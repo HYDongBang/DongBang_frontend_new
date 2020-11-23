@@ -14,7 +14,7 @@ const ButtonContainer = styled.div`
 `;
 
 
-const OrangeButton =({type, content}) =>(
+const OrangeButton =({content}) =>(
     <ButtonContainer>{content}</ButtonContainer>
   );
   
