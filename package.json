@@ -1,0 +1,17 @@
+{
+    "name": "dongbang_frontend_new",
+    "version": "1.0.0",
+    "description": "new version of DongBang frontend project",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HYDongBang/DongBang_frontend_new.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/HYDongBang/DongBang_frontend_new/issues"
+    },
+    "homepage": "https://github.com/HYDongBang/DongBang_frontend_new#readme"
+}
