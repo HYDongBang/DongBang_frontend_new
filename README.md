@@ -15,7 +15,6 @@
 
 -   ![title](https://img.shields.io/badge/-Vanila_javascript-77216F?&logo=javascript&logoColor=white)
 -   ![title](https://img.shields.io/badge/-React-00CAFF?&logo=React&logoColor=white)
--   ![title](https://img.shields.io/badge/-HTML5-E8E8E8?&logo=html5&logoColor=white)
 -   ![title]()
 
 ## Install
