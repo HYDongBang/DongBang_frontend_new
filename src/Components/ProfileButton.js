@@ -12,6 +12,7 @@ const ButtonContainer = styled.div`
   text-align:center;
   font-size: 18px;
   line-height:2.3;
+  cursor:pointer;
 `;
 
 //color -  gray, darkgray, orange 있음

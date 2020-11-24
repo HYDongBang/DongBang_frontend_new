@@ -11,6 +11,7 @@ const ButtonContainer = styled.div`
   line-height:3.5;
   font-family:'raleBold';
   color:${props=>props.theme.white};
+  cursor:pointer;
 `;
 
 

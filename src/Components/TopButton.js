@@ -11,6 +11,7 @@ const ButtonContainer = styled.div`
   background-color:${props=>props.theme.orange};
   color:${props=>props.theme.white};
   text-align:center;
+  cursor:pointer;
 `;
 
 const TopButton =() =>(

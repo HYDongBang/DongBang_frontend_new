@@ -16,6 +16,7 @@ const ButtonContainer = styled.div`
   text-align:center;
   font-size: 22px;
   line-height:2.2;
+  cursor:pointer;
 `;
 
 

@@ -11,6 +11,7 @@ const ButtonContainer = styled.div`
   text-align:center;
   font-size:${props => props.font || "30px" }; 
   line-height:2.1  ;
+  cursor:default;
 `;
  
 // size에 들어가는 값!
