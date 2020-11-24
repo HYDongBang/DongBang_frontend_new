@@ -1,4 +1,4 @@
 import React from "react";
-import BoxInput from "../../Components/BoxInput";
+import X from "../../Components/X";
 
-export default () => <BoxInput placeholder={"hi"} onChange={() => {}} width={"500px"} />;
+export default () => <X></X>;
