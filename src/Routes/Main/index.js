@@ -1,4 +1,4 @@
 import React from "react";
-import LineInput from "../../Components/LineInput";
+import Textarea from "../../Components/Textarea";
 
-export default () => <LineInput placeholder={"hi"} icon="delete" onChange={() => {}} width={"300px"}/>;
+export default () => <Textarea placeholder={"hi"} onChange={() => {}} width={"500px"} height={"500px"} />;

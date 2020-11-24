@@ -8,9 +8,10 @@ const Container = styled.div`
     border-bottom: 2px solid ${props => props.theme.lightGray};
     padding: 3px 7px;
     font-family: "raleRegular";
+    display: flex;
 `;
 
-/* IOS에 대응 */
+/* 위에 3줄은 IOS에 대응 */
 /* TODO: width 말고 다른걸로 수정 => icon들도 수정 */
 const Input = styled.input`
     appearance: none;
@@ -18,7 +19,11 @@ const Input = styled.input`
     -webkit-border-radius: 0;
     border: none;
     font-size: 1em;
-    width: 93%;
+    float: left;
+    flex-grow: 1;
+    &:focus {
+        outline: none;
+    }
 `;
 
 const Button = styled.div`
@@ -33,8 +38,8 @@ const Button = styled.div`
         background: ${props => props.theme.orange};
         border: 1px solid ${props => props.theme.orange};
         color: ${props => props.theme.white};
-        transition: all .3s
-      }
+        transition: all 0.3s;
+    }
 `;
 
 /* 
@@ -42,13 +47,13 @@ required: input 태그가 채워져야 하는지
 onClick: icon 클릭시
 icon: icon 종류(mail, pw, certification, delete), 필요없다면 null
 */
-const LineInput = ({ placeholder, required = true, value, onChange, onClick, icon = null, type = "text", width = "auto" }) => (
+const LineInput = ({ placeholder, required = true, value, onChange, onClick, icon = null, type = "text", width = "auto", disabled = false }) => (
     <Container style={{ width: width }}>
-        <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} />
-        {icon === "mail" && <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FF7300", fontSize: "1.1em", cursor: "pointer"}} />}
-        {icon === "pw" && <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#FF7300", fontSize: "1em", cursor: "pointer"}} onClick={onClick} />}
-        {icon === "certification" && <Button onClick={onClick}>인증하기</Button>} 
-        {icon === "delete" && <FontAwesomeIcon icon={faTimes} style={{ color: "#D1D1D1", fontSize: "1em", cursor: "pointer"}} onClick={onClick} />}
+        <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} disabled={disabled} />
+        {icon === "mail" && <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FF7300", fontSize: "1.1em", cursor: "pointer" }} />}
+        {icon === "pw" && <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#FF7300", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
+        {icon === "certification" && <Button onClick={onClick}>인증하기</Button>}
+        {icon === "delete" && <FontAwesomeIcon icon={faTimes} style={{ color: "#D1D1D1", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
     </Container>
 );
 
@@ -60,7 +65,8 @@ LineInput.propTypes = {
     onClick: PropTypes.func,
     icon: PropTypes.string,
     type: PropTypes.string,
-    width: PropTypes.string.isRequired
+    width: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired
 };
 
 export default LineInput;
