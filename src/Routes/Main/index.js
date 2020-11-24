@@ -4,7 +4,8 @@ import ClubLogo from "../../Components/ClubLogo";
 import OrangeButton from "../../Components/OrangeButton";
 import TopButton from "../../Components/TopButton";
 import UserLogo from "../../Components/UserLogo";
-export default () => <div>hi
+import ProfileButton from "../../Components/ProfileButton";
+export default () => <div>
 <ClubLogo type="culture"/>
 <ClubLogo type="volunteer"/>
 <OrangeButton content="hello"/>
@@ -16,4 +17,7 @@ export default () => <div>hi
 <ClubInfoButton content="지원하기"/>
 <ClubInfoButton content="실시간 톡"/>
 <ClubInfoButton content="동아리소개"/>
+<ProfileButton content="저장" color="orange"/>
+<ProfileButton content="취소" color="gray"/>
+<ProfileButton content="저장" color="darkgray"/>
 </div>;
