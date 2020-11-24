@@ -9,6 +9,7 @@ const Input = styled.textarea`
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    font-size: 0.85em;
     resize: none;
 `;
 

@@ -12,13 +12,12 @@ const Container = styled.div`
 `;
 
 /* 위에 3줄은 IOS에 대응 */
-/* TODO: width 말고 다른걸로 수정 => icon들도 수정 */
 const Input = styled.input`
     appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0;
     border: none;
-    font-size: 1em;
+    font-size: 0.85em;
     float: left;
     flex-grow: 1;
     &:focus {

@@ -1,4 +1,4 @@
 import React from "react";
-import Textarea from "../../Components/Textarea";
+import BoxInput from "../../Components/BoxInput";
 
-export default () => <Textarea placeholder={"hi"} onChange={() => {}} width={"500px"} height={"500px"} />;
+export default () => <BoxInput placeholder={"hi"} onChange={() => {}} width={"500px"} />;
