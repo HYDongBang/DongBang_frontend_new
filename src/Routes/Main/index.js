@@ -5,6 +5,8 @@ import OrangeButton from "../../Components/OrangeButton";
 import TopButton from "../../Components/TopButton";
 import UserLogo from "../../Components/UserLogo";
 import ProfileButton from "../../Components/ProfileButton";
+import SocialLogo from "../../Components/SocialLogo";
+import Footer from "../../Components/Footer";
 export default () => <div>
 <ClubLogo type="culture"/>
 <ClubLogo type="volunteer"/>
@@ -20,4 +22,5 @@ export default () => <div>
 <ProfileButton content="저장" color="orange"/>
 <ProfileButton content="취소" color="gray"/>
 <ProfileButton content="저장" color="darkgray"/>
+<SocialLogo/>
 </div>;
