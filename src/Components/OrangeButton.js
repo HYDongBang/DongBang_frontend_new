@@ -9,9 +9,10 @@ const ButtonContainer = styled.div`
   background-color:${props=>props.theme.orange};
   text-align:center;
   line-height:3.5;
-  font-family:'raleBold';
+  font-family:raleBold;
   color:${props=>props.theme.white};
   cursor:pointer;
+  
 `;
 
 
