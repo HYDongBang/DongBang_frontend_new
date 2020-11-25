@@ -6,8 +6,11 @@ import TopButton from "../../Components/TopButton";
 import UserLogo from "../../Components/UserLogo";
 import ProfileButton from "../../Components/ProfileButton";
 import SocialLogo from "../../Components/SocialLogo";
-import Footer from "../../Components/Footer";
-export default () => <div>
+import { Scrollbars } from 'react-custom-scrollbars';
+
+export default () => 
+<Scrollbars style={{ height: 500 }}>
+
 <ClubLogo type="culture"/>
 <ClubLogo type="volunteer"/>
 <OrangeButton content="hello"/>
@@ -23,4 +26,6 @@ export default () => <div>
 <ProfileButton content="취소" color="gray"/>
 <ProfileButton content="저장" color="darkgray"/>
 <SocialLogo/>
-</div>;
+</Scrollbars>
+
+;
