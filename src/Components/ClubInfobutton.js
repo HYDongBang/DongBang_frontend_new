@@ -8,13 +8,12 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
 
 const ButtonContainer = styled.div`
-  width: 163px;
-  height: 52px;
+  width: 125px;
+  height: 40px;
   border-radius: 5px;
   background-color:${props=>props.theme.white};
   box-shadow: #999fa5 0px 3px 6px 0px ;
   text-align:center;
-  font-size: 22px;
   line-height:2.2;
   cursor:pointer;
 `;

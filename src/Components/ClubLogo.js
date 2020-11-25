@@ -36,7 +36,14 @@ const SportsLogo = styled.div`
   background-color:${props=>props.theme.indigo};
 `;
 
-//중간에 이미지 넣는건 이미지 받고 나서 진행할 예정.
+const Test = styled.div`
+background-size: 82px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("data:../Styles/Images/basketball.svg");
+`;
+
+//이미지가 안먹네.?
 /* background-size: 0px;
 background-repeat: no-repeat;
 background-position: center center; */
@@ -45,6 +52,7 @@ background-position: center center; */
 
 const ClubLogo =({type}) =>(
   <>
+  <Test/>
   {type === "culture"&& <CultureLogo/>}
   {type === "volunteer"&& <VolunteerLogo/>}
   {type === "academic"&& <AcademicLogo/>}

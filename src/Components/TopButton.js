@@ -12,6 +12,12 @@ const ButtonContainer = styled.div`
   color:${props=>props.theme.white};
   text-align:center;
   cursor:pointer;
+  &:hover {
+    background-color:${props=>props.theme.white};
+    color:${props=>props.theme.orange};
+    box-shadow: ${props=>props.theme.orange} 1px 1px 10px;
+    transition:0.3s;
+  }
 `;
 
 const TopButton =() =>(
