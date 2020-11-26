@@ -1,31 +1,10 @@
 import React from "react";
-import ClubInfoButton from "../../Components/ClubInfobutton";
-import ClubLogo from "../../Components/ClubLogo";
-import OrangeButton from "../../Components/OrangeButton";
-import TopButton from "../../Components/TopButton";
-import UserLogo from "../../Components/UserLogo";
-import ProfileButton from "../../Components/ProfileButton";
-import SocialLogo from "../../Components/SocialLogo";
 import { Scrollbars } from 'react-custom-scrollbars';
+//Scorllbars 는 notion에 관련된 내용이 있습니다! height 관련 내용을 잘 넣으면 높이 조절 가능
 
 export default () => 
-<Scrollbars style={{ height: 500 }}>
+<div>
 
-<ClubLogo type="culture"/>
-<ClubLogo type="volunteer"/>
-<OrangeButton content="hello"/>
-<TopButton/>
-<UserLogo size="126px" name="남" font="59px"/>
-<UserLogo name="남" />
-<UserLogo size="55px" name="남" font="26px"/>
-<UserLogo size="50px" name="남" font="22px"/>
-<ClubInfoButton content="지원하기"/>
-<ClubInfoButton content="실시간 톡"/>
-<ClubInfoButton content="동아리소개"/>
-<ProfileButton content="저장" color="orange"/>
-<ProfileButton content="취소" color="gray"/>
-<ProfileButton content="저장" color="darkgray"/>
-<SocialLogo/>
-</Scrollbars>
+</div>
 
 ;
