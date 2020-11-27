@@ -6,7 +6,7 @@ import styled from "styled-components";
 const isLoggedIn = true;
 
 const Container = styled.div`
-    background-color: ${props => props.theme.orange};
+    z-index: 100;
     padding: 11px;
     display: flex;
     justify-content: space-between;
