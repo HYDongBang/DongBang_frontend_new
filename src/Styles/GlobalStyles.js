@@ -2,15 +2,15 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 export default createGlobalStyle`
- ${reset};
- 
+${reset};
+
   @font-face {
     font-family:'spoHanR';
-    src: url(${require("./Font/Spoqa/Spoqa Han Sans Regular.ttf")});
+    src: url(${require("./Font/Spoqa/Spoqa-Han-Sans-Regular.ttf")});
   }
   @font-face {
     font-family:'spoHanB';
-    src: url(${require("./Font/Spoqa/Spoqa Han Sans Bold.ttf")});
+    src: url(${require("./Font/Spoqa/Spoqa-Han-Sans-Bold.ttf")});
   }
   @font-face {
     font-family:'raleRegular';
@@ -22,9 +22,9 @@ export default createGlobalStyle`
   }
 
  *{
-     box-sizing: border-box;
- }
- body {
+  box-sizing: border-box;
+}
+body {
         background-color:${props => props.theme.white};
         color:${props => props.theme.black};
         font-family:'spoHanR';
