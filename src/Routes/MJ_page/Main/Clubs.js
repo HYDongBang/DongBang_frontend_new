@@ -3,20 +3,26 @@ import styled from "styled-components";
 import Popup from "reactjs-popup";
 import InfoContainer from "../ClubInfo/InfoContainer";
 
+import movieCrop from "../../../Styles/Images/movieCrop.png"
+import ClubLogo from "../../../Components/ClubLogo"
+
+
 const Club = styled.div`
-  height: 230px;
-  width: 15vw;
+  height: 250px;
+  width: 250px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 20px;
   margin: 20px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
+  border: 1px solid #E5EAEE;
+  box-shadow: #E5EAEE 0px 3px 3px ;
+  overflow:hidden;
+  
 `;
 
 const Context = styled.div`
-  padding: 15px;
-  border-top: 1px solid ${(props) => props.theme.gray};
+  padding: 50px 10px 10px 10px;
+  height:70%;
 `;
 
 const ClubName = styled.div`
@@ -28,11 +34,17 @@ const ClubText = styled.div`
 `;
 
 const ClubImg = styled.img`
-  height: 72%;
+  height: 35%;
   width: 100%;
 `;
 
-export const Clubs = ({ clubs, myType }) => {
+const Position = styled.div`
+  position:absolute;
+  margin-top:-45px;
+  margin-left: 80px;
+`;
+
+export default  ({ clubs, myType }) => {
   {
     if (!clubs) {
       clubs = [];
@@ -45,9 +57,10 @@ export const Clubs = ({ clubs, myType }) => {
               key={club.id}
               trigger={
                 <Club>
-                  <ClubImg>
-                    <img></img>
-                  </ClubImg>
+                  <ClubImg src = {movieCrop}/>
+                  <Position>
+                     <ClubLogo type = "culture"/>
+                  </Position>
 
                   <Context>
                     <ClubName>{club.name}</ClubName>
@@ -57,7 +70,7 @@ export const Clubs = ({ clubs, myType }) => {
               }
               modal
             >
-              <ClubInfoContainer club={club} />
+              <InfoContainer club={club} />
             </Popup>
           )}
 
@@ -65,17 +78,11 @@ export const Clubs = ({ clubs, myType }) => {
             <Popup
               key={club.id}
               trigger={
-                <Club>
-                  <ClubImg>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        padding: "7% 25%",
-                      }}
-                      src={club.logoImage}
-                    ></img>
-                  </ClubImg>
+                <Club src = {movieCrop}>
+                  <ClubImg/>
+                  <Position >
+                     <ClubLogo type = "culture"/>
+                  </Position>
                   <Context>
                     <ClubName>{club.name}</ClubName>
                     <ClubText>{club.bio}</ClubText>
@@ -84,7 +91,7 @@ export const Clubs = ({ clubs, myType }) => {
               }
               modal
             >
-              <ClubInfoContainer club={club} />
+              <InfoContainer club={club} />
             </Popup>
           )}
         </>

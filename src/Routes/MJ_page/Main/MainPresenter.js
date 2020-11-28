@@ -13,7 +13,7 @@ import Clubs from "./Clubs"
 
 const Wrapper = styled.div`
     width:100%;
-    height:1000px;
+    height:100%;
 `;
 
 const MainImg = styled.img`
@@ -30,6 +30,7 @@ const Categories = styled.div`
     height: 200px;
     width: 1000px;
     padding: 30px 0;
+    margin-left:17%;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -68,14 +69,21 @@ const Text = styled.div`
 `;
 
 
+const ClubContainer = styled.div`
+
+    width: 100%;
+`;
+
 export default ({
     myType,
     setType,
 }) => {
-    const clubs = {
+    const clubs = [
+        {
         name: "안녕",
         bio:"반가워"
-    }
+        }
+    ]
     return (
     <Wrapper> 
         <MainImg src={main}/>
@@ -154,7 +162,7 @@ export default ({
                 )}   
             </Categories>
             <ClubContainer>
-                <ClubFilter
+                <Clubs
                     // clubs={word.length < 1 ? data.allClub : filterDisplay}
                     clubs = {clubs}
                     myType={myType}

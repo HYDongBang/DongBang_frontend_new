@@ -15,7 +15,7 @@ const Header = styled.div`
 `;
 
 const Wrapper = styled.div`
-    height: 1000px;
+    height:100%;
     width: 100%;
 `;
 
@@ -41,8 +41,8 @@ export default () => {
                 <Switch>
                 <Route path="/" exact component={Main} />
                 {/* <Route path="/auth" component={Auth} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/clubInfo:id" component={ClubInfo} /> */}
+                <Route path="/profile" component={Profile} /> */}
+                {/* <Route path="/clubInfo:id" component={ClubInfo} /> */}
                 <Redirect path="*" to="/" />
                 </Switch>
             </Wrapper>
