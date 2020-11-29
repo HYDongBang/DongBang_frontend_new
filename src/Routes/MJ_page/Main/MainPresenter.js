@@ -18,19 +18,19 @@ const Wrapper = styled.div`
 
 const MainImg = styled.img`
     width: 100%;
+    height: 600px;
 `;
 
 const MainContents = styled.div`
-    width: 80%;
+    width: 70%;
     height:100%;
     margin: 0 auto;
 `;
 
 const Categories = styled.div`
     height: 200px;
-    width: 1000px;
-    padding: 30px 0;
-    margin-left:17%;
+    width: 100%;
+    padding: 30px 10%;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -38,8 +38,8 @@ const Categories = styled.div`
 `;
 
 const Category = styled.div`
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     background-color:#F7F8F9;
     border-radius:100%;
     cursor:pointer;
@@ -70,23 +70,74 @@ const Text = styled.div`
 
 
 const ClubContainer = styled.div`
-
+    min-height:600px;
     width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 0px 5%;
 `;
 
 export default ({
     myType,
     setType,
+    word,
+    setWord,
+    filterDisplay,
+    setFilterDisplay,
 }) => {
+
+    // 테스트 데이터
     const clubs = [
         {
-        name: "안녕",
-        bio:"반가워"
+            id:1,
+            name: "안녕",
+            bio:"반가워"
+        },
+        {
+            id:2,
+            name: "222",
+            bio:"342342"
+        },
+        {
+            id:3,
+            name: "3333",
+            bio:"4234234"
         }
     ]
+
+    const handleChange = (e) => {
+        setWord(e);
+    
+        let oldList = clubs.map((club) => {
+          return {
+            id: club.id,
+            name: club.name,
+            bio: club.bio,
+          };
+        });
+    
+        if (word !== "") {
+          let newList = [];
+          newList = oldList.filter((club) => club.name.includes(word));
+          setFilterDisplay(newList);
+        } else {
+          setFilterDisplay(clubs);
+        }
+      };
+
     return (
     <Wrapper> 
         <MainImg src={main}/>
+        <input
+          style={{
+            width: "40%",
+            overfolow: "hidden",
+          }}
+          value={word}
+          placeholder="찾으려는 동아리 명을 입력해주세요."
+          onChange={(e) => handleChange(e.target.value)}
+        />
+
         <MainContents>
             <Categories>
                 {myType === "" ? (
@@ -163,8 +214,7 @@ export default ({
             </Categories>
             <ClubContainer>
                 <Clubs
-                    // clubs={word.length < 1 ? data.allClub : filterDisplay}
-                    clubs = {clubs}
+                    clubs={word.length < 1 ? clubs : filterDisplay}
                     myType={myType}
                 />
             </ClubContainer>

@@ -10,6 +10,10 @@ export default () => {
     <MainPresenter
     myType={myType}
     setType={setType}
+    word={word}
+    setWord={setWord}
+    filterDisplay={filterDisplay}
+    setFilterDisplay={setFilterDisplay}
     />
   );
 };

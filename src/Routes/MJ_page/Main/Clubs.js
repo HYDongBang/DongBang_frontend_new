@@ -17,7 +17,7 @@ const Club = styled.div`
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  
+  margin: 20px 6%;
 `;
 
 const Context = styled.div`
@@ -54,6 +54,7 @@ export default  ({ clubs, myType }) => {
         <>
           {myType === "" && (
             <Popup
+              modal
               key={club.id}
               trigger={
                 <Club>
@@ -68,14 +69,17 @@ export default  ({ clubs, myType }) => {
                   </Context>
                 </Club>
               }
-              modal
             >
-              <InfoContainer club={club} />
+              {/* <InfoContainer club={club} /> */}
+              <div>hi</div>
+              {close => <div close={close} > 1 </div>}
+
             </Popup>
           )}
 
           {myType.indexOf(`${club.type}`) !== -1 && (
             <Popup
+              modal
               key={club.id}
               trigger={
                 <Club src = {movieCrop}>
@@ -89,9 +93,12 @@ export default  ({ clubs, myType }) => {
                   </Context>
                 </Club>
               }
-              modal
+              
             >
-              <InfoContainer club={club} />
+              {/* <InfoContainer club={club} /> */}
+              <div>hi</div>
+              {close => <div close={close} > 1 </div>}
+
             </Popup>
           )}
         </>
