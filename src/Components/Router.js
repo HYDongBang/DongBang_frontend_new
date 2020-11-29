@@ -10,7 +10,7 @@ const AppRouter = () => (
         <Header />
         <Switch>
             <Route path="/" exact component={Main} />
-            <Route path="/my" component={My} />
+            <Route path="/profile" component={My} />
             <Redirect path="*" to="/" />
         </Switch>
         <Footer />
