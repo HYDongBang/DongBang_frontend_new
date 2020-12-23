@@ -1,5 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+// import main from "../Styles/Images/main.jpg"
+// import writing from "../Styles/Images/writing.svg"
+// import painting from "../Styles/Images/painting.svg"
+// import team from "../Styles/Images/team.svg"
+// import speachBubbleLine from "../Styles/Images/speachBubbleLine.svg"
+// import basketball from "../Styles/Images/basketball.svg"
 
 const CultureLogo = styled.div`
   width: 86px;
@@ -42,6 +48,9 @@ background-size: 82px;
   background-position: center center;
   background-image: url("data:../Styles/Images/basketball.svg");
 `;
+const Img = styled.img`
+
+`;
 
 //이미지가 안먹네.?
 /* background-size: 0px;
@@ -53,7 +62,7 @@ background-position: center center; */
 const ClubLogo =({type}) =>(
   <>
   <Test/>
-  {type === "culture"&& <CultureLogo/>}
+  {type === "culture"&& <CultureLogo> </CultureLogo>}
   {type === "volunteer"&& <VolunteerLogo/>}
   {type === "academic"&& <AcademicLogo/>}
   {type === "language"&& <LanguageLogo/>}

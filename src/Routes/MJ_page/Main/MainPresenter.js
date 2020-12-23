@@ -77,6 +77,20 @@ const ClubContainer = styled.div`
     padding: 0px 5%;
 `;
 
+const SearchBar = styled.input`
+    width: 40%;
+    height: 50px;
+    position:absolute;
+    margin-top: 15%;
+    margin-left: 30%;
+    color: ${props => props.checked};
+    font-size: 1em;
+    padding: 10px;
+    border:none;
+    border-radius: 5px;
+    box-shadow: #757575 1px 1px 6px 2px;
+`
+
 export default ({
     myType,
     setType,
@@ -124,19 +138,16 @@ export default ({
           setFilterDisplay(clubs);
         }
       };
-
+ 
     return (
     <Wrapper> 
-        <MainImg src={main}/>
-        <input
-          style={{
-            width: "40%",
-            overfolow: "hidden",
-          }}
+    <SearchBar
           value={word}
           placeholder="찾으려는 동아리 명을 입력해주세요."
           onChange={(e) => handleChange(e.target.value)}
         />
+        <MainImg src={main}/>
+
 
         <MainContents>
             <Categories>
