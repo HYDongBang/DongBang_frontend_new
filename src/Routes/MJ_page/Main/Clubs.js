@@ -44,6 +44,24 @@ const Position = styled.div`
   margin-left: 80px;
 `;
 
+
+const X = styled.a`
+  cursor:pointer;
+  position:absolute;
+  right:-30px;
+  top: -8px;
+  font-size:2.5em;
+  color: #E5EAEE;
+`;
+
+
+const contentStyle ={
+  width:"80%",
+  height: "80%",
+  borderRadius: "15px",
+  padding: "0px",
+};
+
 export default  ({ clubs, myType }) => {
   {
     if (!clubs) {
@@ -51,10 +69,10 @@ export default  ({ clubs, myType }) => {
     }
     return clubs.map((club) => {
       return (
+        
         <>
           {myType === "" && (
             <Popup
-              modal
               key={club.id}
               trigger={
                 <Club>
@@ -69,17 +87,20 @@ export default  ({ clubs, myType }) => {
                   </Context>
                 </Club>
               }
+              modal
+              contentStyle ={contentStyle} 
             >
-              {/* <InfoContainer club={club} /> */}
-              <div>hi</div>
-              {close => <div close={close} > 1 </div>}
-
+              {close =>(
+                <>
+                <X onClick={close}>&times; </X>
+                <InfoContainer club={club} />
+                </>
+              )}
             </Popup>
           )}
 
           {myType.indexOf(`${club.type}`) !== -1 && (
             <Popup
-              modal
               key={club.id}
               trigger={
                 <Club src = {movieCrop}>
@@ -93,12 +114,15 @@ export default  ({ clubs, myType }) => {
                   </Context>
                 </Club>
               }
-              
+              modal
+              contentStyle ={contentStyle}
             >
-              {/* <InfoContainer club={club} /> */}
-              <div>hi</div>
-              {close => <div close={close} > 1 </div>}
-
+              {close =>(
+                <>
+                <a close={close} > 1 </a>
+                <InfoContainer club={club} />
+                </>
+              )}
             </Popup>
           )}
         </>
