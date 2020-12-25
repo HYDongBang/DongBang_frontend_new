@@ -5,6 +5,7 @@ import InfoContainer from "../ClubInfo/InfoContainer";
 
 import movieCrop from "../../../Styles/Images/movieCrop.png"
 import ClubLogo from "../../../Components/ClubLogo"
+import ClubsContainer from "../ClubInfo/ClubsContainer";
 
 
 const Club = styled.div`
@@ -56,7 +57,7 @@ const X = styled.a`
 
 
 const contentStyle ={
-  width:"80%",
+  width:"70%",
   height: "80%",
   borderRadius: "15px",
   padding: "0px",
@@ -93,7 +94,7 @@ export default  ({ clubs, myType }) => {
               {close =>(
                 <>
                 <X onClick={close}>&times; </X>
-                <InfoContainer club={club} />
+                <ClubsContainer club={club} />
                 </>
               )}
             </Popup>
@@ -120,7 +121,7 @@ export default  ({ clubs, myType }) => {
               {close =>(
                 <>
                 <X onClick={close}>&times; </X>
-                <InfoContainer club={club} />
+                <ClubsContainer club={club} />
                 </>
               )}
             </Popup>

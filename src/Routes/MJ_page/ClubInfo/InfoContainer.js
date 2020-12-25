@@ -1,9 +1,9 @@
 import React from "react";
 import InfoPresenter from "./InfoPresenter";
 
-export default ({ club }) => {
+export default ({  action, setAction, club }) => {
 
   return (
-    <InfoPresenter club={club} />
+    <InfoPresenter club={club} setAction = {setAction} action = {action}/>
   );
 };

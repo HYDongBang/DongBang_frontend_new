@@ -1,3 +1,3 @@
-import InfoContainer from "./InfoContainer";
+import ClubsContainer from "./ClubsContainer";
 
-export default InfoContainer;
+export default ClubsContainer;

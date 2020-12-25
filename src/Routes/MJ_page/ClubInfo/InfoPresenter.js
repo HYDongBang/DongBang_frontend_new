@@ -4,14 +4,10 @@ import ClubInfoButton from "../../../Components/ClubInfobutton";
 import ClubLogo from "../../../Components/ClubLogo";
 import headerMovie from "../../../Styles/Images/header_movie.jpg"
 
-const Wrapper = styled.div`
-  background: white;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  overflow-y: auto;
-  border-radius: 15px;
-`;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComments } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+
 
 const OrangeButton = styled.div`
   width: 220px;
@@ -126,17 +122,38 @@ const ActDes = styled.div`
     font-size:0.8em;
 `;
 
+const ButtonContainer = styled.div`
+  width: 125px;
+  height: 40px;
+  border-radius: 5px;
+  background-color:${props=>props.theme.white};
+  box-shadow: #999fa5 0px 3px 6px 0px ;
+  text-align:center;
+  line-height:2.2;
+  cursor:pointer;
+  margin:2px;
+`;
 
 
-export default ({club})=>{
-  const [action, setAction] = useState("Info");
+
+export default ({club, setAction, action})=>{
 
 return (
-    <Wrapper>
+    <>
         <HeaderImg src = {headerMovie}/>
         <Buttons>
-            <ClubInfoButton content = "실시간 톡" onClick={() => setAction("Talk")}/>
-            <ClubInfoButton content = "지원하기" onClick={() => setAction("Apply")}/>
+            <ButtonContainer onClick={() => setAction("Talk")} >
+                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faPaperPlane} />   
+                실시간 톡
+            </ButtonContainer>
+
+            <ButtonContainer onClick={() => setAction("Apply")} >
+                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
+                지원하기
+            </ButtonContainer>
+
+            {/* <ClubInfoButton content = "실시간 톡" onClick={() => setAction("Talk")}/> */}
+            {/* <ClubInfoButton content = "지원하기" onClick={() => setAction("Apply")}/> */}
         </Buttons>
 
         <Club>
@@ -194,6 +211,6 @@ return (
                 </>
                 )}
  
-</Wrapper>
+</>
 )
 }
