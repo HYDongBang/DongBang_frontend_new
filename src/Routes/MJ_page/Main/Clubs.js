@@ -119,7 +119,7 @@ export default  ({ clubs, myType }) => {
             >
               {close =>(
                 <>
-                <a close={close} > 1 </a>
+                <X onClick={close}>&times; </X>
                 <InfoContainer club={club} />
                 </>
               )}
