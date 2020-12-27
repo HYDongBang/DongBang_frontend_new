@@ -143,12 +143,12 @@ return (
         <HeaderImg src = {headerMovie}/>
         <Buttons>
             <ButtonContainer onClick={() => setAction("Talk")} >
-                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faPaperPlane} />   
+                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
                 실시간 톡
             </ButtonContainer>
 
             <ButtonContainer onClick={() => setAction("Apply")} >
-                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
+                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x"  icon={faPaperPlane}  />   
                 지원하기
             </ButtonContainer>
 
