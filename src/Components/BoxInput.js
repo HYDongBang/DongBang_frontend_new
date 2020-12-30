@@ -27,7 +27,7 @@ BoxInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,
     width: PropTypes.string.isRequired,
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool,
 };
 
 export default BoxInput;
