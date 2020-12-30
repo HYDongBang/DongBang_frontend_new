@@ -16,7 +16,7 @@ const Header = styled.div`
 `;
 
 const Wrapper = styled.div`
-    height: 1000px;
+    min-height: 1000px;
     width: 100%;
     font-family: raleBold;
     display: flex;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
 const Menu = styled.div`
     background: ${props => props.theme.inputTagGray};
-    height: 100%;
+    min-height: 1000px;
     width: 30%;
     text-align: right;
 `;
@@ -116,14 +116,12 @@ export default ({ match }) => {
                     </List>
                 </Menu>
                 <Container>
-                    {
-                        <Route exact path={match.path} component={Profile} />
-                        /*<Route path={'/club'} component={Club} />
+                    <Route exact path={"/profile"} component={Profile} />
+                    <Route path={"/club"} component={Club} />
                     <Route path={'/member'} component={Member} />
-                    <Route path={'/applicant'} component={Applicant} />
+                    {/*<Route path={'/applicant'} component={Applicant} />
                     <Route path={'/interview'} component={Interview} />
-                    <Route path={'/form'} component={Form} />*/
-                    }
+                    <Route path={'/form'} component={Form} />*/}
                 </Container>
             </Wrapper>
         </>

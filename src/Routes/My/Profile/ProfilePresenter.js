@@ -28,12 +28,12 @@ const Question = styled.div`
 
 const About = styled.div`
     font-family: spoHanB;
-    font-size: 0.9em;
-    padding-bottom: 7px;
+    font-size: 0.8em;
+    padding-bottom: 10px;
 `;
 
 const Submit = styled.div`
-    padding-top: 60px;
+    padding-top: 80px;
     display: flex;
     justify-content: flex-end;
     padding-right: 40%;
