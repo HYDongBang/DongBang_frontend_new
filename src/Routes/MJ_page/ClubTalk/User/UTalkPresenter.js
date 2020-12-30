@@ -64,15 +64,18 @@ const Right = styled.div`
 const Talks = styled.div`
     display: flex;
     flex-direction:column;
+    padding:20px;
+    height:83%;
 `;
 
 const Talk = styled.div`
-    display:flex;
-    flex-direction:row;
+    margin-bottom:15px;
 `;
 
 const DT = styled.div`
-
+    width: fit-content;
+    margin-right: 7px;
+    margin-left: 7px;
 `
 
 const Date = styled.div`
@@ -84,37 +87,58 @@ const Time = styled.div`
 `;
 
 const MyBubble = styled.div`
-  width: 80%;
+  width: 65%;
   float:right;
   box-shadow: #efefef 4px 4px 3px;
   background-color:#FFEFCC;
   border-radius: 15px 0px 15px 15px;
   padding: 15px;
-  position: relative;
 
 `;
 
 const OtherBubble = styled.div`
-  width: 80%;
+  width: 65%;
   float:left;
   box-shadow: #efefef 4px 4px 3px;
   background-color:#F7F7F7;
   border-radius: 15px 15px 0px 15px;
   padding: 15px;
-  position: relative;
 `;
 
 const Message = styled.div`
-
+    width:100%; 
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding:10px;
+    margin:7px;
+    display:flex;
 `;
 
-const MessageInput = styled.div`
-
+const MessageInput = styled.textarea`
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    font-size: 0.85em;
+    resize: none;
+    width:90%;
+    height:100px;
 `;
 
 const SendButton = styled.div`
-
+    width:100px;
+    height: 100%;
+    background-color:orange;
+    border-radius:10px;
+    padding:40px 33px;
+    background-color: #FF7300;
+    color: white;
 `;
+
+
+
 
 export default ({club, setAction, action})=>{
 
@@ -144,25 +168,27 @@ export default ({club, setAction, action})=>{
             <Right>
                 <Talks>
                     <Talk>
-                        <DT>
-                            <Date>20.11.09</Date>
-                            <Time>11:56</Time>
-                        </DT>
                         <MyBubble>
                             스쿠버 다이빙 동아리에 가입하고 싶은데.. 한번도 배운적이 없어요. 괜찮을까요?
                         </MyBubble>
+                        <DT style ={{float:"right"}}>
+                            <Date>20.11.09</Date>
+                            <Time>11:56</Time>
+                        </DT>
                     </Talk>
                     <Talk>
-                        <Date>20.11.09</Date>
-                        <Time>12:56</Time>
                         <OtherBubble>
                             네, 저희 동아리에 들어오시면 기초부터 장비 사용법까지 알려드립니다. 걱정마세요!
                         </OtherBubble>
+                        <DT style ={{float:"left"}}>
+                            <Date>20.11.09</Date>
+                            <Time>11:56</Time>
+                        </DT>
                     </Talk>
                 </Talks>
                 <Message> 
-                    <MessageInput/>
-                    <SendButton />
+                    <MessageInput  type = "text" placeholder = "메시지를 입력해주세요." />
+                    <SendButton>전송</SendButton>
                 </Message>
             </Right>
         </UContents>
