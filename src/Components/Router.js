@@ -11,6 +11,11 @@ const AppRouter = () => (
         <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/profile" component={My} />
+            <Route path="/club" component={My} />
+            <Route path="/member" component={My} />
+            <Route path="/applicant" component={My} />
+            <Route path="/interview" component={My} />
+            <Route path="/form" component={My} />
             <Redirect path="*" to="/" />
         </Switch>
         <Footer />
