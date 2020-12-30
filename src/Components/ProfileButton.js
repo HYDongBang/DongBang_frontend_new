@@ -2,25 +2,28 @@ import React from "react";
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
-  width: 137px;
-  height: 45px;
-  border-radius: 5px;
-  background-color:${props => props.color === "orange" && "#FF7300" }; 
-  background-color:${props => props.color === "darkgray" && "#484C4F" }; 
-  background-color:${props => props.color === "gray" && "#D1D1D1" }; 
-  color:${props=>props.theme.white};
-  text-align:center;
-  font-size: 18px;
-  line-height:2.3;
-  cursor:pointer;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: ${props => props.color === "orange" && "#FF7300"};
+    background-color: ${props => props.color === "darkgray" && "#484C4F"};
+    background-color: ${props => props.color === "gray" && "#D1D1D1"};
+    color: ${props => props.theme.white};
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 9px;
+    &:hover {
+        background-color: ${props => props.hover === "orange" && "#FF7300"};
+        transition: 0.1s;
+    }
 `;
 
 //color -  gray, darkgray, orange 있음
-const ProfileButton =({content, color}) =>(
-    <ButtonContainer color = {color}>
+const ProfileButton = ({ content, color, hover }) => (
+    <ButtonContainer color={color} hover={hover}>
         {content}
     </ButtonContainer>
-  );
-  
-  export default ProfileButton;
-  
+);
+
+export default ProfileButton;
