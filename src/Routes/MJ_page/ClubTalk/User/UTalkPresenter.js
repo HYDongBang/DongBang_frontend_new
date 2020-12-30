@@ -59,31 +59,49 @@ const LeftButton = styled.div`
 
 const Right = styled.div`
     width: 72%;
-    padding:30px 13%;
 `;
 
 const Talks = styled.div`
-
+    display: flex;
+    flex-direction:column;
 `;
 
 const Talk = styled.div`
-
+    display:flex;
+    flex-direction:row;
 `;
 
-const Date = styled.div`
+const DT = styled.div`
 
+`
+
+const Date = styled.div`
+    font-size:0.8em;
 `;
 
 const Time = styled.div`
-
+    font-size:0.8em;
 `;
 
 const MyBubble = styled.div`
+  width: 80%;
+  float:right;
+  box-shadow: #efefef 4px 4px 3px;
+  background-color:#FFEFCC;
+  border-radius: 15px 0px 15px 15px;
+  padding: 15px;
+  position: relative;
 
 `;
 
 const OtherBubble = styled.div`
-
+  width: 80%;
+  float:left;
+  box-shadow: #efefef 4px 4px 3px;
+  background-color:#F7F7F7;
+  border-radius: 15px 15px 0px 15px;
+  padding: 15px;
+  position: relative;
 `;
 
 const Message = styled.div`
@@ -105,7 +123,9 @@ export default ({club, setAction, action})=>{
             <Left>
                 <LeftImg src = {ScubaCrop}/>
                 <LeftInfo>
+                    <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>
+                    </div>
                     <ClubType>체육</ClubType>
                     <ClubName>HYSCUBA</ClubName>
                 </LeftInfo> 
@@ -124,8 +144,10 @@ export default ({club, setAction, action})=>{
             <Right>
                 <Talks>
                     <Talk>
-                        <Date>20.11.09</Date>
-                        <Time>11:56</Time>
+                        <DT>
+                            <Date>20.11.09</Date>
+                            <Time>11:56</Time>
+                        </DT>
                         <MyBubble>
                             스쿠버 다이빙 동아리에 가입하고 싶은데.. 한번도 배운적이 없어요. 괜찮을까요?
                         </MyBubble>

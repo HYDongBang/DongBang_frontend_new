@@ -103,7 +103,9 @@ export default ({club, setAction, action})=>{
         <Left>
             <LeftImg src = {ScubaCrop}/>
             <LeftInfo>
+                <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                 <ClubLogo type = "sports"/>
+                </div>
                 <ClubType>체육</ClubType>
                 <ClubName>HYSCUBA</ClubName>
             </LeftInfo>
