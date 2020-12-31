@@ -34,7 +34,7 @@ const Categories = styled.div`
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-context: space-between;
+    align-content: space-between;
 `;
 
 const Category = styled.div`

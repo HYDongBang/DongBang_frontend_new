@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
-import InfoContainer from "../ClubInfo/InfoContainer";
 
 import movieCrop from "../../../Styles/Images/movieCrop.png"
 import ClubLogo from "../../../Components/ClubLogo"
