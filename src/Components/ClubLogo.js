@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import writing from "../Styles/Images/writing.svg"
-import painting from "../Styles/Images/painting.svg"
-import team from "../Styles/Images/team.svg"
-import speachBubbleLine from "../Styles/Images/speachBubbleLine.svg"
-import basketball from "../Styles/Images/basketball.svg"
+import writing from "../Styles/Images/writingWhite.svg"
+import painting from "../Styles/Images/paintingWhite.svg"
+import team from "../Styles/Images/teamWhite.svg"
+import speachBubbleLine from "../Styles/Images/speachBubbleLineWhite.svg"
+import basketball from "../Styles/Images/basketballWhite.svg"
+
+const Img = styled.img`
+  width: 60px;
+  height: 86px;
+`;
 
 const CultureLogo = styled.div`
   width: 86px;
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
-  background-image: url({writing});
-  fill:white;
 `;
 
 const VolunteerLogo = styled.div`
@@ -43,27 +46,13 @@ const SportsLogo = styled.div`
   background-color:${props=>props.theme.indigo};
 `;
 
-/* 
-const Img = styled.img`
-  width: 80px;
-  height: 80px;
-  fill: white;
-`; */
-
-//이미지가 안먹네.?
-/* background-size: 0px;
-background-repeat: no-repeat;
-background-position: center center; */
-
-//language, sports 색 정해야함.
-
 const ClubLogo =({type}) =>(
   <>
-  {type === "culture"&& <CultureLogo> </CultureLogo>}
-  {type === "volunteer"&& <VolunteerLogo/>}
-  {type === "academic"&& <AcademicLogo/>}
-  {type === "language"&& <LanguageLogo/>}
-  {type === "sports"&& <SportsLogo/>}
+  {type === "culture"&& <CultureLogo><Img  src = {painting}/></CultureLogo>}
+  {type === "volunteer"&& <VolunteerLogo><Img  src = {team}/></VolunteerLogo>}
+  {type === "academic"&& <AcademicLogo> <Img src = {writing}/> </AcademicLogo>}
+  {type === "language"&& <LanguageLogo> <Img src = {speachBubbleLine}/> </LanguageLogo>}
+  {type === "sports"&& <SportsLogo> <Img src = {basketball}/> </SportsLogo>}
   </>
 );
 
