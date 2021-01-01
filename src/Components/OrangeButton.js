@@ -13,7 +13,6 @@ const ButtonContainer = styled.div`
   font-family:raleBold;
   color:${props=>props.theme.white};
   cursor:pointer;
-  
 `;
 
 
