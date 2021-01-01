@@ -45,16 +45,16 @@ const Categories = styled.div`
 const Category = styled.div`
     width: 110px;
     height: 110px;
-    background-color:#F7F8F9;
-    border-radius:100%;
-    cursor:pointer;
-    border: ${props => props.checked &&  "3px solid #FF7300" };
 `;
 
 const Img = styled.img`
     width: 100%;
     height: 100%;
     padding: 20%;
+    background-color:#F7F8F9;
+    border-radius:25%;
+    cursor:pointer;
+    border: ${props => props.checked &&  "2px solid #FF7300" };
 `;
 
 const AllImg = styled.div`
@@ -63,6 +63,8 @@ const AllImg = styled.div`
     font-size:2em;
     text-align:center;
     padding-top: 32%;
+    border-radius:25%;
+    border: ${props => props.checked &&  "2px solid #FF7300" };
     color: ${props => props.checked &&  "#FF7300" };
 `;
 
@@ -157,7 +159,7 @@ export default ({
         <MainContents>
             <Categories>
                 {myType === "" ? (
-                    <Category onClick={() => setType("")} checked="true">
+                    <Category onClick={() => setType("")}>
                         <AllImg checked="true"> ALL </AllImg>
                         <Text checked="true">모두보기</Text>
                     </Category>
@@ -169,8 +171,8 @@ export default ({
                 )}
 
                 {myType === "문화예술공연" ? (
-                    <Category onClick={() => setType("")} checked="true">
-                        <Img src = {paintingOrange} />
+                    <Category onClick={() => setType("")}>
+                        <Img checked="true" src = {paintingOrange} />
                         <Text checked="true">문화/예술/공연</Text>
                     </Category>
                 ) : (
@@ -181,8 +183,8 @@ export default ({
                 )}
 
                 {myType === "봉사사회활동" ? (
-                    <Category onClick={() => setType("")} checked="true">
-                        <Img src = {teamOrange} />
+                    <Category onClick={() => setType("")} >
+                        <Img checked="true" src = {teamOrange} />
                         <Text checked="true">봉사/사회활동</Text>
                     </Category>
                 ) : (
@@ -193,8 +195,8 @@ export default ({
                 )}
 
                 {myType === "학술교양종교" ? (
-                    <Category onClick={() => setType("")} checked="true">
-                        <Img src = {writingOrange} />
+                    <Category onClick={() => setType("")}>
+                        <Img  checked="true" src = {writingOrange} />
                         <Text checked="true">학술/교양/종교</Text>
                     </Category>
                 ) : (
@@ -205,8 +207,8 @@ export default ({
                 )}   
 
                 {myType === "어학친목" ? (
-                    <Category onClick={() => setType("")} checked="true">
-                        <Img src = {speachBubbleLineOrange} />
+                    <Category onClick={() => setType("")}>
+                        <Img checked="true" src = {speachBubbleLineOrange} />
                         <Text checked="true">어학/친목</Text>
                     </Category>
                 ) : (
@@ -217,8 +219,8 @@ export default ({
                 )}
                 
                 {myType === "체육" ? (
-                    <Category onClick={() => setType("")} checked="true">
-                        <Img src = {basketballOrange}/>
+                    <Category onClick={() => setType("")} >
+                        <Img checked="true" src = {basketballOrange}/>
                         <Text checked="true">체육</Text>
                     </Category>
                 ) : (
