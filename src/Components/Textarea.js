@@ -10,6 +10,7 @@ const Input = styled.textarea`
     -moz-box-shadow: none;
     box-shadow: none;
     font-size: 0.85em;
+    font-family: raleR;
     resize: none;
 `;
 
@@ -19,7 +20,7 @@ const Textarea = ({ placeholder, required = true, value, onChange, type = "text"
 
 Textarea.propTypes = {
     placeholder: PropTypes.string.isRequired,
-    required: PropTypes.bool.isRequired,
+    required: PropTypes.bool,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,

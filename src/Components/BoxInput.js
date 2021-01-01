@@ -10,14 +10,14 @@ const Input = styled.input`
     font-family: raleRegular;
     border: 1px solid ${props => props.theme.lightGray};
     border-radius: 5px;
-    padding: 5px 7px;
+    padding: 7px 10px;
 `;
 
 /* 
 required: input 태그가 채워져야 하는지
 */
 const BoxInput = ({ placeholder, required = true, value, onChange, type = "text", width = "auto", disabled = false }) => (
-    <Input placeholder={placeholder} required={required} value={value} onChange={onChange} style={{width: width}} type={type} disabled={disabled} />
+    <Input placeholder={placeholder} required={required} value={value} onChange={onChange} style={{ width: width }} type={type} disabled={disabled} />
 );
 
 BoxInput.propTypes = {
@@ -27,7 +27,7 @@ BoxInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,
     width: PropTypes.string.isRequired,
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool,
 };
 
 export default BoxInput;

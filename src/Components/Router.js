@@ -9,8 +9,13 @@ const AppRouter = () => (
     <Router>
         <Header />
         <Switch>
-            <Route path="/" exact component={MJ_page} />
-            <Route path="/my" component={My} />
+            <Route path="/" exact component={Main} />
+            <Route path="/profile" component={My} />
+            <Route path="/club" component={My} />
+            <Route path="/member" component={My} />
+            <Route path="/applicant" component={My} />
+            <Route path="/interview" component={My} />
+            <Route path="/form" component={My} />
             <Redirect path="*" to="/" />
         </Switch>
         <Footer />
