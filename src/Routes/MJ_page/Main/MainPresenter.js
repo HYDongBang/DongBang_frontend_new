@@ -3,10 +3,15 @@ import styled from "styled-components";
 
 import main from "../../../Styles/Images/main.jpg"
 import writing from "../../../Styles/Images/writing.svg"
+import writingOrange from "../../../Styles/Images/writingOrange.svg"
 import painting from "../../../Styles/Images/painting.svg"
+import paintingOrange from "../../../Styles/Images/paintingOrange.svg"
 import team from "../../../Styles/Images/team.svg"
+import teamOrange from "../../../Styles/Images/teamOrange.svg"
 import speachBubbleLine from "../../../Styles/Images/speachBubbleLine.svg"
+import speachBubbleLineOrange from "../../../Styles/Images/speachBubbleLineOrange.svg"
 import basketball from "../../../Styles/Images/basketball.svg"
+import basketballOrange from "../../../Styles/Images/basketballOrange.svg"
 
 import Clubs from "./Clubs"
 
@@ -165,7 +170,7 @@ export default ({
 
                 {myType === "문화예술공연" ? (
                     <Category onClick={() => setType("")} checked="true">
-                        <Img src = {painting} />
+                        <Img src = {paintingOrange} />
                         <Text checked="true">문화/예술/공연</Text>
                     </Category>
                 ) : (
@@ -177,7 +182,7 @@ export default ({
 
                 {myType === "봉사사회활동" ? (
                     <Category onClick={() => setType("")} checked="true">
-                        <Img src = {team} />
+                        <Img src = {teamOrange} />
                         <Text checked="true">봉사/사회활동</Text>
                     </Category>
                 ) : (
@@ -189,7 +194,7 @@ export default ({
 
                 {myType === "학술교양종교" ? (
                     <Category onClick={() => setType("")} checked="true">
-                        <Img src = {writing} />
+                        <Img src = {writingOrange} />
                         <Text checked="true">학술/교양/종교</Text>
                     </Category>
                 ) : (
@@ -201,7 +206,7 @@ export default ({
 
                 {myType === "어학친목" ? (
                     <Category onClick={() => setType("")} checked="true">
-                        <Img src = {speachBubbleLine} />
+                        <Img src = {speachBubbleLineOrange} />
                         <Text checked="true">어학/친목</Text>
                     </Category>
                 ) : (
@@ -213,7 +218,7 @@ export default ({
                 
                 {myType === "체육" ? (
                     <Category onClick={() => setType("")} checked="true">
-                        <Img src = {basketball}/>
+                        <Img src = {basketballOrange}/>
                         <Text checked="true">체육</Text>
                     </Category>
                 ) : (
