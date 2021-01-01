@@ -36,7 +36,7 @@ const Rank = styled.div`
 `;
 
 const List = styled.div`
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
 `;
@@ -47,15 +47,27 @@ const Box = styled.div`
     padding: 9px 12px;
     display: flex;
     justify-content: space-between;
-    width: 30%;
+    width: 23%;
     margin-right: 10px;
     margin-bottom: 10px;
-    min-width: 180px;
+    min-width: 120px;
+    align-items: center;
+`;
+
+const Info = styled.div`
+    display: flex;
+    align-items: flex-end;
 `;
 
 const Name = styled.div`
     cursor: pointer;
     font-size: 0.85em;
+`;
+
+const StudentNumber = styled.div`
+    font-size: 0.7em;
+    color: ${props => props.theme.lightGray};
+    padding: 0px 2px;
 `;
 
 const Edit = styled.div`
@@ -66,7 +78,7 @@ const Submit = styled.div`
     padding-top: 80px;
     display: flex;
     justify-content: flex-end;
-    padding-right: 40%;
+    padding-right: 30%;
     padding-bottom: 50px;
 `;
 
@@ -80,9 +92,12 @@ export default ({ president, manager, member }) => (
             <Members>
                 <Rank>회장단</Rank>
                 <List>
-                    {president.map(({ name }) => (
+                    {president.map(({ name, studentNumber }) => (
                         <Box>
-                            <Name>{name}</Name>
+                            <Info>
+                                <Name>{name}</Name>
+                                <StudentNumber>{studentNumber}</StudentNumber>
+                            </Info>
                             <Edit>
                                 <FontAwesomeIcon icon={faPen} />
                             </Edit>
@@ -93,9 +108,12 @@ export default ({ president, manager, member }) => (
             <Members>
                 <Rank>운영진</Rank>
                 <List>
-                    {manager.map(({ name }) => (
+                    {manager.map(({ name, studentNumber }) => (
                         <Box>
-                            <Name>{name}</Name>
+                            <Info>
+                                <Name>{name}</Name>
+                                <StudentNumber>{studentNumber}</StudentNumber>
+                            </Info>
                             <Edit>
                                 <FontAwesomeIcon icon={faPen} />
                             </Edit>
@@ -106,9 +124,12 @@ export default ({ president, manager, member }) => (
             <Members>
                 <Rank>멤버</Rank>
                 <List>
-                    {member.map(({ name }) => (
+                    {member.map(({ name, studentNumber }) => (
                         <Box>
-                            <Name>{name}</Name>
+                            <Info>
+                                <Name>{name}</Name>
+                                <StudentNumber>{studentNumber}</StudentNumber>
+                            </Info>
                             <Edit>
                                 <FontAwesomeIcon icon={faPen} />
                             </Edit>

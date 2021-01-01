@@ -49,7 +49,7 @@ const Box = styled.div`
         border: 2px solid ${props => props.theme.orange};
         transition: 0.3s;
     }
-    margin: 0px 20px 0px 10px;
+    margin: 0px 25px 0px 10px;
 `;
 
 const Attribute = styled.div`
@@ -72,7 +72,8 @@ const Member = styled.div`
 const Info = styled.div`
     font-size: 0.85em;
     width: 130px;
-    padding-right: 5px;
+    padding-right: 7px;
+    line-height: 20px;
 `;
 
 const Submit = styled.div`
@@ -96,23 +97,23 @@ export default ({ applicants }) => (
             <Table>
                 <Attributes>
                     <Box></Box>
-                    <Attribute>이름</Attribute>
+                    <Attribute style={{ width: "80px" }}>이름</Attribute>
                     <Attribute>전화번호</Attribute>
                     <Attribute>메일 주소</Attribute>
-                    <Attribute>학교/학과</Attribute>
-                    <Attribute>학번</Attribute>
+                    <Attribute style={{ width: "200px" }}>학교/학과</Attribute>
+                    <Attribute style={{ width: "100px" }}>학번</Attribute>
                 </Attributes>
                 <Members>
                     {applicants.map(({ name, phoneNumber, email, uni, major, studentNumber }) => (
                         <Member>
                             <Box></Box>
-                            <Info>{name}</Info>
+                            <Info style={{ width: "80px" }}>{name}</Info>
                             <Info>{phoneNumber}</Info>
                             <Info>{email}</Info>
-                            <Info>
+                            <Info style={{ width: "200px" }}>
                                 {uni}/{major}
                             </Info>
-                            <Info>{studentNumber}</Info>
+                            <Info style={{ width: "100px" }}>{studentNumber}</Info>
                         </Member>
                     ))}
                 </Members>
