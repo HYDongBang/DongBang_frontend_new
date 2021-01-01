@@ -23,7 +23,6 @@ const Sub = styled.div`
 
 const Contents = styled.div`
     overflow-y: auto;
-    overflow-x: ;
 `;
 
 const Members = styled.div`

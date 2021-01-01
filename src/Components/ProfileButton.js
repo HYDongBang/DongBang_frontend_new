@@ -20,8 +20,8 @@ const ButtonContainer = styled.div`
 `;
 
 //color -  gray, darkgray, orange 있음
-const ProfileButton = ({ content, color, hover }) => (
-    <ButtonContainer color={color} hover={hover}>
+const ProfileButton = ({ content, color, hover, style }) => (
+    <ButtonContainer color={color} hover={hover} style={style}>
         {content}
     </ButtonContainer>
 );

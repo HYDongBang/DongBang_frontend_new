@@ -118,10 +118,10 @@ export default ({ match }) => {
                 <Container>
                     <Route exact path={"/profile"} component={Profile} />
                     <Route path={"/club"} component={Club} />
-                    <Route path={'/member'} component={Member} />
-                    {/*<Route path={'/applicant'} component={Applicant} />
-                    <Route path={'/interview'} component={Interview} />
-                    <Route path={'/form'} component={Form} />*/}
+                    <Route path={"/member"} component={Member} />
+                    <Route path={"/applicant"} component={Applicant} />
+                    <Route path={"/interview"} component={Interview} />
+                    <Route path={"/form"} component={Form} />
                 </Container>
             </Wrapper>
         </>
