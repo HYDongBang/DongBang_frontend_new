@@ -29,6 +29,7 @@ const LeftImg = styled.img`
 
 const ClubName = styled.div`
     margin-bottom:10px;
+    margin-top:10px;
     font-size: 1.5em;
 `;
 
@@ -42,7 +43,8 @@ const ClubType = styled.div`
 
 const LeftButtons = styled.div`
   display:flex;
-  margin-top:40px;
+  width: fit-content;
+  margin:40px auto 0px;
 `;
 
 const LeftButton = styled.div`
