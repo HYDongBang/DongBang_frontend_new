@@ -51,7 +51,7 @@ const Img = styled.img`
     width: 100%;
     height: 100%;
     padding: 20%;
-    background-color:#F7F8F9;
+    background-color:${props => props.checked ? "#FFFFFF" : "#F7F8F9" };
     border-radius:25%;
     cursor:pointer;
     border: ${props => props.checked &&  "2px solid #FF7300" };
@@ -64,6 +64,7 @@ const AllImg = styled.div`
     text-align:center;
     padding-top: 32%;
     border-radius:25%;
+    background-color:${props => props.checked ? "#FFFFFF" : "#F7F8F9" };
     border: ${props => props.checked &&  "2px solid #FF7300" };
     color: ${props => props.checked &&  "#FF7300" };
 `;
