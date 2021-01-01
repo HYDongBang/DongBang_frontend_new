@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
 import LineInput from "../../../Components/LineInput"
 import Textarea from "../../../Components/Textarea"
+import OrangeButton from "../../../Components/OrangeButton"
 
 import ScubaCrop from "../../../Styles/Images/Scuba_Crop.jpg"
 
@@ -14,7 +15,7 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
 const AContents = styled.div`
     display:flex;
-    padding:20px;
+    padding:10px;
     width:100%;
     height:100%;
 `;
@@ -46,7 +47,8 @@ const ClubType = styled.div`
 
 const LeftButtons = styled.div`
   display:flex;
-  margin-top:40px;
+  width: fit-content;
+  margin:40px auto 0px;
 `;
 
 const LeftButton = styled.div`
@@ -86,7 +88,7 @@ const QA = styled.div`
 
 
 const Question = styled.div`
-    margin-bottom:7px;
+    margin-bottom:10px;
 `;
 
 
@@ -94,6 +96,12 @@ const Desc = styled.div`
 
 `;
 
+const Tarea = styled.div`
+    width: 100%;
+    padding:20px;
+    height:150px;
+    border: 1px solid ${props=>props.theme.lightGray};
+`;
 
 
 export default ({club, setAction, action})=>{
@@ -133,9 +141,14 @@ export default ({club, setAction, action})=>{
                 </QA>
                 <QA>
                     <Question>이름</Question>
-                    <Textarea width = "100%" height="110px"/>
+                    <Tarea>
+                        <Textarea width = "100%" height="100%"/>
+                    </Tarea>
                 </QA>
             </QAs>
+            <div style = {{width:"fit-content", margin:"auto"}}>
+                <OrangeButton content ="지원하기"/>
+            </div>
         </Right>
         </AContents>
     )
