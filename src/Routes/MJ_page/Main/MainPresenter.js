@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 import main from "../../../Styles/Images/main.jpg"
 import writing from "../../../Styles/Images/writing.svg"
 import writingOrange from "../../../Styles/Images/writingOrange.svg"
@@ -15,6 +16,8 @@ import basketballOrange from "../../../Styles/Images/basketballOrange.svg"
 
 import Clubs from "./Clubs"
 
+import { useQuery } from "react-apollo-hooks";
+import {READ_ALL_CLUBS} from "./MainQueries"
 
 const Wrapper = styled.div`
     width:100%;
@@ -108,33 +111,18 @@ export default ({
     setFilterDisplay,
 }) => {
 
-    // 테스트 데이터
-    const clubs = [
-        {
-            id:1,
-            name: "안녕",
-            bio:"반가워"
-        },
-        {
-            id:2,
-            name: "222",
-            bio:"342342"
-        },
-        {
-            id:3,
-            name: "3333",
-            bio:"4234234"
-        }
-    ]
+  const { loading, data } = useQuery(READ_ALL_CLUBS);
+    console.log(data.readAllClubs);
 
     const handleChange = (e) => {
         setWord(e);
     
-        let oldList = clubs.map((club) => {
+        let oldList = data.readAllClubs.map((club) => {
           return {
             id: club.id,
             name: club.name,
-            bio: club.bio,
+            type: club.type,
+            description: club.description,
           };
         });
     
@@ -143,7 +131,7 @@ export default ({
           newList = oldList.filter((club) => club.name.includes(word));
           setFilterDisplay(newList);
         } else {
-          setFilterDisplay(clubs);
+          setFilterDisplay(data.readAllClubs);
         }
       };
  
@@ -232,10 +220,12 @@ export default ({
                 )}   
             </Categories>
             <ClubContainer>
-                <Clubs
-                    clubs={word.length < 1 ? clubs : filterDisplay}
+                {!loading && data && 
+                    <Clubs
+                    clubs={word.length < 1 ? data.readAllClubs : filterDisplay}
                     myType={myType}
-                />
+                    />
+                }
             </ClubContainer>
         </MainContents>
     </Wrapper>

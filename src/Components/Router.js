@@ -9,7 +9,7 @@ const AppRouter = () => (
     <Router>
         <Header />
         <Switch>
-            <Route path="/" exact component={Main} />
+            <Route path="/" exact component={MJ_page} />
             <Route path="/profile" component={My} />
             <Route path="/club" component={My} />
             <Route path="/member" component={My} />
