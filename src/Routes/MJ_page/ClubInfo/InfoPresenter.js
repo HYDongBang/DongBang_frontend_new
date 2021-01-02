@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import ClubInfoButton from "../../../Components/ClubInfobutton";
 import ClubLogo from "../../../Components/ClubLogo";
 import headerMovie from "../../../Styles/Images/header_movie.jpg"
 
@@ -8,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
+import { useQuery } from "react-apollo-hooks";
+import {READ_CLUB} from "./InfoQueries"
 
 const OrangeButton = styled.div`
   width: 220px;
@@ -137,8 +138,26 @@ const ButtonContainer = styled.div`
 
 export default ({club, setAction, action})=>{
 
+    const { loading, data } = useQuery(READ_CLUB, {variables:{id: club.id}});
+    
+  if (!loading && data.readClub) {
+    const des = data.readClub.description;
+    let clubDes = des.split("\n").map(function (item, idx) {
+      return (
+        <span key={idx}>
+          {item}
+          <br />
+        </span>
+      );
+    });
+  }
+
 return (
+    
     <>
+    {!loading && data.readClub &&
+    (
+        <>
         <HeaderImg src = {headerMovie}>
         </HeaderImg>
         <Club>
@@ -206,7 +225,11 @@ return (
                     </Activity>
                 </Activities>
                 </>
-                )}
+            )}
+        </>
+                
+    ) }
+        
  
 </>
 )
