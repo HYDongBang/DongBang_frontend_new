@@ -112,7 +112,6 @@ export default ({
 }) => {
 
   const { loading, data } = useQuery(READ_ALL_CLUBS);
-    console.log(data.readAllClubs);
 
     const handleChange = (e) => {
         setWord(e);
