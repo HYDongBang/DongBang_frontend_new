@@ -12,7 +12,6 @@ const UContents = styled.div`
 
 const Left = styled.div`
     width:28%;
-    border-right: 2px solid ${props=>props.theme.lightGray};
 `;
 
 const Top = styled.div`
@@ -45,7 +44,7 @@ const RoomDesc = styled.div`
 `;
 
 const Preview = styled.div`
-    width: 250px;
+    width: 60%;
     margin-left: 15px;
 `;
 
@@ -65,6 +64,12 @@ const TalkPreview = styled.div`
 `;
 
 
+const Line = styled.div`
+    width: 2px;
+    height:100%;
+    background-color: ${props=>props.theme.lightGray};
+`;
+
 const Right = styled.div`
     width: 72%;
 `;
@@ -73,7 +78,7 @@ const Talks = styled.div`
     display: flex;
     flex-direction:column;
     padding:20px;
-    height:83%;
+    height:80%;
 `;
 
 const Talk = styled.div`
@@ -115,6 +120,7 @@ const OtherBubble = styled.div`
 
 const Message = styled.div`
     width:100%; 
+    height:17%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding:10px;
@@ -132,7 +138,7 @@ const MessageInput = styled.textarea`
     font-size: 0.85em;
     resize: none;
     width:90%;
-    height:100px;
+    height:100%;
 `;
 
 const SendButton = styled.div`
@@ -167,6 +173,7 @@ export default ({club, setAction, action})=>{
                     </RoomDesc>
                 </Room>
             </Left>
+            <Line/>
 
             <Right>
                 <Talks>
