@@ -30,15 +30,15 @@ const MainImg = styled.img`
 `;
 
 const MainContents = styled.div`
-    width: 70%;
+    width: 100%;
     height:100%;
-    margin: 0 auto;
+    padding: 0 15%;
 `;
 
 const Categories = styled.div`
     height: 200px;
     width: 100%;
-    padding: 30px 10%;
+    padding: 30px;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -73,7 +73,7 @@ const AllImg = styled.div`
 `;
 
 const Text = styled.div`
-    width: 120px;
+    width: 110px;
     text-align:center;
     margin-top:20px;
     color: ${props => props.checked &&  "#FF7300" };
@@ -85,7 +85,6 @@ const ClubContainer = styled.div`
     width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
-    padding: 0px 5%;
 `;
 
 const SearchBar = styled.input`
