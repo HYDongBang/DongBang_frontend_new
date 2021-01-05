@@ -67,7 +67,7 @@ const Talks = styled.div`
     display: flex;
     flex-direction:column;
     padding:20px;
-    height:83%;
+    height:80%;
 `;
 
 const Talk = styled.div`
@@ -109,6 +109,7 @@ const OtherBubble = styled.div`
 
 const Message = styled.div`
     width:100%; 
+    height:17%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding:10px;
@@ -126,7 +127,7 @@ const MessageInput = styled.textarea`
     font-size: 0.85em;
     resize: none;
     width:90%;
-    height:100px;
+    height:100%;
 `;
 
 const SendButton = styled.div`

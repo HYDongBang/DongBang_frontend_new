@@ -155,8 +155,8 @@ export default ({club, setAction, action})=>{
 return (
     
     <>
-    {!loading && data.readClub &&
-    (
+    {/* {!loading && data.readClub &&
+    ( */}
         <>
         <HeaderImg src = {headerMovie}>
         </HeaderImg>
@@ -228,8 +228,8 @@ return (
             )}
         </>
                 
-    ) }
-        
+    {/* ) }
+         */}
  
 </>
 )

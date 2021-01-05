@@ -15,7 +15,7 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
 const AContents = styled.div`
     display:flex;
-    padding:10px;
+    padding:20px;
     width:100%;
     height:100%;
 `;
