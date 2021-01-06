@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BoxInput from "../../../Components/BoxInput";
 import ProfileButton from "../../../Components/ProfileButton";
+import UserLogo from "../../../Components/UserLogo";
 // import Loading from "../../../Components/"
 
 const Title = styled.div`
@@ -21,6 +22,11 @@ const Sub = styled.div`
 `;
 
 const Contents = styled.div``;
+
+const Info = styled.div`
+    padding-left: 15px;
+    width: 20%;
+`;
 
 const Question = styled.div`
     padding: 15px 0px;
@@ -46,9 +52,12 @@ export default ({ name, uni, major, studentNumber, phone, email }) => (
             <Sub>내 정보 및 프로필을 편집할 수 있습니다.</Sub>
         </Title>
         <Contents>
-            <Question>
-                <About>이름</About>
-                <BoxInput placeholder="ex) 홍길동" {...name} width="60%"></BoxInput>
+            <Question style={{ display: "flex" }}>
+                <UserLogo name="홍" size="" font=""></UserLogo>
+                <Info>
+                    <About>이름</About>
+                    <BoxInput placeholder="ex) 홍길동" {...name} width="100%"></BoxInput>
+                </Info>
             </Question>
             <Question>
                 <About>학교</About>
