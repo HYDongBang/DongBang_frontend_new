@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.button`
     width: 110px;
     height: 35px;
     border-radius: 5px;
@@ -12,7 +12,8 @@ const ButtonContainer = styled.div`
     text-align: center;
     font-size: 0.9em;
     cursor: pointer;
-    padding: 9px;
+    padding: 5px 30px;
+    border: none;
     &:hover {
         background-color: ${props => props.hover === "orange" && "#FF7300"};
         transition: 0.1s;

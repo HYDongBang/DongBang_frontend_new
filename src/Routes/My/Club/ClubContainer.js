@@ -2,6 +2,7 @@ import React from "react";
 import ClubPresenter from "./ClubPresenter";
 import useInput from "../../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
+import { GET_CLUB, UPDATE_CLUB } from "./ClubQueries";
 
 export default () => {
     const name = useInput("");
@@ -16,5 +17,9 @@ export default () => {
     const phone = useInput("");
     const email = useInput("");
 
-    return <ClubPresenter name={name} short={short} long={long} logo={logo} image={image} facebook={facebook} instagram={instagram} meeting={meeting} people={people} phone={phone} email={email} />;
+    const onImgClick = (close) => {
+        close();
+    };
+
+    return <ClubPresenter name={name} short={short} long={long} logo={logo} image={image} facebook={facebook} instagram={instagram} meeting={meeting} people={people} phone={phone} email={email} onImgClick={onImgClick}/>;
 };
