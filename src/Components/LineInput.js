@@ -51,7 +51,8 @@ const LineInput = ({ placeholder, required = true, value, onChange, onClick, ico
         <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} disabled={disabled} />
         {icon === "mail" && <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FF7300", fontSize: "1.1em", cursor: "pointer" }} />}
         {icon === "pw" && <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#FF7300", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
-        {icon === "certification" && <Button onClick={onClick}>인증하기</Button>}
+        {icon === "certification" && <Button onClick={onClick}>인증번호 받기</Button>}
+        {icon === "check" && <Button onClick={onClick}>인증하기</Button>}
         {icon === "delete" && <FontAwesomeIcon icon={faTimes} style={{ color: "#D1D1D1", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
     </Container>
 );

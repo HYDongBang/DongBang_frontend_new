@@ -19,7 +19,7 @@ export default ({ action, setAction, club }) => {
         <Wrapper>
         {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
         {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
-        {action === "Talk" && (<MTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+        {action === "Talk" && (<UTalkContainer club = {club} action={action} setAction ={setAction}/>)}
         {action === "Apply" && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
         </Wrapper>
     )

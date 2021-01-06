@@ -17,12 +17,16 @@ const Club = styled.div`
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  margin: 20px 6%;
+  margin: 20px 5%;
 `;
 
 const Context = styled.div`
   padding: 50px 10px 10px 10px;
   height:70%;
+`;
+
+const ClubType = styled.div`
+  margin: 10px auto 15px;
 `;
 
 const ClubName = styled.div`
@@ -31,6 +35,7 @@ const ClubName = styled.div`
 
 const ClubText = styled.div`
   font-size: 0.8em;
+  line-height: 1.2em;
 `;
 
 const ClubImg = styled.img`
@@ -82,8 +87,9 @@ export default  ({ clubs, myType }) => {
                   </Position>
 
                   <Context>
+                    <ClubType> {club.type}</ClubType>
                     <ClubName>{club.name}</ClubName>
-                    <ClubText>{club.bio}</ClubText>
+                    <ClubText>{club.description}</ClubText>
                   </Context>
                 </Club>
               }
@@ -109,8 +115,9 @@ export default  ({ clubs, myType }) => {
                      <ClubLogo type = "culture"/>
                   </Position>
                   <Context>
+                    <ClubType> {club.type}</ClubType>
                     <ClubName>{club.name}</ClubName>
-                    <ClubText>{club.bio}</ClubText>
+                    <ClubText>{club.description}</ClubText>
                   </Context>
                 </Club>
               }

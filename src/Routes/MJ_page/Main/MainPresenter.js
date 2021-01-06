@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 import main from "../../../Styles/Images/main.jpg"
 import writing from "../../../Styles/Images/writing.svg"
 import writingOrange from "../../../Styles/Images/writingOrange.svg"
@@ -15,6 +16,8 @@ import basketballOrange from "../../../Styles/Images/basketballOrange.svg"
 
 import Clubs from "./Clubs"
 
+import { useQuery } from "react-apollo-hooks";
+import {READ_ALL_CLUBS} from "./MainQueries"
 
 const Wrapper = styled.div`
     width:100%;
@@ -27,15 +30,15 @@ const MainImg = styled.img`
 `;
 
 const MainContents = styled.div`
-    width: 70%;
+    width: 100%;
     height:100%;
-    margin: 0 auto;
+    padding: 0 15%;
 `;
 
 const Categories = styled.div`
     height: 200px;
     width: 100%;
-    padding: 30px 10%;
+    padding: 30px;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -70,7 +73,7 @@ const AllImg = styled.div`
 `;
 
 const Text = styled.div`
-    width: 120px;
+    width: 110px;
     text-align:center;
     margin-top:20px;
     color: ${props => props.checked &&  "#FF7300" };
@@ -82,7 +85,6 @@ const ClubContainer = styled.div`
     width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
-    padding: 0px 5%;
 `;
 
 const SearchBar = styled.input`
@@ -108,33 +110,17 @@ export default ({
     setFilterDisplay,
 }) => {
 
-    // 테스트 데이터
-    const clubs = [
-        {
-            id:1,
-            name: "안녕",
-            bio:"반가워"
-        },
-        {
-            id:2,
-            name: "222",
-            bio:"342342"
-        },
-        {
-            id:3,
-            name: "3333",
-            bio:"4234234"
-        }
-    ]
+  const { loading, data } = useQuery(READ_ALL_CLUBS);
 
     const handleChange = (e) => {
         setWord(e);
     
-        let oldList = clubs.map((club) => {
+        let oldList = data.readAllClubs.map((club) => {
           return {
             id: club.id,
             name: club.name,
-            bio: club.bio,
+            type: club.type,
+            description: club.description,
           };
         });
     
@@ -143,7 +129,7 @@ export default ({
           newList = oldList.filter((club) => club.name.includes(word));
           setFilterDisplay(newList);
         } else {
-          setFilterDisplay(clubs);
+          setFilterDisplay(data.readAllClubs);
         }
       };
  
@@ -232,10 +218,12 @@ export default ({
                 )}   
             </Categories>
             <ClubContainer>
-                <Clubs
-                    clubs={word.length < 1 ? clubs : filterDisplay}
+                {!loading && data && 
+                    <Clubs
+                    clubs={word.length < 1 ? data.readAllClubs : filterDisplay}
                     myType={myType}
-                />
+                    />
+                }
             </ClubContainer>
         </MainContents>
     </Wrapper>

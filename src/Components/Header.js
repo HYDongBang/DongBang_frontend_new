@@ -4,8 +4,21 @@ import styled from "styled-components";
 import Popup from "reactjs-popup";
 import AuthContainer from "../Routes/MJ_page/Auth/AuthContainer"
 
-// 임시 데이터
-const isLoggedIn = false;
+import { useQuery, useMutation } from "react-apollo-hooks";
+import { gql } from "apollo-boost";
+
+
+const LOG_IN = gql`
+    {
+        isLoggedIn @client
+    }
+`;
+
+const LOG_OUT = gql`
+    mutation logUserOut {
+        logUserOut @client
+    }
+`;
 
 const Container = styled.div`
     z-index: 100;
@@ -54,34 +67,41 @@ const contentStyle ={
 `;
 
 
-export default () => (
-    <Container>
-        <Link to="/">
-            <Icon>DongBang 동방</Icon>
-        </Link>
-        {isLoggedIn ? (
-            <List>
-                <Link to="/profile">
-                    <Text>마이페이지</Text>
-                </Link>
-                <Text>로그아웃</Text>
-            </List>
-        ) : (
-            <List>
-                <Popup 
-                trigger={
-                    <Text>로그인/회원가입</Text>
-                  }
-                  modal
-                  contentStyle = {contentStyle}>
-                    {close =>(
-                        <>
-                        <X onClick={close}>&times; </X>
-                        <AuthContainer/>
-                        </>
-                    )}
-                </Popup>
-            </List>
-        )}
-    </Container>
-);
+export default () => {
+    const {
+        data: { isLoggedIn }
+    } = useQuery(LOG_IN);
+    const [logOut] = useMutation(LOG_OUT);
+
+        return (
+        <Container>
+            <Link to="/">
+                <Icon>DongBang 동방</Icon>
+            </Link>
+            {isLoggedIn ? (
+                <List>
+                    <Link to="/profile">
+                        <Text>마이페이지</Text>
+                    </Link>
+                    <Text onClick={logOut}>로그아웃</Text>
+                </List>
+            ) : (
+                <List>
+                    <Popup 
+                    trigger={
+                        <Text>로그인/회원가입</Text>
+                    }
+                    modal
+                    contentStyle = {contentStyle}>
+                        {close =>(
+                            <>
+                            <X onClick={close}>&times; </X>
+                            <AuthContainer/>
+                            </>
+                        )}
+                    </Popup>
+                </List>
+            )}
+        </Container>
+    );
+}
