@@ -4,6 +4,7 @@ import ApplyPresenter from "./ApplyPresenter";
 import { useQuery } from "react-apollo-hooks";
 import { useMutation } from "react-apollo-hooks";
 import { CREATE_APPLICATION, READ_CLUB} from "./ApplyQueries";
+import { toast } from "react-toastify";
 
 export default ({action, setAction, club }) => {
 
@@ -53,14 +54,14 @@ export default ({action, setAction, club }) => {
             },
           });
           if (!id || id === "") {
-            console.log("전송 오류");
+            toast.error("전송 오류");
           } else {
-            setAction("clubInfo");
-            console.log("전송 완료");
+            setAction("Info");
+            toast("전송 완료");
           }
         } catch (err) {
           console.log(err.message);
-          console.log("신청서를 보낼 수 없습니다. 다시 시도해주세요.");
+          toast.error("신청서를 보낼 수 없습니다. 다시 시도해주세요.");
         }
       } else {
         console.log("모든 입력창을 채워주세요.");
