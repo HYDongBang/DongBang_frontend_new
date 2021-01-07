@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
 import LineInput from "../../../Components/LineInput"
@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
+import { Scrollbars } from 'react-custom-scrollbars';
 
 
 const AContents = styled.div`
@@ -33,8 +34,8 @@ const LeftImg = styled.img`
 `;
 
 const ClubName = styled.div`
-    margin-bottom:10px;
-    font-size: 1.5em;
+    margin:10px;
+    font-size: 1.3em;
 `;
 
 const LeftInfo = styled.div`
@@ -63,7 +64,7 @@ const LeftButton = styled.div`
   margin:2px;
 `;
 
-const Right = styled.div`
+const Right = styled.form`
     width: 72%;
     padding:30px 13%;
 `;
@@ -79,7 +80,7 @@ const Title = styled.div`
 `;
 
 const QAs = styled.div`
-
+    height:70%;
 `;
 
 const QA = styled.div`
@@ -104,52 +105,92 @@ const Tarea = styled.div`
 `;
 
 
-export default ({club, setAction, action})=>{
+export default ({club, setAction, action, loading, data, onSubmit, myanswers, setMyAnswers, myApplication})=>{
+    const handleInput = (e, idx) => {
+        myanswers[idx] = e;
+        if (e !== "") {
+          console.log(myanswers);
+        }
+      };
 
     return (
         <AContents>
-        <Left>
-            <LeftImg src = {ScubaCrop}/>
-            <LeftInfo>
-                <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
-                <ClubLogo type = "sports"/>
-                </div>
-                <ClubType>체육</ClubType>
-                <ClubName>HYSCUBA</ClubName>
-            </LeftInfo>
-            <LeftButtons>
-                <LeftButton onClick={() => setAction("Info")} >
-                    <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faUserFriends}  />   
-                    동아리 소개
-                </LeftButton>
-                <LeftButton onClick={() => setAction("Talk")}>
-                    <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
-                    실시간 톡
-                </LeftButton>
-            </LeftButtons>
-        </Left>
+            {!loading && data.readClub &&(
+                <>
+                <Left>
+                <LeftImg src = {ScubaCrop}/>
+                <LeftInfo>
+                    <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
+                    <ClubLogo type = "sports"/>
+                    </div>
+                    <ClubType>{club.type}</ClubType>
+                    <ClubName>{club.name}</ClubName>
+                </LeftInfo>
+                <LeftButtons>
+                    <LeftButton onClick={() => setAction("Info")} >
+                        <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faUserFriends}  />   
+                        동아리 소개
+                    </LeftButton>
+                    <LeftButton onClick={() => setAction("Talk")}>
+                        <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
+                        실시간 톡
+                    </LeftButton>
+                </LeftButtons>
+            </Left>
 
-        <Right>    
-            <Top>
-                <Title>지원하기</Title>
-                <Desc>동아리에 지원하기 위해서 아래 내용을 작성해주세요</Desc>
-            </Top>
-            <QAs>
-                <QA>
-                    <Question>이름</Question>
-                    <LineInput/>
-                </QA>
-                <QA>
-                    <Question>이름</Question>
-                    <Tarea>
-                        <Textarea width = "100%" height="100%"/>
-                    </Tarea>
-                </QA>
-            </QAs>
-            <div style = {{width:"fit-content", margin:"auto"}}>
-                <OrangeButton content ="지원하기"/>
-            </div>
-        </Right>
+            <Right onSubmit={myApplication, onSubmit}>    
+                <Top>
+                    <Title>지원하기</Title>
+                    <Desc>동아리에 지원하기 위해서 아래 내용을 작성해주세요</Desc>
+                </Top>
+                <QAs>
+                    <Scrollbars style ={{height:"100%"}}>
+                        {data.readClub.questions.map((question, idx)=>{
+                            return(
+                            <>
+                            {question.type ==="short" && 
+                                <QA>
+                                    <Question>{question.title}</Question>
+                                    <LineInput onChange={(e) => handleInput(e.target.value, idx)}/>
+                                </QA>
+                            }
+                            {question.type ==="long" && 
+                                <QA>
+                                <Question>{question.title}</Question>
+                                    <Tarea>
+                                        <Textarea width = "100%" height="100%" onChange={(e) => handleInput(e.target.value, idx)}/>
+                                    </Tarea>
+                                </QA>
+                            }
+                            {question.type ==="multiple" && 
+                                <QA>
+                                <Question>{question.title}</Question>
+                                    {question.choices.map((choice)=>(
+                                        <label style={{ marginBottom: "5px" }}>
+                                        <input
+                                        style={{ marginBottom: "5px" }}
+                                        type="radio"
+                                        name="options"
+                                        value={choice.subject}
+                                        onChange={(e) => handleInput(e.target.value, idx)}
+                                        ></input>
+                                        {choice.subject}
+                                    </label>
+                                    ))}
+                                </QA>
+                            }
+                            </>
+                            )
+                        })}
+                    </Scrollbars>
+                </QAs>
+                <div style = {{width:"fit-content", margin:"auto"}}>
+                    <OrangeButton content ="지원하기"/>
+                </div>
+            </Right>
+            </>
+            )}
+        
         </AContents>
     )
 }

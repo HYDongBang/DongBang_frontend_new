@@ -6,6 +6,8 @@ import headerMovie from "../../../Styles/Images/header_movie.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
+import { faInstagramSquare } from '@fortawesome/free-brands-svg-icons'
 
 import { useQuery } from "react-apollo-hooks";
 import {READ_CLUB} from "./InfoQueries"
@@ -61,7 +63,8 @@ const Desc = styled.div`
 const ClubInfo = styled.div`
     justify-content:space-between;
     display:flex;
-    padding: 20px 7%;
+    padding: 0px 7%;
+    line-height:2em;
 `;
 
 const LeftInfo = styled.div`
@@ -78,6 +81,12 @@ const Tag = styled.div`
 color: ${props=>props.theme.orange};
 margin-right:5px;
 `;
+
+const Icon = styled.a`
+    margin-left:10px;
+    color:  ${props=>props.theme.black};
+`;
+
 
 const Info = styled.div`
 margin-right:15px;
@@ -138,11 +147,12 @@ const ButtonContainer = styled.div`
 
 export default ({club, setAction, action})=>{
 
-    const { loading, data } = useQuery(READ_CLUB, {variables:{id: club.id}});
-    
-  if (!loading && data.readClub) {
-    const des = data.readClub.description;
-    let clubDes = des.split("\n").map(function (item, idx) {
+const { loading, data } = useQuery(READ_CLUB, {variables:{id: club.id}});
+let clubContent;
+
+if (!loading && data.readClub) {
+    const content = data.readClub.content;
+    clubContent = content.split("\n").map(function (item, idx) {
       return (
         <span key={idx}>
           {item}
@@ -150,20 +160,21 @@ export default ({club, setAction, action})=>{
         </span>
       );
     });
-  }
+
+
+}
 
 return (
-    
     <>
-    {/* {!loading && data.readClub &&
-    ( */}
+    {!loading && data.readClub &&
+    (
         <>
         <HeaderImg src = {headerMovie}>
         </HeaderImg>
         <Club>
             <ClubLogo style={{margin:"auto"}} type = "sports"/>
-            <Type>체육</Type>
-            <Name>HYSCUBA</Name>
+            <Type>{data.readClub.type}</Type>
+            <Name>{data.readClub.name}</Name>
         </Club>
         <Buttons>
             <ButtonContainer onClick={() => setAction("Talk")} >
@@ -178,22 +189,27 @@ return (
         </Buttons>
 
         <Desc> 
-            스포츠 다이빙은 레크레이션 다이빙 활동을 대표한다. 스포츠 다이빙은 많은 사람들이 즐기고 있으며, 따뜻하고 이국적인 지역에서 간단한 장비와 초급 단계의 훈련을 받고도 충분히 즐길 수 있다.
-            반면 스포츠 다이빙의 한계와 제한 범위는 명확하게 정의되어 있다. 장비는 실린더(탱크) 한 개를 사용해야 하고, 최대 허용 수심은 40m지만, PADI의 오픈워터 레벨을 기준으로 초급 다이버는 한계수심이 18m로 제한되며 천정이 막힌 환경(예를 들면 수중동굴이나 난파선의 내부 등)에서는 다이빙할 수 없다. 초급 라이센스 다이버일수록 트러블 발생시 대처능력이 떨어지고, 긴급 상황에서 수면으로 상승해야할 시 위가 막힌 환경이라면 사고로 이어질 수 있기 때문이다. 초급 레벨을 벗어나 어드밴스로 레벨을 올리면 한계수심이 최대40m까지 허용이 되며 위가 막힌 환경에서도 다이빙할 수 있도록 교육받게 된다. 동시에 대부분의 스포츠 다이빙에서는 무감압 다이빙을 한다.
+          {clubContent}
         </Desc>
 
         <Line/>
 
         <ClubInfo>
             <LeftInfo>
-                <Tag>회합일정</Tag> <Info>화요일</Info>
-                <Tag>뒷풀이</Tag> <Info>화요일</Info>
-                <Tag>인원수</Tag> <Info>화요일</Info>
-                <Tag>연합여부</Tag> <Info>화요일</Info>
+                <Tag>회합일정</Tag> <Info>{data.readClub.partyDay}</Info>
+                <Tag>뒷풀이</Tag> <Info>{data.readClub.party?"있음":"없음"}</Info>
+                <Tag>인원수</Tag> <Info>{data.readClub.numberOfMembers}명</Info>
+                <Tag>연합여부</Tag> <Info>{data.readClub.isUnion?"연합":"비연합"}</Info>
             </LeftInfo>
             <RightInfo>
-                <Tag>메일</Tag> <Info>nso1012@naver.com</Info>
-                <Tag>연락처</Tag> <Info>010-2834-9053</Info>
+                <Tag>메일</Tag> <Info>{data.readClub.email}</Info>
+                <Tag>연락처</Tag> <Info>{data.readClub.phoneNumber}</Info>
+                <Icon href = {data.readClub.facebookUrl} target="_blank" title="페이스북">
+                    <FontAwesomeIcon size="2x" icon={faFacebookSquare}/>
+                </Icon> 
+                <Icon href = {data.readClub.instagramUrl} target="_blank" title="인스타그램">
+                    <FontAwesomeIcon size="2x" icon={faInstagramSquare}/>
+                </Icon> 
             </RightInfo>
         </ClubInfo>
 
@@ -203,34 +219,26 @@ return (
                 </div>)}
         {action === "MoreInfo" && (
             <>
-            <MLine/>
-                <Activities>
-                    <Activity>
-                        <ActImg></ActImg>
-                        <ActTitle>
-                            동아리와 알아보는 스쿠버다이빙의 매력!
-                        </ActTitle>
-                        <ActDes>
-                            스포츠 다이빙은 레크레이션 다이빙 활동을 대표한다. 스포츠 다이빙은 많은 사람들이 즐기고 있으며, 따뜻하고 이국적인 지역에서 간단한 장비와 초급 단계의 훈련을 받고도 충분히 즐길 수 있다. 반면 스포츠 다이빙의 한계와 제한 범위는 명확하게 정의되어 있다. 장비는 실린더(탱크) 한 개를 사용해야 하고, 최대 허용 수심은 40m지만, PADI의 오픈워터 레벨을 기준으로 초급 다이버는 한계수심이 18m로 제한되며 천정이 막힌 환경(예를 들면 수중동굴이나 난파선의 내부 등)에서는 다이빙할 수 없다. 
-                        </ActDes>
-                    </Activity>
-                    <Activity>
-                        <ActImg></ActImg>
-                        <ActTitle>
-                            동아리와 알아보는 스쿠버다이빙의 매력!
-                        </ActTitle>
-                        <ActDes>
-                            스포츠 다이빙은 레크레이션 다이빙 활동을 대표한다. 스포츠 다이빙은 많은 사람들이 즐기고 있으며, 따뜻하고 이국적인 지역에서 간단한 장비와 초급 단계의 훈련을 받고도 충분히 즐길 수 있다. 반면 스포츠 다이빙의 한계와 제한 범위는 명확하게 정의되어 있다. 장비는 실린더(탱크) 한 개를 사용해야 하고, 최대 허용 수심은 40m지만, PADI의 오픈워터 레벨을 기준으로 초급 다이버는 한계수심이 18m로 제한되며 천정이 막힌 환경(예를 들면 수중동굴이나 난파선의 내부 등)에서는 다이빙할 수 없다. 
-                        </ActDes>
-                    </Activity>
+                <MLine/>
+                <Activities >
+                    {data.readClub.posts.map((post)=>{
+                        return(
+                        <Activity>
+                            <ActImg></ActImg>
+                            <ActTitle key>
+                                {post.title}
+                            </ActTitle>
+                            <ActDes>
+                                {post.content}
+                            </ActDes>
+                        </Activity>
+                        )
+                    })}
                 </Activities>
-                </>
+            </>
             )}
-        </>
-                
-    {/* ) }
-         */}
- 
+        </>         
+    ) }
 </>
 )
 }
