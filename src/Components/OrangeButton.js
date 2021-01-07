@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 //현재 폰트가 잘 안먹힘.. 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.button`
   width: ${props => props.width || "220px" };
   height: ${props => props.height || "50px" };
   border-radius: 38px;
@@ -13,6 +13,7 @@ const ButtonContainer = styled.div`
   font-family:raleBold;
   color:${props=>props.theme.white};
   cursor:pointer;
+  border:none;
 `;
 
 

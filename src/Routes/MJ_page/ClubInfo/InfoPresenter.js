@@ -149,7 +149,6 @@ export default ({club, setAction, action})=>{
 
 const { loading, data } = useQuery(READ_CLUB, {variables:{id: club.id}});
 let clubContent;
-let moreInfo;
 
 if (!loading && data.readClub) {
     const content = data.readClub.content;
