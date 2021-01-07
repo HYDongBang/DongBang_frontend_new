@@ -21,8 +21,12 @@ export default ({ action, setAction, club, loading, data }) => {
           <>
             {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
-            {action === "Talk" && data.readLoggedInUser.clubMaster.id === club.id && (<MTalkContainer club = {club} action={action} setAction ={setAction}/>)}
-            {action === "Talk" && data.readLoggedInUser.clubMaster.id !== club.id && (<UTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+            {action === "Talk" &&
+              <>
+                {data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.clubMaster.id === club.id && (<MTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+                {data.readLoggedInUser.clubMaster === null && (<UTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+              </>
+            }
             {action === "Apply" && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
           </>
           }
