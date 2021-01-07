@@ -51,7 +51,6 @@ const SNSDesc = styled.div`
 
 export default ({ 
     status,
-    setStatus,
     email,
     password,
     password2,
@@ -59,8 +58,7 @@ export default ({
     name,
     studentNumber,
     phoneNumber,
-    university,
-    major,
+    majUniv,
     auth,
     onSecret,
     checkSecret})=>{
@@ -103,7 +101,7 @@ export default ({
                     </Content>
                     <Content>
                         <Text>University / major</Text>   
-                        <LineInput {...major} placeholder = "소속 대학과 전공을 적어주세요 (/로 구별합니다)"/>
+                        <LineInput {...majUniv} placeholder = "소속 대학과 전공을 적어주세요 (/로 구별합니다)"/>
                     </Content>
                     <Content>
                         <Text>Student ID No.</Text>   
