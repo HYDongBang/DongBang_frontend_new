@@ -14,13 +14,18 @@ const Wrapper = styled.div`
   border-radius: 15px;
 `;
 
-export default ({ action, setAction, club }) => {
+export default ({ action, setAction, club, loading, data }) => {
     return (
         <Wrapper>
-        {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
-        {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
-        {action === "Talk" && (<UTalkContainer club = {club} action={action} setAction ={setAction}/>)}
-        {action === "Apply" && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
+          {!loading && data &&
+          <>
+            {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
+            {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
+            {action === "Talk" && data.readLoggedInUser.clubMaster.id === club.id && (<MTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+            {action === "Talk" && data.readLoggedInUser.clubMaster.id !== club.id && (<UTalkContainer club = {club} action={action} setAction ={setAction}/>)}
+            {action === "Apply" && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
+          </>
+          }
         </Wrapper>
     )
 }
