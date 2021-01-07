@@ -17,8 +17,8 @@ const ButtonContainer = styled.button`
 `;
 
 
-const OrangeButton =({content, width, height}) =>(
-    <ButtonContainer width= {width} height={height}>{content}</ButtonContainer>
+const OrangeButton =({content, width, height, onClick}) =>(
+    <ButtonContainer width= {width} height={height} onClick = {onClick}>{content}</ButtonContainer>
   );
   
   export default OrangeButton;

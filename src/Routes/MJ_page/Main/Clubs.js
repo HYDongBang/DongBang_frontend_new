@@ -17,7 +17,7 @@ const Club = styled.div`
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  margin: 20px 6%;
+  margin: 20px 5%;
 `;
 
 const Context = styled.div`
