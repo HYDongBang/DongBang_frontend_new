@@ -160,8 +160,6 @@ if (!loading && data.readClub) {
         </span>
       );
     });
-
-
 }
 
 return (
