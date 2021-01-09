@@ -154,14 +154,23 @@ const SendButton = styled.div`
 
 
 
-export default ({club, setAction, action})=>{
+export default ({club,
+     setAction,
+     action,
+     rooms,
+     room,
+     roomsLoading,
+     roomLoading,
+    })=>{
 
     return (
         <UContents>
-            <Left>
+            {!roomsLoading && !roomLoading && <>
+                <Left>
                 <Top>
                     <Filter>전체메시지</Filter>
                 </Top>
+                
                 <Room>  
                     <RoomTime>20.11.09 13:56</RoomTime>
                     <RoomDesc>
@@ -201,6 +210,8 @@ export default ({club, setAction, action})=>{
                     <SendButton>전송</SendButton>
                 </Message>
             </Right>
+            </>}
+            
         </UContents>
     )
 }
