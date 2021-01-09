@@ -39,16 +39,10 @@ const Attributes = styled.div`
     padding: 15px 0px;
 `;
 
-const Box = styled.div`
-    border: 2px solid ${props => props.theme.lightGray};
-    border-radius: 5px;
+const Box = styled.input`
     height: 18px;
     width: 18px;
     cursor: pointer;
-    &:hover {
-        border: 2px solid ${props => props.theme.orange};
-        transition: 0.3s;
-    }
     margin: 0px 25px 0px 10px;
 `;
 
@@ -84,44 +78,47 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-export default ({ applicants }) => (
+export default ({ applicants, questions, onClickAll, onClickSelect, onClickButton, loading }) => (
     <>
         <Title>
             <Main>지원자 관리</Main>
             <Sub>지원자를 관리할 수 있습니다.</Sub>
         </Title>
-        <Contents>
-            <Num>
-                전체 지원자 <span style={{ color: "#FF7300" }}>{applicants.length}</span> 명
-            </Num>
-            <Table>
-                <Attributes>
-                    <Box></Box>
-                    <Attribute style={{ width: "80px" }}>이름</Attribute>
-                    <Attribute>전화번호</Attribute>
-                    <Attribute>메일 주소</Attribute>
-                    <Attribute style={{ width: "200px" }}>학교/학과</Attribute>
-                    <Attribute style={{ width: "100px" }}>학번</Attribute>
-                </Attributes>
-                <Members>
-                    {applicants.map(({ name, phoneNumber, email, uni, major, studentNumber }) => (
-                        <Member>
-                            <Box></Box>
-                            <Info style={{ width: "80px" }}>{name}</Info>
-                            <Info>{phoneNumber}</Info>
-                            <Info>{email}</Info>
-                            <Info style={{ width: "200px" }}>
-                                {uni}/{major}
-                            </Info>
-                            <Info style={{ width: "100px" }}>{studentNumber}</Info>
-                        </Member>
-                    ))}
-                </Members>
-            </Table>
-        </Contents>
+        {loading && <div>loading</div>}
+        {!loading && (
+            <Contents>
+                <Num>
+                    전체 지원자 <span style={{ color: "#FF7300" }}>{applicants.length}</span> 명
+                </Num>
+                <Table>
+                    <Attributes>
+                        <Box type="checkbox" onChange={onClickAll}></Box>
+                        <Attribute style={{ width: "80px" }}>이름</Attribute>
+                        <Attribute>전화번호</Attribute>
+                        <Attribute>메일 주소</Attribute>
+                        <Attribute style={{ width: "200px" }}>학교/학과</Attribute>
+                        <Attribute style={{ width: "100px" }}>학번</Attribute>
+                    </Attributes>
+                    <Members>
+                        {applicants.map(({ id, answers, user: { name, phoneNumber, email, university, major, studentNumber } }) => (
+                            <Member key={id}>
+                                <Box type="checkbox" value={id} onChange={onClickSelect}></Box>
+                                <Info style={{ width: "80px" }}>{name}</Info>
+                                <Info>{phoneNumber}</Info>
+                                <Info>{email}</Info>
+                                <Info style={{ width: "200px" }}>
+                                    {university}/{major}
+                                </Info>
+                                <Info style={{ width: "100px" }}>{studentNumber}</Info>
+                            </Member>
+                        ))}
+                    </Members>
+                </Table>
+            </Contents>
+        )}
         <Submit>
-            <ProfileButton content="거절" color="darkgray" style={{ marginRight: "15px" }}></ProfileButton>
-            <ProfileButton content="승낙" color="orange"></ProfileButton>
+            <ProfileButton content="거절" color="darkgray" style={{ marginRight: "15px" }} onClick={onClickButton}></ProfileButton>
+            <ProfileButton content="승낙" color="orange" onClick={onClickButton}></ProfileButton>
         </Submit>
     </>
 );

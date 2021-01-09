@@ -1,16 +1,20 @@
 import { gql } from "apollo-boost";
 
 export const GET_CLUB_MEMBERS = gql`
-    query me {
-        me {
+    query readLoggedInUser {
+        readLoggedInUser {
             id
-            isMaster {
+            clubMaster {
                 id
-                name
                 members {
                     id
-                    Name
+                    email
+                    name
                     studentNumber
+                    phoneNumber
+                    university
+                    major
+                    application
                 }
             }
         }
