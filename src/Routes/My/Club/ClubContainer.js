@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import ClubPresenter from "./ClubPresenter";
 import useInput from "../../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
@@ -13,6 +14,8 @@ export default () => {
     const content = useInput("");
     const clubImage = useInput("");
     const logoImage = useInput("");
+    const clubFile = useInput(null);
+    const logoFile = useInput(null);
     const partyDay = useInput("");
     const party = useInput("");
     const numberOfMembers = useInput("");
@@ -47,8 +50,57 @@ export default () => {
         close();
     };
 
+    const onFileUpload = e => {
+        const id = e.target.id;
+        const file = e.target.files[0];
+        if (id === "logoImage") {
+            logoFile.setValue(file);
+            logoImage.setValue(file.name);
+        } else if (id === "clubImage") {
+            clubFile.setValue(file);
+            clubImage.setValue(file.name);
+        }
+    };
+
+    const onClickRadio = e => {
+        const id = e.target.id;
+        if (id === "yesParty") {
+            party.setValue(true);
+        } else if (id === "noParty") {
+            party.setValue(false);
+        } else if (id === "yesUnion") {
+            isUnion.setValue(true);
+        } else if (id === "noUnion") {
+            isUnion.setValue(false);
+        }
+    };
+
     const onSubmit = async e => {
         e.preventDefault();
+        try {
+            const { logo } = await axios.post("http://localhost:4000/api/upload", logoFile.value, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            const { club } = await axios.post("http://localhost:4000/api/upload", clubFile.value, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            if (!logo || !club) {
+                console.log("fail to upload files");
+                alert("파일 업로드에 실패하였습니다.");
+            } else {
+                logoImage.setValue(logo.location);
+                clubImage.setValue(club.location);
+                console.log(logo.location);
+                console.log(club.location);
+            }
+        } catch (e) {
+            console.log(e.message);
+            alert("파일 업로드에 실패하였습니다.");
+        }
         try {
             const { data } = await updateClubMutation({
                 variables: {
@@ -96,6 +148,8 @@ export default () => {
             facebookUrl={facebookUrl}
             onImgClick={onImgClick}
             onSubmit={onSubmit}
+            onFileUpload={onFileUpload}
+            onClickRadio={onClickRadio}
             loading={getClubQuery.loading}
         />
     );

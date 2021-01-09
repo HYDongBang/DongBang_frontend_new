@@ -196,6 +196,8 @@ export default ({
     facebookUrl,
     onImgClick,
     onSubmit,
+    onFileUpload,
+    onClickRadio,
     loading
 }) => (
     <>
@@ -282,17 +284,16 @@ export default ({
                         <About>동아리 로고</About>
                         <File>
                             <BoxInput placeholder="동아리 로고" {...logoImage} width="20%" disabled={true}></BoxInput>
-                            <Label htmlFor="logo">업로드</Label>
-                            {/* TODO: onChange 로 파일 업로드시 이름 변경*/}
-                            <input type="file" id="logo" style={{ display: "none" }}></input>
+                            <Label htmlFor="logoImage">업로드</Label>
+                            <input type="file" id="logoImage" style={{ display: "none" }} onChange={onFileUpload}></input>
                         </File>
                     </Question>
                     <Question>
                         <About>동아리 대표 이미지</About>
                         <File>
                             <BoxInput placeholder="동아리 대표 이미지" {...clubImage} width="20%" disabled={true}></BoxInput>
-                            <Label htmlFor="image">업로드</Label>
-                            <input type="file" id="image" style={{ display: "none" }}></input>
+                            <Label htmlFor="clubImage">업로드</Label>
+                            <input type="file" id="clubImage" style={{ display: "none" }} onChange={onFileUpload}></input>
                         </File>
                     </Question>
                 </Contents>
@@ -301,14 +302,23 @@ export default ({
                     <Info>
                         <Left>
                             <Question>
-                                {/*TODO: 라디오 인풋 선택지 변경 */}
                                 <About>뒷풀이 여부</About>
-                                <Radio>
-                                    <input type="radio" id="yesParty" name="party" value="yesParty"></input>
-                                    <RadioLabel htmlFor="yesParty">있음</RadioLabel>
-                                    <input type="radio" id="noParty" name="party" value="noParty"></input>
-                                    <RadioLabel htmlFor="noParty">없음</RadioLabel>
-                                </Radio>
+                                {party.value === true && (
+                                    <Radio>
+                                        <input type="radio" id="yesParty" name="party" value="yesParty" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesParty">있음</RadioLabel>
+                                        <input type="radio" id="noParty" name="party" value="noParty" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noParty">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                                {party.value === false && (
+                                    <Radio>
+                                        <input type="radio" id="yesParty" name="party" value="yesParty" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesParty">있음</RadioLabel>
+                                        <input type="radio" id="noParty" name="party" value="noParty" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noParty">없음</RadioLabel>
+                                    </Radio>
+                                )}
                             </Question>
                             <Question>
                                 <About>동아리 회합일정</About>
@@ -328,12 +338,22 @@ export default ({
                         <Right>
                             <Question>
                                 <About>연합 여부</About>
-                                <Radio>
-                                    <input type="radio" id="yesUnion" name="union" value="yesUnion"></input>
-                                    <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
-                                    <input type="radio" id="noUnion" name="union" value="noUnion"></input>
-                                    <RadioLabel htmlFor="noUnion">없음</RadioLabel>
-                                </Radio>
+                                {isUnion.value === true && (
+                                    <Radio>
+                                        <input type="radio" id="yesUnion" name="union" value="yesUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
+                                        <input type="radio" id="noUnion" name="union" value="noUnion" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noUnion">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                                {isUnion.value === false && (
+                                    <Radio>
+                                        <input type="radio" id="yesUnion" name="union" value="yesUnion" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
+                                        <input type="radio" id="noUnion" name="union" value="noUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noUnion">없음</RadioLabel>
+                                    </Radio>
+                                )}
                             </Question>
                             <Question>
                                 <About>동아리 인원수</About>
