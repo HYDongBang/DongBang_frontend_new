@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ProfileButton from "../../../Components/ProfileButton";
+import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Loading from "../../../Components/";
 
 const Title = styled.div`
@@ -39,13 +41,6 @@ const Attributes = styled.div`
     padding: 15px 0px;
 `;
 
-const Box = styled.input`
-    height: 18px;
-    width: 18px;
-    cursor: pointer;
-    margin: 0px 25px 0px 10px;
-`;
-
 const Attribute = styled.div`
     font-size: 1.1em;
     color: ${props => props.theme.darkGray};
@@ -78,7 +73,7 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-export default ({ applicants, questions, onClickAll, onClickSelect, onClickButton, loading }) => (
+export default ({ applicants, selected, questions, onClickAll, onClickSelect, onClickButton, loading }) => (
     <>
         <Title>
             <Main>지원자 관리</Main>
@@ -92,7 +87,8 @@ export default ({ applicants, questions, onClickAll, onClickSelect, onClickButto
                 </Num>
                 <Table>
                     <Attributes>
-                        <Box type="checkbox" onChange={onClickAll}></Box>
+                        {selected.indexOf("all") !== -1 && <FontAwesomeIcon id={"all"} icon={faCheckSquare} style={{ color: "#1D2226", margin: "0px 20px 0px 10px", cursor: "pointer", fontSize: "1.1em" }} onClick={onClickAll} />}
+                        {selected.indexOf("all") === -1 && <FontAwesomeIcon id={"all"} icon={faSquare} style={{ color: "#1D2226", margin: "0px 20px 0px 10px", cursor: "pointer", fontSize: "1.1em" }} onClick={onClickAll} />}
                         <Attribute style={{ width: "80px" }}>이름</Attribute>
                         <Attribute>전화번호</Attribute>
                         <Attribute>메일 주소</Attribute>
@@ -102,7 +98,9 @@ export default ({ applicants, questions, onClickAll, onClickSelect, onClickButto
                     <Members>
                         {applicants.map(({ id, answers, user: { name, phoneNumber, email, university, major, studentNumber } }) => (
                             <Member key={id}>
-                                <Box type="checkbox" value={id} onChange={onClickSelect}></Box>
+                                {selected.indexOf(id.toString()) !== -1 && <FontAwesomeIcon id={id} icon={faCheckSquare} style={{ color: "#1D2226", margin: "0px 20px 0px 10px", cursor: "pointer", fontSize: "1.1em" }} onClick={onClickSelect} />}
+                                {selected.indexOf(id.toString()) === -1 && <FontAwesomeIcon id={id} icon={faSquare} style={{ color: "#1D2226", margin: "0px 20px 0px 10px", cursor: "pointer", fontSize: "1.1em" }} onClick={onClickSelect} />}
+                                {/*TODO: 이름 누르면 팝업창 trigger 구현 */}
                                 <Info style={{ width: "80px" }}>{name}</Info>
                                 <Info>{phoneNumber}</Info>
                                 <Info>{email}</Info>

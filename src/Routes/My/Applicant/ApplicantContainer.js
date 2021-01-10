@@ -18,26 +18,38 @@ export default () => {
         }
     }, [getApplicantsQuery.data]);
 
+    // TODO: state 통해 all 여부 관리
     const onClickAll = e => {
-        const checked = e.target.checked;
-        if (checked === true) {
+        const isAllSelected = selected.indexOf("all") !== -1;
+        if (isAllSelected === false) {
             setSelected(applicants.map(applicant => applicant.id));
-        } else if (checked === false) {
+        } else if (isAllSelected === true) {
             setSelected([]);
         }
     };
 
     const onClickSelect = e => {
-        const checked = e.target.checked;
-        const id = e.target.value;
-        if (checked === true) {
+        const id = e.target.id.toString();
+        const isSelected = selected.indexOf(id) !== -1;
+        console.log("id", id, "isSelected", isSelected);
+        if (isSelected === true) {
+            setSelected(selected.filter(element => element !== id));
+        } else if (isSelected === false) {
             setSelected(selected.concat([id]));
-        } else if (checked === false) {
-            setSelected(selected.filter(num => num !== id));
         }
     };
-
+    // TODO: 거절, 승낙 버튼 구현
     const onClickButton = e => {};
 
-    return <ApplicantPresenter applicants={applicants} questions={questions} onClickAll={onClickAll} onClickSelect={onClickSelect} onClickButton={onClickButton} loading={getApplicantsQuery.loading} />;
+    return (
+        <ApplicantPresenter
+            applicants={applicants}
+            selected={selected}
+            questions={questions}
+            onClickAll={onClickAll}
+            onClickSelect={onClickSelect}
+            onClickButton={onClickButton}
+            loading={getApplicantsQuery.loading}
+        />
+    );
 };

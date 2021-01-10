@@ -78,30 +78,26 @@ export default () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const { logo } = await axios.post("http://localhost:4000/api/upload", logoFile.value, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            });
-            const { club } = await axios.post("http://localhost:4000/api/upload", clubFile.value, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            });
-            if (!logo || !club) {
-                console.log("fail to upload files");
-                alert("파일 업로드에 실패하였습니다.");
-            } else {
-                logoImage.setValue(logo.location);
-                clubImage.setValue(club.location);
-                console.log(logo.location);
-                console.log(club.location);
+            const lFile = new FormData();
+            const cFile = new FormData();
+            lFile.append("file", logoFile.value);
+            cFile.append("file", clubFile.value);
+            {
+                const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", lFile, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+                logoImage.setValue(data.location);
             }
-        } catch (e) {
-            console.log(e.message);
-            alert("파일 업로드에 실패하였습니다.");
-        }
-        try {
+            {
+                const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", cFile, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+                clubImage.setValue(data.location);
+            }
             const { data } = await updateClubMutation({
                 variables: {
                     name: name.value,
@@ -120,11 +116,7 @@ export default () => {
                     facebookUrl: facebookUrl.value
                 }
             });
-            if (!data) {
-                console.error("fail to edit club profile");
-            } else {
-                alert("동아리 정보를 수정하였습니다.");
-            }
+            alert("동아리 정보 수정에 성공하였습니다.");
         } catch (e) {
             console.log(e.message);
             alert("다시 시도해 주세요.");

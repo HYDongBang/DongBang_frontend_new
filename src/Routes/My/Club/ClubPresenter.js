@@ -207,7 +207,7 @@ export default ({
         </Title>
         {loading && <div>loading</div>}
         {!loading && (
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} encType="multipart/form-data">
                 <Contents>
                     <Category>
                         <Popup
