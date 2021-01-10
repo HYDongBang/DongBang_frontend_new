@@ -10,9 +10,9 @@ import { toast } from "react-toastify";
 
 export default ({action, setAction, club, userEmail }) => {
   const { loading, data } = useQuery(READ_ROOM, {variables:{id: club.id}});
-
   const [ createMessageMutation ] = useMutation(CREATE_MESSAGE);
   const myText = useInput("");
+  const i = 7;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -22,8 +22,8 @@ export default ({action, setAction, club, userEmail }) => {
             data: { createMessage: id },
           } = await createMessageMutation({
             variables: {
-              roomId: data.readRoom.id,
-              // toid: 1,
+              // roomId: data.readRoom.id,
+              toId: i,
               text: myText.value,
             },
           });

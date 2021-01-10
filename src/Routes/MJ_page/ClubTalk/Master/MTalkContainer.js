@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import MTalkPresenter from "./MTalkPresenter";
 
 import { useMutation } from "react-apollo-hooks";
@@ -9,8 +9,10 @@ import { useQuery } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 
 export default ({action, setAction, club }) => {
+  const [rid, setRid ] = useState(-1);
+
   const { loading:roomsLoading, data: rooms } = useQuery(READ_ROOMS);
-  const { loading:roomLoading, data: room } = useQuery(READ_ROOM, {variables:{id: club.id}});
+  const { loading:roomLoading, data: room } = useQuery(READ_ROOM, {variables:{id: rid}});
 
   console.log(rooms);
   console.log(room);
@@ -24,6 +26,8 @@ export default ({action, setAction, club }) => {
      roomLoading={roomLoading}
      rooms={rooms}
      room={room}
+     rid={rid}
+     setRid={setRid}
      />
   );
 };

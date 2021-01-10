@@ -19,22 +19,23 @@ export const READ_ROOM = gql `
 `
 export const READ_ROOMS = gql `
     query readRooms{
-        readRooms{
-            updatedAt
-            participants{
-              email
-            }
-            recentMessage{
-              to{
-                email
-              }
-              from{
-                email
-              }
-              text
-              createdAt
-            }
+      readRooms{
+        id
+        updatedAt
+        participants{
+          email
         }
+        recentMessage{
+          to{
+            email
+          }
+          from{
+            email
+          }
+          text
+          createdAt
+        }
+      }
     }
 `
 

@@ -180,31 +180,34 @@ export default ({club,
 
             <Right>
                 <Talks>
-                {data.readRoom.messages.map((message)=>{
-                    return (<>
-                    {message.from.email === {userEmail} ?
-                        <Talk>
-                            <MyBubble>
-                                {message.text}
-                            </MyBubble>
-                            <DT style ={{float:"right"}}>
-                                <Date>{message.createdAt}</Date>
-                                <Time>{message.createdAt}</Time>
-                            </DT>
-                        </Talk>
-                        :
-                        <Talk>
-                            <OtherBubble>
-                                {message.text}
-                            </OtherBubble>
-                            <DT style ={{float:"left"}}>
-                                <Date>20.11.09</Date>
-                                <Time>11:56</Time>
-                            </DT>
-                        </Talk>
+                    {data.readRoom.messages !== undefined &&
+                        <>{data.readRoom.messages.map((message)=>{
+                            return (<>
+                            {message.from.email === {userEmail} ?
+                                <Talk>
+                                    <MyBubble>
+                                        {message.text}
+                                    </MyBubble>
+                                    <DT style ={{float:"right"}}>
+                                        <Date>{message.createdAt}</Date>
+                                        <Time>{message.createdAt}</Time>
+                                    </DT>
+                                </Talk>
+                                :
+                                <Talk>
+                                    <OtherBubble>
+                                        {message.text}
+                                    </OtherBubble>
+                                    <DT style ={{float:"left"}}>
+                                        <Date>20.11.09</Date>
+                                        <Time>11:56</Time>
+                                    </DT>
+                                </Talk>
+                            }
+                            </>)
+                        })}</>
                     }
-                    </>)
-                })}
+                
                 </Talks>
                 <Message onSubmit = {onSubmit}> 
                     <MessageInput {...text} type = "text" placeholder = "메시지를 입력해주세요." />
