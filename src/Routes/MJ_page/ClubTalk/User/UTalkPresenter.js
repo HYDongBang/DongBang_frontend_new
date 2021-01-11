@@ -183,7 +183,7 @@ export default ({club,
                     {data.readRoomByClubId !== undefined &&
                         <>{data.readRoomByClubId.messages.map((message)=>{
                             return (<>
-                            {message.from.email === {userEmail} ?
+                            {message.from.email === userEmail ?
                                 <Talk>
                                     <MyBubble>
                                         {message.text}
