@@ -12,3 +12,16 @@ export const READ_LOGGED_IN_USER = gql `
     }
 `
 
+export const READ_CLUB = gql `
+    query readClub($id: Int){
+        readClub(id: $id){
+                master{
+                    id
+                }
+            }
+        }
+`
+
+
+
+

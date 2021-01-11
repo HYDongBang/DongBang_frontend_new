@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
-export const READ_ROOM = gql `
-    query readRoom($id: Int!){
-        readRoom(id: $id){
+export const READ_ROOM_BY_CLUB_ID = gql `
+    query readRoomByClubId($clubId: Int!){
+        readRoomByClubId(clubId: $clubId){
             id
             messages{
                 to{

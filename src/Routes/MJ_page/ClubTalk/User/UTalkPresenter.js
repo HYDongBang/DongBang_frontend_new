@@ -180,8 +180,8 @@ export default ({club,
 
             <Right>
                 <Talks>
-                    {data.readRoom.messages !== undefined &&
-                        <>{data.readRoom.messages.map((message)=>{
+                    {data.readRoomByClubId !== undefined &&
+                        <>{data.readRoomByClubId.messages.map((message)=>{
                             return (<>
                             {message.from.email === {userEmail} ?
                                 <Talk>
