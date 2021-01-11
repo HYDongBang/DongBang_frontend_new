@@ -12,9 +12,6 @@ export default ({action, setAction, club, userEmail, cData }) => {
   const { loading, data } = useQuery(READ_ROOM_BY_CLUB_ID, {variables:{clubId: club.id}});
   const [ createMessageMutation ] = useMutation(CREATE_MESSAGE);
   const myText = useInput("");
-  console.log(data);
-  console.log(cData);
-  const i = 7;
 
   const onSubmit = async (e) => {
     e.preventDefault();

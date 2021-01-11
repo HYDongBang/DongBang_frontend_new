@@ -118,7 +118,7 @@ const OtherBubble = styled.div`
   padding: 15px;
 `;
 
-const Message = styled.div`
+const Message = styled.form`
     width:100%; 
     height:17%;
     border: 1px solid #D1D1D1;
@@ -141,7 +141,7 @@ const MessageInput = styled.textarea`
     height:100%;
 `;
 
-const SendButton = styled.div`
+const SendButton = styled.button`
     width:100px;
     height: 100%;
     background-color:orange;
@@ -149,6 +149,7 @@ const SendButton = styled.div`
     padding:40px 33px;
     background-color: #FF7300;
     color: white;
+    border:none;
 `;
 
 
@@ -162,9 +163,11 @@ export default ({club,
      roomsLoading,
      roomLoading,
      rid,
-    setRid
+    setRid,
+    userEmail,
+    myText,
+    onSubmit
     })=>{
-
     return (
         <UContents>
             {!roomsLoading && !roomLoading && <>
@@ -195,31 +198,34 @@ export default ({club,
                         <>{room.readRoom.messages.map((message)=>{
                             console.log(message);
                            return( <>
-                            <Talk>
+                           {message.from.email === userEmail ?
+                            (<Talk>
                                 <MyBubble>
-                                    스쿠버 다이빙 동아리에 가입하고 싶은데.. 한번도 배운적이 없어요. 괜찮을까요?
+                                    {message.text}
                                 </MyBubble>
                                 <DT style ={{float:"right"}}>
                                     <Date>20.11.09</Date>
                                     <Time>11:56</Time>
                                 </DT>
-                            </Talk>
-                            <Talk>
+                            </Talk>)
+                            :
+                            (<Talk>
                                 <OtherBubble>
-                                    네, 저희 동아리에 들어오시면 기초부터 장비 사용법까지 알려드립니다. 걱정마세요!
+                                    {message.text}
                                 </OtherBubble>
                                 <DT style ={{float:"left"}}>
                                     <Date>20.11.09</Date>
                                     <Time>11:56</Time>
                                 </DT>
-                            </Talk>
+                            </Talk>)
+                        }
                         </>)
                         })
                         }</>}
 
                 </Talks>
-                <Message> 
-                    <MessageInput  type = "text" placeholder = "메시지를 입력해주세요." />
+                <Message onSubmit = {onSubmit}> 
+                    <MessageInput {...myText} type = "text" placeholder = "메시지를 입력해주세요." />
                     <SendButton>전송</SendButton>
                 </Message>
             </Right>
