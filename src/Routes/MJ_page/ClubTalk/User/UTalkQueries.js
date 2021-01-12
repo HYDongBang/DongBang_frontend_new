@@ -34,3 +34,18 @@ export const CREATE_MESSAGE = gql `
         }
     }
   `
+  export const NEW_MESSAGE = gql `
+      subscription createMessage($roomId: Int){
+          createMessage(roomId:$roomId){
+              id
+              text
+              createdAt
+              to{
+                  email
+              }
+              from{
+                  email
+              }
+          }
+      }
+    `
