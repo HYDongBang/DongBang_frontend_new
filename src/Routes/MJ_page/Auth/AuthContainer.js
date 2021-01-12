@@ -40,7 +40,7 @@ export default ({ }) => {
         } catch (e) {
           console.log(e.message);
           {e.message === "GraphQL error: 일치하는 사용자가 없습니다."&& toast("일치하는 사용자가 없습니다.");}
-          console.log("다시 시도해 주세요");
+          {e.message === "GraphQL error: Wrong email/secret combination"&& toast("이메일/비밀번호 조합이 옳지 않습니다.");}
         }
       } else {
             console.log("메일 혹은 비밀번호를 모두 입력해주세요.");
