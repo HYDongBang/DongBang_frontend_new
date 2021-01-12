@@ -17,6 +17,7 @@ const Input = styled.input`
     -webkit-appearance: none;
     -webkit-border-radius: 0;
     border: none;
+    background: ${props => props.theme.white};
     font-size: 0.85em;
     float: left;
     flex-grow: 1;
@@ -61,7 +62,7 @@ LineInput.propTypes = {
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     onClick: PropTypes.func,
     icon: PropTypes.string,
     type: PropTypes.string,
