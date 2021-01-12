@@ -22,6 +22,11 @@ export const READ_CLUB = gql `
             }
         }
 `
+export const LOG_IN = gql`
+    {
+        isLoggedIn @client
+    }
+`;
 
 
 
