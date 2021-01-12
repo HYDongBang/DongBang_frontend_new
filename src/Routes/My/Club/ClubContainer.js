@@ -78,6 +78,8 @@ export default () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
+            let logoLocation = "";
+            let clubLocation = "";
             const lFile = new FormData();
             const cFile = new FormData();
             lFile.append("file", logoFile.value);
@@ -85,18 +87,18 @@ export default () => {
             {
                 const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", lFile, {
                     headers: {
-                        "Content-Type": "multipart/form-data"
+                        "content-type": "multipart/form-data"
                     }
                 });
-                logoImage.setValue(data.location);
+                logoLocation = data.location;
             }
             {
                 const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", cFile, {
                     headers: {
-                        "Content-Type": "multipart/form-data"
+                        "content-type": "multipart/form-data"
                     }
                 });
-                clubImage.setValue(data.location);
+                clubLocation = data.location;
             }
             const { data } = await updateClubMutation({
                 variables: {
@@ -104,8 +106,8 @@ export default () => {
                     type: type.value,
                     description: description.value,
                     content: content.value,
-                    clubImage: clubImage.value,
-                    logoImage: logoImage.value,
+                    clubImage: logoLocation,
+                    logoImage: clubLocation,
                     partyDay: partyDay.value,
                     party: party.value,
                     numberOfMembers: numberOfMembers.value,

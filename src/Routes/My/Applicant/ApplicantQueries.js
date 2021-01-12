@@ -40,18 +40,14 @@ export const GET_APPLICANTS = gql`
     }
 `;
 
-export const DELETE_APPLICANTS = gql`
-    mutation deleteApplication($id: Int!) {
-        deleteApplication(id: $id) {
-            id
-        }
+export const PASS_APPLICATIONS = gql`
+    mutation passApplications($applicationIds: [Int]) {
+        passApplications(applicationIds: $applicationIds)
     }
 `;
 
-export const JOIN_CLUB = gql`
-    mutation joinClub($userId: Int!) {
-        joinClub(userId: $userId) {
-            id
-        }
+export const DELETE_APPLICATIONS = gql`
+    mutation deleteApplications($id: [Int]) {
+        deleteApplications(id: $id)
     }
 `;
