@@ -158,7 +158,7 @@ export default ({club,
             {!loading &&
             <>
              <Left>
-                <LeftImg src = {ScubaCrop}/>
+                <LeftImg src = {club.logoImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>

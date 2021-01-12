@@ -167,7 +167,7 @@ return (
     {!loading && data.readClub &&
     (
         <>
-        <HeaderImg src = {headerMovie}>
+        <HeaderImg src = {data.readClub.clubImage}>
         </HeaderImg>
         <Club>
             <ClubLogo style={{margin:"auto"}} type = "sports"/>

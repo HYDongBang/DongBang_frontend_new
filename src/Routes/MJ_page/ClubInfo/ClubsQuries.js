@@ -18,6 +18,7 @@ export const READ_CLUB = gql `
                 master{
                     id
                 }
+            logoImage,
             }
         }
 `
