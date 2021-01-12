@@ -31,6 +31,11 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
     setAction("Info")
   }
 
+  if (action === "Talk" && isLoggedIn && data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.clubMaster.id !== club.master.id){
+    toast("클럽장은 본인의 클럽 Talk에만 참여할 수 있습니다.");
+    setAction("Info")
+  }
+
     return (
         <Wrapper>
           {!loading && !cLoading && data &&
@@ -39,7 +44,7 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
             {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "Talk" && isLoggedIn &&
               <>
-                {data.readLoggedInUser.clubMaster !== null && (<MTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email}/>)}
+                {data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.clubMaster.id === club.master.id && (<MTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email}/>)}
                 {data.readLoggedInUser.clubMaster === null && (<UTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email} cData = {cData}/>)}
               </>
             }

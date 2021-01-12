@@ -41,7 +41,7 @@ const Buttons = styled.div`
 const Club = styled.div`
     text-align:center;
     width:fit-content;
-    margin:-47px auto 0px;
+    margin: 5px auto 0px;
 `;
 
 const Type = styled.div`
