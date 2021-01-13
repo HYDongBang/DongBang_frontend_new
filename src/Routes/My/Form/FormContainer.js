@@ -1,7 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import FormPresenter from "./FormPresenter";
 import { useMutation, useQuery } from "react-apollo-hooks";
 
 export default () => {
-    return <FormPresenter />;
+    const [select, setSelect] = useState("");
+
+    return (
+    <FormPresenter  
+    select={select}
+    setSelect={setSelect}
+    />);
 };

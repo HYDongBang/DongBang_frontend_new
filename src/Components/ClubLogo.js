@@ -16,6 +16,7 @@ const CultureLogo = styled.div`
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
+  text-align:center;
 `;
 
 const VolunteerLogo = styled.div`
@@ -23,6 +24,7 @@ const VolunteerLogo = styled.div`
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.indiePink};
+  text-align:center;
 `;
 
 const AcademicLogo = styled.div`
@@ -30,6 +32,7 @@ const AcademicLogo = styled.div`
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.yellow};
+  text-align:center;
 `;
 
 const LanguageLogo = styled.div`
@@ -37,6 +40,7 @@ const LanguageLogo = styled.div`
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
+  text-align:center;
 `;
 
 const SportsLogo = styled.div`
@@ -44,6 +48,7 @@ const SportsLogo = styled.div`
   height: 86px;
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
+  text-align:center;
 `;
 
 const ClubLogo =({type}) =>(
