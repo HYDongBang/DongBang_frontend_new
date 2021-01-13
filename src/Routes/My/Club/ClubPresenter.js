@@ -1,10 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import Popup from "reactjs-popup";
 import BoxInput from "../../../Components/BoxInput";
 import Textarea from "../../../Components/Textarea";
 import ProfileButton from "../../../Components/ProfileButton";
 import { faInstagramSquare, faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import writing from "../../../Styles/Images/writing.svg";
+import painting from "../../../Styles/Images/painting.svg";
+import team from "../../../Styles/Images/team.svg";
+import speachBubbleLine from "../../../Styles/Images/speachBubbleLine.svg";
+import basketball from "../../../Styles/Images/basketball.svg";
+
 // import Loading from "../../../Components/";
 
 const Title = styled.div`
@@ -30,16 +38,21 @@ const Category = styled.div`
     align-items: center;
 `;
 
-const Select = styled.div`
+const SelectImg = styled.div`
     font-size: 0.55em;
     border-radius: 20px;
     background-color: ${props => props.theme.lightGray};
-    padding: 20px 10px 20px 10px;
     text-align: center;
     height: 60px;
     width: 60px;
     margin-right: 10px;
     cursor: pointer;
+`;
+
+const SelectedImg = styled.img`
+    width: 70%;
+    height: 70%;
+    margin-top: 10px;
 `;
 
 const Question = styled.div`
@@ -131,108 +144,238 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-export default ({ name, short, long, logo, image, facebook, instagram, meeting, people, phone, email }) => (
+const Wrapper = styled.div`
+    display: flex;
+`;
+
+const Tag = styled.div`
+    padding: 0px 20px;
+`;
+
+const ImgContainer = styled.div`
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: 2px solid ${props => props.theme.white};
+    background: ${props => props.theme.white};
+    text-align: center;
+    line-height: 9;
+    &:hover {
+        border: 2px solid ${props => props.theme.orange};
+        transition: 0.3s;
+    }
+`;
+
+const Img = styled.img`
+    width: 60%;
+    height: 60%;
+`;
+
+const Text = styled.div`
+    color: ${props => props.theme.white};
+    padding-top: 20px;
+    font-size: 0.9em;
+    text-align: center;
+`;
+
+export default ({
+    name,
+    type,
+    description,
+    content,
+    clubImage,
+    logoImage,
+    partyDay,
+    party,
+    numberOfMembers,
+    isUnion,
+    email,
+    phoneNumber,
+    instagramUrl,
+    facebookUrl,
+    onImgClick,
+    onSubmit,
+    onFileUpload,
+    onClickRadio,
+    loading
+}) => (
     <>
         <Title>
             <Main>동아리 정보 관리</Main>
             <Sub>동아리 정보를 편집할 수 있습니다.</Sub>
         </Title>
-        <Contents>
-            <Category>
-                <Select>
-                    카테고리
-                    <br />
-                    선택
-                </Select>
-                <Question>
-                    <About>동아리 이름</About>
-                    <BoxInput placeholder="동아리 이름을 적어주세요." {...name} width="300px"></BoxInput>
-                </Question>
-            </Category>
-            <Question>
-                <About>동아리 한줄 소개</About>
-                <BoxInput placeholder="간단한 동아리 소개를 입력해 주세요." {...short} width="60%"></BoxInput>
-            </Question>
-            <Question>
-                <About>동아리 설명글</About>
-                <Container>
-                    <Textarea placeholder="동아리를 설명할 수 있는 자세한 글을 작성해주세요." {...long} width="100%" height="150px"></Textarea>
-                </Container>
-            </Question>
-            <Question>
-                <About>동아리 로고</About>
-                <File>
-                    <BoxInput placeholder="동아리 로고" {...logo} width="20%" disabled={true}></BoxInput>
-                    <Label htmlFor="logo">업로드</Label>
-                    <input type="file" id="logo" style={{display: "none"}}></input>
-                </File>
-            </Question>
-            <Question>
-                <About>동아리 대표 이미지</About>
-                <File>
-                    <BoxInput placeholder="동아리 대표 이미지" {...image} width="20%" disabled={true}></BoxInput>
-                    <Label htmlFor="image">업로드</Label>
-                    <input type="file" id="image" style={{display: "none"}}></input>
-                </File>
-            </Question>
-        </Contents>
-        <Addition>
-            <Description>동아리 추가 정보 입력</Description>
-            <Info>
-                <Left>
+        {loading && <div>loading</div>}
+        {!loading && (
+            <form onSubmit={onSubmit} encType="multipart/form-data">
+                <Contents>
+                    <Category>
+                        <Popup
+                            trigger={
+                                <SelectImg>
+                                    {type.value === "" && (
+                                        <div style={{ marginTop: "20px" }}>
+                                            카테고리
+                                            <br />
+                                            선택
+                                        </div>
+                                    )}
+                                    {type.value === "문화예술공연" && <SelectedImg src={painting}></SelectedImg>}
+                                    {type.value === "봉사사회활동" && <SelectedImg src={team}></SelectedImg>}
+                                    {type.value === "학술교양종교" && <SelectedImg src={writing}></SelectedImg>}
+                                    {type.value === "어학친목" && <SelectedImg src={speachBubbleLine}></SelectedImg>}
+                                    {type.value === "체육" && <SelectedImg src={basketball}></SelectedImg>}
+                                </SelectImg>
+                            }
+                            modal
+                            contentStyle={{ background: "none", border: "none" }}
+                        >
+                            {close => (
+                                <Wrapper>
+                                    <Tag>
+                                        <ImgContainer id="문화예술공연" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="문화예술공연" src={painting}></Img>
+                                        </ImgContainer>
+                                        <Text>문화/예술/공연</Text>
+                                    </Tag>
+                                    <Tag>
+                                        <ImgContainer id="봉사사회활동" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="봉사사회활동" src={team}></Img>
+                                        </ImgContainer>
+                                        <Text>봉사/사회활동</Text>
+                                    </Tag>
+                                    <Tag>
+                                        <ImgContainer id="학술교양종교" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="학술교양종교" src={writing}></Img>
+                                        </ImgContainer>
+                                        <Text>학술/교양/종교</Text>
+                                    </Tag>
+                                    <Tag>
+                                        <ImgContainer id="어학친목" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="어학친목" src={speachBubbleLine}></Img>
+                                        </ImgContainer>
+                                        <Text>어학/친목</Text>
+                                    </Tag>
+                                    <Tag>
+                                        <ImgContainer id="체육" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="체육" src={basketball}></Img>
+                                        </ImgContainer>
+                                        <Text>체육</Text>
+                                    </Tag>
+                                </Wrapper>
+                            )}
+                        </Popup>
+                        <Question>
+                            <About>동아리 이름</About>
+                            <BoxInput placeholder="동아리 이름을 적어주세요." {...name} width="300px"></BoxInput>
+                        </Question>
+                    </Category>
                     <Question>
-                        <About>뒷풀이 여부</About>
-                        <Radio>
-                            <input type="radio" id="yesParty" name="party" value="yesParty"></input>
-                            <RadioLabel htmlFor="yesParty">있음</RadioLabel>
-                            <input type="radio" id="noParty" name="party" value="noParty"></input>
-                            <RadioLabel htmlFor="noParty">없음</RadioLabel>
-                        </Radio>
+                        <About>동아리 한줄 소개</About>
+                        <BoxInput placeholder="간단한 동아리 소개를 입력해 주세요." {...description} width="60%"></BoxInput>
                     </Question>
                     <Question>
-                        <About>동아리 회합일정</About>
-                        <BoxInput placeholder="회합 일정을 입력해주세요." {...meeting} width="90%"></BoxInput>
+                        <About>동아리 설명글</About>
+                        <Container>
+                            <Textarea placeholder="동아리를 설명할 수 있는 자세한 글을 작성해주세요." {...content} width="100%" height="150px"></Textarea>
+                        </Container>
                     </Question>
                     <Question>
-                        <About>동아리 연락처</About>
-                        <BoxInput placeholder="문의가능한 연락처를 입력해주세요." {...phone} width="90%"></BoxInput>
+                        <About>동아리 로고</About>
+                        <File>
+                            <BoxInput placeholder="동아리 로고" {...logoImage} width="20%" disabled={true}></BoxInput>
+                            <Label htmlFor="logoImage">업로드</Label>
+                            <input type="file" id="logoImage" style={{ display: "none" }} onChange={onFileUpload}></input>
+                        </File>
                     </Question>
                     <Question>
-                        <SnsLogo>
-                            <FontAwesomeIcon icon={faInstagramSquare} style={{height: "34px", width: "34px", zIndex: "50"}}/>
-                            <BoxInput placeholder="인스타그램 주소를 넣어주세요." {...instagram} width="77%"></BoxInput>
-                        </SnsLogo>
+                        <About>동아리 대표 이미지</About>
+                        <File>
+                            <BoxInput placeholder="동아리 대표 이미지" {...clubImage} width="20%" disabled={true}></BoxInput>
+                            <Label htmlFor="clubImage">업로드</Label>
+                            <input type="file" id="clubImage" style={{ display: "none" }} onChange={onFileUpload}></input>
+                        </File>
                     </Question>
-                </Left>
-                <Right>
-                    <Question>
-                        <About>연합 여부</About>
-                        <Radio>
-                            <input type="radio" id="yesUnion" name="union" value="yesUnion"></input>
-                            <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
-                            <input type="radio" id="noUnion" name="union" value="noUnion"></input>
-                            <RadioLabel htmlFor="noUnion">없음</RadioLabel>
-                        </Radio>
-                    </Question>
-                    <Question>
-                        <About>동아리 인원수</About>
-                        <BoxInput placeholder="인원수를 입력해주세요." {...people} width="90%"></BoxInput>
-                    </Question>
-                    <Question>
-                        <About>동아리 메일 주소</About>
-                        <BoxInput placeholder="메일 주소를 입력해주세요." {...email} width="90%"></BoxInput>
-                    </Question>
-                    <Question>
-                        <SnsLogo>
-                            <FontAwesomeIcon icon={faFacebookSquare} style={{height: "34px", width: "34px", zIndex: "50"}}/>
-                            <BoxInput placeholder="페이스북 주소를 넣어주세요." {...facebook} width="78%"></BoxInput>
-                        </SnsLogo>
-                    </Question>
-                </Right>
-            </Info>
-        </Addition>
-        <Submit>
-            <ProfileButton content="저장" color="gray" hover="orange"></ProfileButton>
-        </Submit>
+                </Contents>
+                <Addition>
+                    <Description>동아리 추가 정보 입력</Description>
+                    <Info>
+                        <Left>
+                            <Question>
+                                <About>뒷풀이 여부</About>
+                                {party.value === true && (
+                                    <Radio>
+                                        <input type="radio" id="yesParty" name="party" value="yesParty" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesParty">있음</RadioLabel>
+                                        <input type="radio" id="noParty" name="party" value="noParty" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noParty">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                                {party.value === false && (
+                                    <Radio>
+                                        <input type="radio" id="yesParty" name="party" value="yesParty" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesParty">있음</RadioLabel>
+                                        <input type="radio" id="noParty" name="party" value="noParty" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noParty">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                            </Question>
+                            <Question>
+                                <About>동아리 회합일정</About>
+                                <BoxInput placeholder="회합 일정을 입력해주세요." {...partyDay} width="90%"></BoxInput>
+                            </Question>
+                            <Question>
+                                <About>동아리 연락처</About>
+                                <BoxInput placeholder="문의가능한 연락처를 입력해주세요." {...phoneNumber} width="90%" type="tel"></BoxInput>
+                            </Question>
+                            <Question>
+                                <SnsLogo>
+                                    <FontAwesomeIcon icon={faInstagramSquare} style={{ height: "34px", width: "34px", zIndex: "50" }} />
+                                    <BoxInput placeholder="인스타그램 주소를 넣어주세요." {...instagramUrl} width="77%" type="url"></BoxInput>
+                                </SnsLogo>
+                            </Question>
+                        </Left>
+                        <Right>
+                            <Question>
+                                <About>연합 여부</About>
+                                {isUnion.value === true && (
+                                    <Radio>
+                                        <input type="radio" id="yesUnion" name="union" value="yesUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
+                                        <input type="radio" id="noUnion" name="union" value="noUnion" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noUnion">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                                {isUnion.value === false && (
+                                    <Radio>
+                                        <input type="radio" id="yesUnion" name="union" value="yesUnion" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
+                                        <input type="radio" id="noUnion" name="union" value="noUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noUnion">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                            </Question>
+                            <Question>
+                                <About>동아리 인원수</About>
+                                <BoxInput placeholder="인원수를 입력해주세요." {...numberOfMembers} width="90%" type="number"></BoxInput>
+                            </Question>
+                            <Question>
+                                <About>동아리 메일 주소</About>
+                                <BoxInput placeholder="메일 주소를 입력해주세요." {...email} width="90%" type="email"></BoxInput>
+                            </Question>
+                            <Question>
+                                <SnsLogo>
+                                    <FontAwesomeIcon icon={faFacebookSquare} style={{ height: "34px", width: "34px", zIndex: "50" }} />
+                                    <BoxInput placeholder="페이스북 주소를 넣어주세요." {...facebookUrl} width="78%" type="url"></BoxInput>
+                                </SnsLogo>
+                            </Question>
+                        </Right>
+                    </Info>
+                </Addition>
+                <Submit>
+                    <ProfileButton content="저장" color="gray" hover="orange"></ProfileButton>
+                </Submit>
+            </form>
+        )}
     </>
 );
