@@ -121,6 +121,8 @@ export default ({
             name: club.name,
             type: club.type,
             description: club.description,
+            logoImage: club.logoImage,
+            clubImage: club.clubImage,
           };
         });
     

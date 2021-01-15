@@ -73,15 +73,17 @@ export default  ({ clubs, myType }) => {
       clubs = [];
     }
     return clubs.map((club) => {
+
+      console.log(club.clubImage);
+
       return (
-        
         <>
           {myType === "" && (
             <Popup
               key={club.id}
               trigger={
                 <Club>
-                  <ClubImg src = {movieCrop}/>
+                  <ClubImg src = {club.logoImage}/>
                   <Position>
                      <ClubLogo type = "culture"/>
                   </Position>
@@ -109,8 +111,8 @@ export default  ({ clubs, myType }) => {
             <Popup
               key={club.id}
               trigger={
-                <Club src = {movieCrop}>
-                  <ClubImg/>
+                <Club >
+                  <ClubImg src = {club.clubImage}/>
                   <Position >
                      <ClubLogo type = "culture"/>
                   </Position>

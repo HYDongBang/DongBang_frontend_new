@@ -8,6 +8,10 @@ export const READ_ALL_CLUBS = gql `
             type
             description
             logoImage
+            clubImage
+            master{
+                id
+            }
         }
     }
 `

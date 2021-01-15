@@ -4,6 +4,7 @@ import SignInPresenter from "./SignInPresenter";
 import { useMutation } from "react-apollo-hooks";
 import useInput from "../../../Hooks/useInput";
 import {EMAIL_AUTHENTICATE, CREATE_USER} from "./SignInQueries";
+import { toast } from "react-toastify";
 
 export default ({status, setStatus}) => {
   const [isChecked, setChecked] = useState(false);
@@ -16,8 +17,7 @@ export default ({status, setStatus}) => {
   const name = useInput("");
   const studentNumber = useInput("");
   const phoneNumber = useInput("");
-  const university = useInput("");
-  const major = useInput("");
+  const majUniv = useInput("");
 
   const [ authenticateMutation ] = useMutation(EMAIL_AUTHENTICATE);
   const [ createUserMutation] = useMutation(CREATE_USER);
@@ -30,12 +30,14 @@ export default ({status, setStatus}) => {
       }});
       console.log(emailAuthenticate);
       if(emailAuthenticate){
+        toast("코드를 보냈습니다")
         setSecret(emailAuthenticate);
       }
   }
 }
 const checkSecret = async (e) => {
   if(secret !== "" && secret === auth.value) {
+    toast("코드 인증 완료")
     setChecked(true);
     } 
 }
@@ -45,43 +47,42 @@ const checkSecret = async (e) => {
       if (status === "signUp") {
       if (email.value !== "" && auth.value !== "" && password.value !== "" && password2.value !== "") {
         if(password.value !== password2.value){
-          console.log("비밀번호가 일치하지 않습니다.");
+          toast.error("비밀번호가 일치하지 않습니다.");
         }
         if (!isChecked){
-          console.log("코드가 일치하지 않습니다");
+          toast.error("코드가 일치하지 않습니다");
         }
         if(isChecked && password.value === password2.value){
           setStatus("signUp2");
         }
         
       } else {
-        console.log("모든 입력창을 채워주세요.");
+        toast("모든 입력창을 채워주세요.");
       }
      }
      if (status === "signUp2") {
-      if (password.value !== "" && name.value !== "" && studentNumber.value !== "" && phoneNumber.value !== "" && major.value !== "") {
+      if (password.value !== "" && name.value !== "" && studentNumber.value !== "" && phoneNumber.value !== "" && majUniv.value !== "") {
         try {
+          const majUnivArray = majUniv.value.split('/');
           const { data: { createUser } } = await createUserMutation({
             variables: {
               email: email.value,
               studentNumber: studentNumber.value,
               phoneNumber: phoneNumber.value,
-              university: university.value,
-              major: major.value,
+              university: majUnivArray[0],
+              major: majUnivArray[1],
               password: password.value,
               name: name.value
           }});
           if (!createUser.id) {
-            console.log("계정 생성에 실패했습니다. 다시 시도해 주세요.");
+            toast.error("계정 생성에 실패했습니다. 다시 시도해 주세요.");
           } else {
-            console.log(
-              "계정이 생성되었습니다. 잠시후 로그인 페이지로 이동합니다."
-            );
+            toast("계정이 생성되었습니다. 잠시후 로그인 페이지로 이동합니다.");
             setTimeout(() => setStatus("login"), 2000);
           }
         } catch (err) {
           console.log(err.message);
-          console.log("계정을 생성할 수 없습니다. 다시 시도해주세요.");
+          toast.error("계정을 생성할 수 없습니다. 다시 시도해주세요.");
         }
       } else {
         console.log("모든 입력창을 채워주세요.");
@@ -100,8 +101,7 @@ const checkSecret = async (e) => {
     name={name}
     studentNumber={studentNumber}
     phoneNumber={phoneNumber}
-    university={university}
-    major={major}
+    majUniv={majUniv}
     onSecret={onSecret}
     checkSecret = {checkSecret}
     />
