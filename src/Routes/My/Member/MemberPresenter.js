@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Popup from "reactjs-popup";
 import ProfileButton from "../../../Components/ProfileButton";
+import LineInput from "../../../Components/LineInput";
+import MemberBox from "./MemberBox";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Loading from "../../../Components/";
@@ -60,7 +63,6 @@ const Info = styled.div`
 `;
 
 const Name = styled.div`
-    cursor: pointer;
     font-size: 0.85em;
 `;
 
@@ -82,7 +84,16 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-export default ({ president, manager, member }) => (
+const X = styled.div`
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    top: -8px;
+    font-size: 2.5em;
+    color: #e5eaee;
+`;
+
+export default ({ master, administrator, member, onClickRadio, onClickLeave }) => (
     <>
         <Title>
             <Main>멤버 관리</Main>
@@ -90,33 +101,49 @@ export default ({ president, manager, member }) => (
         </Title>
         <Contents>
             <Members>
-                <Rank>회장단</Rank>
+                <Rank>회장</Rank>
                 <List>
-                    {president.map(({ name, studentNumber }) => (
                         <Box>
                             <Info>
-                                <Name>{name}</Name>
-                                <StudentNumber>{studentNumber}</StudentNumber>
+                                <Name>{master.name}</Name>
+                                <StudentNumber>{master.studentNumber}</StudentNumber>
                             </Info>
-                            <Edit>
-                                <FontAwesomeIcon icon={faPen} />
-                            </Edit>
+                            <Popup
+                                trigger={<Edit><FontAwesomeIcon icon={faPen} /></Edit>}
+                                modal
+                                contentStyle={{ width: "600px", height: "300px", border: "none", borderRadius: "10px"}}
+                            >
+                                {close => (
+                                    <>
+                                    <X onClick={close}>&times; </X>
+                                    <MemberBox type="master" list={master} onClickRadio={onClickRadio} onClickLeave={onClickLeave}></MemberBox>
+                                    </>
+                                )}
+                            </Popup>
                         </Box>
-                    ))}
                 </List>
             </Members>
             <Members>
                 <Rank>운영진</Rank>
                 <List>
-                    {manager.map(({ name, studentNumber }) => (
-                        <Box>
+                    {administrator.map(list => (
+                        <Box key={list.id}>
                             <Info>
-                                <Name>{name}</Name>
-                                <StudentNumber>{studentNumber}</StudentNumber>
+                                <Name>{list.name}</Name>
+                                <StudentNumber>{list.studentNumber}</StudentNumber>
                             </Info>
-                            <Edit>
-                                <FontAwesomeIcon icon={faPen} />
-                            </Edit>
+                            <Popup
+                                trigger={<Edit><FontAwesomeIcon icon={faPen} /></Edit>}
+                                modal
+                                contentStyle={{ width: "600px", height: "300px", border: "none", borderRadius: "10px"}}
+                            >
+                                {close => (
+                                    <>
+                                    <X onClick={close}>&times; </X>
+                                    <MemberBox type="administrator" list={list} onClickRadio={onClickRadio} onClickLeave={onClickLeave}></MemberBox>
+                                    </>
+                                )}
+                            </Popup>
                         </Box>
                     ))}
                 </List>
@@ -124,22 +151,28 @@ export default ({ president, manager, member }) => (
             <Members>
                 <Rank>멤버</Rank>
                 <List>
-                    {member.map(({ name, studentNumber }) => (
-                        <Box>
+                    {member.map(list => (
+                        <Box key={list.id}>
                             <Info>
-                                <Name>{name}</Name>
-                                <StudentNumber>{studentNumber}</StudentNumber>
+                                <Name>{list.name}</Name>
+                                <StudentNumber>{list.studentNumber}</StudentNumber>
                             </Info>
-                            <Edit>
-                                <FontAwesomeIcon icon={faPen} />
-                            </Edit>
+                            <Popup
+                                trigger={<Edit><FontAwesomeIcon icon={faPen} /></Edit>}
+                                modal
+                                contentStyle={{ width: "600px", height: "300px", border: "none", borderRadius: "10px"}}
+                            >
+                                {close => (
+                                    <>
+                                    <X onClick={close}>&times; </X>
+                                    <MemberBox type="member" list={list} onClickRadio={onClickRadio} onClickLeave={onClickLeave}></MemberBox>
+                                    </>
+                                )}
+                            </Popup>
                         </Box>
                     ))}
                 </List>
             </Members>
         </Contents>
-        <Submit>
-            <ProfileButton content="저장" color="gray" hover="orange"></ProfileButton>
-        </Submit>
     </>
 );
