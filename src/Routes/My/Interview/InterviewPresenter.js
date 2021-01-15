@@ -60,8 +60,46 @@ const Number = styled.div`
 `;
 
 const TimeTable = styled.div`
-    background: black;
     width: 80%;
+`;
+
+const Up = styled.div`
+    display: flex;
+    padding-left: 50px;
+`;
+
+const Day = styled.div`
+    font-size: 0.85em;
+    padding: 5px 20px;
+`;
+
+const Down = styled.div`
+    padding: 5px;
+    display: flex;
+`;
+
+const Left = styled.div`
+
+`;
+
+const Time = styled.div`
+    font-size: 0.85em;
+    padding: 10px 5px;
+`;
+
+const Right = styled.div`
+    border: 2px solid ${props => props.theme.darkGray};
+    border-radius: 5px;
+    padding-right: 10px;
+`;
+
+const Line = styled.div`
+
+`;
+
+const Box = styled.div`
+    width: 40px;
+    height: 20px;
 `;
 
 const Submit = styled.div`
@@ -72,7 +110,8 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-export default ({ applicants }) => (
+
+export default ({ applicants, time }) => (
     <>
         <Title>
             <Main>면접 타임 테이블</Main>
@@ -88,7 +127,24 @@ export default ({ applicants }) => (
                     </Applicant>
                 ))}
             </Applicants>
-            <TimeTable></TimeTable>
+            <TimeTable>
+                <Up>
+                    <Day>월</Day><Day>화</Day><Day>수</Day><Day>목</Day><Day>금</Day><Day>토</Day><Day>일</Day>
+                </Up>
+                <Down>
+                    <Left>
+                        {time.map(time => (<Time>{time}</Time>))}
+                    </Left>
+                    <Right>
+                        <Line>
+                            <Box></Box>
+                        </Line>
+                        <Line>
+                            <Box></Box>
+                        </Line>
+                    </Right>
+                </Down>
+            </TimeTable>
         </Contents>
         <Submit>
             <ProfileButton content="초기화" color="darkgray" style={{ marginRight: "15px" }}></ProfileButton>
