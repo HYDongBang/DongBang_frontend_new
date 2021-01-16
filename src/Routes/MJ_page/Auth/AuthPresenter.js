@@ -6,6 +6,7 @@ import OrangeButton from "../../../Components/OrangeButton";
 import SocialLogo from "../../../Components/SocialLogo";
 
 import SignInContainer from "./SignInContainer"
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const Container = styled.div`
     width:100%;
@@ -84,44 +85,54 @@ const Button = styled.button`
   border:none;
 `;
 
-export default ({ status, setStatus, email, password, onSubmit})=>{
-    return (
-        <>
-        {status === "login" ? 
-            <Container>
-            <Header>
-            <Title>Hello</Title>
-            <Desc>아이디와 비밀번호를 입력해주세요.</Desc>
-            </Header>
-            <form onSubmit={onSubmit}>
-                <Contents>
-                    <Content>
-                        <Text>Email Address</Text>   
-                        <LineInput {...email} icon="mail" type = "email" placeholder = "이메일 "/>
-                    </Content>
-                    <Content>
-                    <Text>Password</Text>   
-                    <LineInput {...password} icon="pw" type = "password" placeholder = "비밀번호 "/>
-                    </Content>
-                    <FPassword>Forgot Password?</FPassword>
-                </Contents>
-                <Bottom>
-                    <LoginDesc>
-                        <Text>회원가입을 아직안하셨나요? </Text>
-                        <SText onClick={() => setStatus("signUp")} >가입하기</SText>
-                    </LoginDesc>
-                    <Button>LogIn</Button>
-                    <SNSDesc>SNS 계정으로 간단하게 로그인 하세요</SNSDesc>
-                    <div style = {{width:"fit-content", margin:"auto"}}>
-                    <SocialLogo/>
-                    </div>
-                </Bottom>
-            </form>
-            </Container>
-            :
-            <SignInContainer status = {status} setStatus={setStatus}/>
-        }
+export default ({ 
+    status, 
+    setStatus, 
+    email, 
+    password, 
+    onSubmit,
+    pwClick,
+    setPwClick
+})=>{
 
-        </>
+    return (
+        <Scrollbars style={{ width: "100%", height: "100%"}}>
+            {status === "login" ? 
+                <Container>
+                    <Header>
+                        <Title>Hello</Title>
+                        <Desc>아이디와 비밀번호를 입력해주세요.</Desc>
+                    </Header>
+                    <form onSubmit={onSubmit}>
+                        <Contents>
+                            <Content>
+                                <Text>Email Address</Text>   
+                                <LineInput {...email} icon="mail" type = "email" placeholder = "이메일 "/>
+                            </Content>
+                            <Content>
+                                <Text>Password</Text>   
+                                <LineInput {...password}  onClick={() => setPwClick(!pwClick)}  icon="pw" type ={pwClick? "text": "password"} placeholder = "비밀번호 "/>
+
+                            </Content>
+                            <FPassword>Forgot Password?</FPassword>
+                        </Contents>
+                        <Bottom>
+                            <LoginDesc>
+                                <Text>회원가입을 아직안하셨나요? </Text>
+                                <SText onClick={() => setStatus("signUp")} >가입하기</SText>
+                            </LoginDesc>
+                            <Button>LogIn</Button>
+                            <SNSDesc>SNS 계정으로 간단하게 로그인 하세요</SNSDesc>
+                            <div style = {{width:"fit-content", margin:"auto"}}>
+                            <SocialLogo/>
+                            </div>
+                        </Bottom>
+                    </form>
+                </Container>
+
+                :
+                <SignInContainer status = {status} setStatus={setStatus}/>
+            }
+        </Scrollbars>
     )
 } 

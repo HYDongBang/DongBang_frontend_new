@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import LineInput from "../../../Components/LineInput";
@@ -61,8 +61,12 @@ export default ({
     majUniv,
     auth,
     onSecret,
-    checkSecret})=>{
-    
+    checkSecret,
+    isChecked,
+    secret
+})=>{
+    const [pwClick, setPwClick] = useState(false);
+    const [pw2Click, setPw2Click] = useState(false);
 
 
     return (
@@ -79,18 +83,25 @@ export default ({
                         <Text> Email Address</Text>   
                         <LineInput {...email} icon="certification" type = "email" placeholder = "이메일을 작성해주세요." onClick ={onSecret}/>
                     </Content>
-                    <Content>
-                        <Text>Authentication Code</Text>   
-                        <LineInput {...auth}  icon="check" placeholder = "코드를 작성해주세요." onClick ={checkSecret}/>
-                    </Content>
-                    <Content>
-                        <Text>Password</Text>   
-                        <LineInput {...password} icon="pw" type = "password" placeholder = "비밀번호 "/>
-                    </Content>
-                    <Content>
-                        <Text>Password</Text>   
-                        <LineInput {...password2} icon="pw" type = "password" placeholder = "비밀번호를 다시 한번 입력해주세요"/>
-                    </Content>
+                    {secret !== "" &&
+                        <Content>
+                            <Text>Authentication Code</Text>   
+                            <LineInput {...auth}  icon="check" placeholder = "코드를 작성해주세요." onClick ={checkSecret}/>
+                        </Content>
+                    }
+                    {isChecked && 
+                    <>
+                        <Content>
+                            <Text>Password</Text>   
+                            <LineInput {...password} icon="pw" onClick={() => setPwClick(!pwClick)} type ={pwClick? "text": "password"} placeholder = "비밀번호 "/>
+                        </Content>
+                        <Content>
+                            <Text>Password</Text>   
+                            <LineInput {...password2} icon="pw"  onClick={() => setPw2Click(!pw2Click)} type ={pw2Click? "text": "password"} placeholder = "비밀번호를 다시 한번 입력해주세요"/>
+                        </Content>
+                    </>
+                    }
+
                     </>
                     }
                     {status === "signUp2" &&

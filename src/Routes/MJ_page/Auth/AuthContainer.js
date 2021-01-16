@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 export default ({ }) => {
     const [status, setStatus] = useState("login");
+    const [pwClick, setPwClick] = useState(false);
     const email = useInput("");
     const password = useInput("");
 
@@ -48,6 +49,14 @@ export default ({ }) => {
   };
 
   return (
-    <AuthPresenter status = {status} setStatus = {setStatus} email={email} password={password} onSubmit={onSubmit}/>
+    <AuthPresenter 
+      status = {status}
+      setStatus = {setStatus} 
+      email={email}
+      password={password}
+      onSubmit={onSubmit}
+      pwClick={pwClick}
+      setPwClick ={setPwClick}
+     />
   );
 };
