@@ -70,11 +70,15 @@ const Box = styled.div`
     border-radius: 5px;
     margin-top:20px;
     width: 60%;
+    overflow:auto;
 `;
 
 const Inner = styled.div``;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    margin-bottom: 10px;
+    display:flex;
+    `;
 
 const Question = styled.input`
     -webkit-appearance: none;
@@ -88,7 +92,12 @@ const Question = styled.input`
     width:80%;
 `;
 
-const Selector = styled.div``;
+const Selector = styled.div`
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 18%;
+    `;
 
 const Buttons = styled.div`
     display:flex;
@@ -98,15 +107,22 @@ const Buttons = styled.div`
     padding-top: 15px;
 `;
 
-const Button = styled.button`
-    margin-left: 10px;
+const Button = styled.div`
     border:none;
-    background-color:white;
+    background-color:transparent;
+    float:right;
 `;
 
 const Options = styled.div``;
 
-const OptionPlus = styled.div``;
+const OptionPlus = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    width: 80%;
+    font-size: 0.8em;
+    margin-top: 10px;
+    color: ${props => props.theme.darkGray};
+    `;
 
 const Submit = styled.div`
     padding-top: 80px;
@@ -117,16 +133,30 @@ const Submit = styled.div`
 `;
 
 export default ({
-    select,
-    setSelect,
-    uLoading,
-    uData,
+    Loading,
+    questions,
+    setQuestions,
+    name,
+    description,
+    onDeleteQuestion,
+    onDeleteChoice
 }) => {
-    const {loading:cLoading, data:cData} = useQuery(READ_CLUB, {variables:{id: uData === undefined || uData.readLoggedInUser.clubMaster.id}});
-    const password2 = "123";
+    const handleInput = e => {
+        const key = e.target.getAttribute("data-key");
+        const value = e.target.value;
+        const index = questions.indexOf(questions.filter(element => element.id == key)[0]);
+        setQuestions(prev => {
+            prev[index].title = value;
+            return prev;
+        });
+        console.log(questions);
+
+    };
+
+
     return(
     <>
-        {!cLoading && !uLoading&&
+        {!Loading && 
         <>
             <Title>
                 <Main>가입 신청 양식</Main>
@@ -138,53 +168,50 @@ export default ({
                         <ClubLogo type = "culture"/>
                         <TBox>
                             <Text>동아리 이름</Text>
-                            <ClubText> {cData.readClub.name} </ClubText>
+
+                            <ClubText> {name.value} </ClubText>
                         </TBox>
                     </ClubInfo>
                     <CBox>
                         <Text>동아리 설명</Text>
-                        <ClubText> {cData.readClub.description} </ClubText>
+                        <ClubText> {description.value} </ClubText>
                     </CBox>
                 </Top>
-            {cData.readClub.questions.map((question, idx)=>{
-                const qTitle = question.title;
-                console.log(qTitle)
+            {questions.map((question, idx)=>{
                 return (
                     <>
                         {question.type === "short" &&
-                            <Box onClick={() => setSelect(question.id)}>
+                            <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <div> {question.title} </div>
-                                        <Question {...question} placeholder="질문"/>
+                                        <Question value = {question.title}  onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Selector>123</Selector>
                                     </Wrapper>
-                                    <Selector></Selector>
                                 </Inner>
-                                {select === question.id &&
-                                    <Buttons>
-                                        <Button> <FontAwesomeIcon icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} />질문삭제</Button>
-                                        <Button> <FontAwesomeIcon icon={faPlusSquare} style={{ fontSize: "1.1em", marginRight: "5px"}} />질문추가</Button>
-                                    </Buttons>
-                                } 
+                                <Button> <FontAwesomeIcon onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /></Button>
+
+                               
                             </Box>
                         }
                         {question.type === "multiple" &&
-                            <Box onClick={() => setSelect(question.id)}>
+                            <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question placeholder="질문"/>
+                                        <Question value = {question.title}  onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Selector>123</Selector>
                                     </Wrapper>
-                                    <Options>
-                                        <LineInput {...question.title} icon ="delete" placeholder="옵션" width="60%"/>
-                                        <OptionPlus>옵션추가</OptionPlus>
-                                    </Options>
+
+                                    {question.choices.map((choice, idx)=>{
+                                            return (
+                                                <Options>
+                                                    <LineInput value = {choice.subject} onClick={() => onDeleteChoice(choice.id)} icon ="delete" placeholder="옵션" width="80%"/>
+                                                    <OptionPlus>옵션추가</OptionPlus>
+                                                </Options>
+                                            )
+                                        })}
                                 </Inner>
-                                {select === question.id &&
-                                    <Buttons>
-                                        <Button> <FontAwesomeIcon icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} />질문삭제</Button>
-                                        <Button> <FontAwesomeIcon icon={faPlusSquare} style={{ fontSize: "1.1em", marginRight: "5px"}} />질문추가</Button>
-                                    </Buttons>
-                                }
+                                <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
+                               
                             </Box>
                         }
                     </>

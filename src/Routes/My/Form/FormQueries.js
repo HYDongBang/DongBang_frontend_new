@@ -1,36 +1,30 @@
 import { gql } from "apollo-boost";
 
-export const READ_LOGGED_IN_USER = gql `
+export const GET_QUESTIONS = gql `
     query {
         readLoggedInUser{
             clubMaster{
                 id
-            }
-        }
-    }
-`
-
-
-export const READ_CLUB = gql `
-    query readClub($id: Int){
-        readClub(id: $id){
-            name
-            description
-            questions{
-                id,
-                type,
-                title,
-                index,
-                choices{
+                name
+                description
+                questions{
+                    id,
+                    type,
+                    title,
                     index,
-                    subject
+                    choices{
+                        index,
+                        subject
+                    }
                 }
             }
         }
     }
 `
+
+
 export const CREATE_QUESTION = gql `
-    mutation createQuestion($index: Int!,$type: String!,  $title:String!){
+    mutation createQuestion($index: Int!,$type: String!, $title:String!){
         createQuestion(index: $index,type: $type, title:$title){
            id
            index
@@ -42,6 +36,21 @@ export const CREATE_CHOICE = gql `
         createChoice(index: $index, questionId: $questionId, subject:$subject){
            index
            id
+        }
+    }
+`
+export const DELETE_QUESTION = gql `
+    mutation deleteQuestion($id: Int!){
+        deleteQuestion(id: $id){
+           index
+        }
+    }
+`
+
+export const DELETE_CHOICE = gql `
+    mutation deleteChoice($id: Int!){
+        deleteChoice(id: $id){
+           index
         }
     }
 `
