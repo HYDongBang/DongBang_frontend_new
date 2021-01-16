@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "react-apollo-hooks";
 import { useEffect } from "react";
 
 import { toast } from "react-toastify";
+import { checkDocument } from "apollo-utilities";
 
 
 export default () => {
@@ -66,7 +67,7 @@ export default () => {
       };
 
     useEffect(()=>{
-        if(!loading ){
+        if(data){
             setQuestions(data.readLoggedInUser.clubMaster.questions);
             name.setValue(data.readLoggedInUser.clubMaster.name);
             description.setValue(data.readLoggedInUser.clubMaster.description);

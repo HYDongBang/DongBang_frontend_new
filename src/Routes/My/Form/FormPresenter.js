@@ -13,6 +13,9 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import {DropdownButton, Dropdown} from "react-bootstrap"
+
+
 const Title = styled.div`
     padding-bottom: 35px;
 `;
@@ -70,7 +73,8 @@ const Box = styled.div`
     border-radius: 5px;
     margin-top:20px;
     width: 60%;
-    overflow:auto;
+    display:flex;
+    flex-direction:column;
 `;
 
 const Inner = styled.div``;
@@ -110,7 +114,7 @@ const Buttons = styled.div`
 const Button = styled.div`
     border:none;
     background-color:transparent;
-    float:right;
+    text-align:end;
 `;
 
 const Options = styled.div``;
@@ -131,6 +135,17 @@ const Submit = styled.div`
     padding-right: 40%;
     padding-bottom: 50px;
 `;
+
+const DropdownStyle ={
+    width: "100%",
+    backgroundColor: "transparent",
+    color: "black",
+    border: "1px solid black",
+    "&:focus":{
+        boxShadow: "0 0 0 0.2rem rgb(255 200 162)"
+    },
+
+}
 
 export default ({
     Loading,
@@ -184,8 +199,14 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question value = {question.title}  onChange={handleInput} placeholder="질문" data-key={question.id}/>
-                                        <Selector>123</Selector>
+                                        <Question value = {question.title}  style = {{width: "100%"}}onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
+                                            <Dropdown.Toggle style ={DropdownStyle}>주관식</Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item>주관식</Dropdown.Item>
+                                                <Dropdown.Item>객관식</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </Wrapper>
                                 </Inner>
                                 <Button> <FontAwesomeIcon onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /></Button>
@@ -197,8 +218,14 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question value = {question.title}  onChange={handleInput} placeholder="질문" data-key={question.id}/>
-                                        <Selector>123</Selector>
+                                        <Question value = {question.title}  style = {{width: "100%"}} onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
+                                            <Dropdown.Toggle style ={DropdownStyle}>객관식</Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item>주관식</Dropdown.Item>
+                                                <Dropdown.Item>객관식</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </Wrapper>
 
                                     {question.choices.map((choice, idx)=>{
@@ -210,7 +237,9 @@ export default ({
                                             )
                                         })}
                                 </Inner>
-                                <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
+                                {/* 함수 안되게 해놓기 위해.. */}
+                                {/* <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button> */}
+                                <Button > <FontAwesomeIcon  icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
                                
                             </Box>
                         }
