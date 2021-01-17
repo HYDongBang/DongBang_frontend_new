@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
+import { Scrollbars } from 'react-custom-scrollbars';
+
+
 const UContents = styled.div`
     display:flex;
     padding:20px;
@@ -67,7 +70,7 @@ const Talks = styled.div`
     display: flex;
     flex-direction:column;
     padding:20px;
-    height:80%;
+    height:100%;
 `;
 
 const Talk = styled.div`
@@ -179,6 +182,7 @@ export default ({club,
             </Left>
 
             <Right>
+            <Scrollbars style={{ width: "100%", height: "80%"}}>
                 <Talks>
                     {data.readRoomByClubId !== undefined &&
                         <>{data.readRoomByClubId.messages.map((message)=>{
@@ -189,8 +193,8 @@ export default ({club,
                                         {message.text}
                                     </MyBubble>
                                     <DT style ={{float:"right"}}>
-                                        <Date>{message.createdAt}</Date>
-                                        <Time>{message.createdAt}</Time>
+                                        <Date>{message.createdAt.substring(5,10)}</Date>
+                                        <Time>{message.createdAt.substring(11,16)}</Time>
                                     </DT>
                                 </Talk>
                                 :
@@ -199,16 +203,16 @@ export default ({club,
                                         {message.text}
                                     </OtherBubble>
                                     <DT style ={{float:"left"}}>
-                                        <Date>20.11.09</Date>
-                                        <Time>11:56</Time>
+                                        <Date>{message.createdAt.substring(5,10)}</Date>
+                                        <Time>{message.createdAt.substring(11,16)}</Time>
                                     </DT>
                                 </Talk>
                             }
                             </>)
                         })}</>
                     }
-                
                 </Talks>
+                </Scrollbars>
                 <Message onSubmit = {onSubmit}> 
                     <MessageInput {...text} type = "text" placeholder = "메시지를 입력해주세요." />
                     <SendButton>전송</SendButton>
