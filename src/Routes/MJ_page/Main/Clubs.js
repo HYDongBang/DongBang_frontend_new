@@ -12,12 +12,11 @@ const Club = styled.div`
   width: 250px;
   text-align: center;
   border-radius: 20px;
-  margin: 20px;
   cursor: pointer;
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  margin: 20px 5%;
+  margin: 20px;
 `;
 
 const Context = styled.div`
@@ -73,9 +72,6 @@ export default  ({ clubs, myType }) => {
       clubs = [];
     }
     return clubs.map((club) => {
-
-      console.log(club.clubImage);
-
       return (
         <>
           {myType === "" && (

@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
 const MainImg = styled.img`
     width: 100%;
-    height: 600px;
+    height: 500px;
 `;
 
 const MainContents = styled.div`
@@ -85,13 +85,14 @@ const ClubContainer = styled.div`
     width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
+    justify-content:space-between;
 `;
 
 const SearchBar = styled.input`
     width: 40%;
     height: 50px;
     position:absolute;
-    margin-top: 15%;
+    margin-top: 150px;
     margin-left: 30%;
     color: ${props => props.checked};
     font-size: 1em;
