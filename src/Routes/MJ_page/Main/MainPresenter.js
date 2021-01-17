@@ -227,7 +227,7 @@ export default ({
                     myType={myType}
                     />
                     :
-                    <Loading/>
+                    <Loading marginT="10%"/>
                 }
             </ClubContainer>
         </MainContents>

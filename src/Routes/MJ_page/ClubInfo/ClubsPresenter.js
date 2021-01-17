@@ -10,6 +10,8 @@ import {LOG_IN} from "./ClubsQuries"
 
 import { toast } from "react-toastify";
 
+import Loading from "../../../Components/Loading";
+
 const Wrapper = styled.div`
   background: white;
   height: 100%;
@@ -38,7 +40,7 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
 
     return (
         <Wrapper>
-          {!loading && !cLoading && data &&
+          {!loading && !cLoading && data ?
           <>
             {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
@@ -50,6 +52,8 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
             }
             {action === "Apply" && isLoggedIn && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
           </>
+          :
+          <Loading marginT = "25%"/>
           }
         </Wrapper>
     )
