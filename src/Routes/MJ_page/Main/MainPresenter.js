@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 import main from "../../../Styles/Images/main.jpg"
 import writing from "../../../Styles/Images/writing.svg"
 import writingOrange from "../../../Styles/Images/writingOrange.svg"
@@ -18,6 +17,7 @@ import Clubs from "./Clubs"
 
 import { useQuery } from "react-apollo-hooks";
 import {READ_ALL_CLUBS} from "./MainQueries"
+import Loading from "../../../Components/Loading";
 
 const Wrapper = styled.div`
     width:100%;
@@ -221,11 +221,13 @@ export default ({
                 )}   
             </Categories>
             <ClubContainer>
-                {!loading && data && 
+                {!loading && data ? 
                     <Clubs
                     clubs={word.length < 1 ? data.readAllClubs : filterDisplay}
                     myType={myType}
                     />
+                    :
+                    <Loading/>
                 }
             </ClubContainer>
         </MainContents>
