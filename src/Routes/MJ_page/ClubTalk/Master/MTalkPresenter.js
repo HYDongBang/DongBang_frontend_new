@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import styled from "styled-components";
 
 import UserLogo from "../../../../Components/UserLogo";
+import { Scrollbars } from 'react-custom-scrollbars';
+
 
 const UContents = styled.div` 
     display:flex;
@@ -170,65 +172,70 @@ export default ({club,
     })=>{
     return (
         <UContents>
-            {!roomsLoading && !roomLoading && <>
-                <Left>
-                <Top>
-                    <Filter>전체메시지</Filter>
-                </Top>
-                {rooms !== undefined &&
-                        <>{rooms.readRooms.map((myroom)=>{
-                            return(<Room onClick={() => setRid(myroom.id)}>  
-                                <RoomTime>{myroom.updatedAt}</RoomTime>
-                                <RoomDesc>
-                                    <UserLogo name = "홍"/> 
-                                    <Preview>
-                                        <Name>hi</Name>
-                                        <TalkPreview>{myroom.recentMessage.text}</TalkPreview>
-                                    </Preview>
-                                </RoomDesc>
-                            </Room>)
-                        })
-                        }</>}
-            </Left>
-            <Line/>
+        {!roomsLoading && !roomLoading && <>
+            <Left>
+                    <Top>
+                        <Filter>전체메시지</Filter>
+                    </Top>
+                <Scrollbars style={{ width: "100%", height: "90%"}}>
+                    {rooms !== undefined &&
+                            <>{rooms.readRooms.map((myroom)=>{
+                                return(<Room onClick={() => setRid(myroom.id)}>  
+                                    <RoomTime>{myroom.updatedAt.substring(5,10)} | {myroom.updatedAt.substring(11,16)}</RoomTime>
+                                    <RoomDesc>
+                                        <UserLogo name = "홍"/> 
+                                        <Preview>
+                                            <Name>hi</Name>
+                                            <TalkPreview>{myroom.recentMessage.text}</TalkPreview>
+                                        </Preview>
+                                    </RoomDesc>
+                                </Room>)
+                            })
+                            }</>}
+                    </Scrollbars>
+                </Left>
+                <Line/>
 
-            <Right>
-                <Talks>
-                {room.readRoom !== undefined &&
-                        <>{room.readRoom.messages.map((message)=>{
-                            console.log(message);
-                           return( <>
-                           {message.from.email === userEmail ?
-                            (<Talk>
-                                <MyBubble>
-                                    {message.text}
-                                </MyBubble>
-                                <DT style ={{float:"right"}}>
-                                    <Date>20.11.09</Date>
-                                    <Time>11:56</Time>
-                                </DT>
-                            </Talk>)
-                            :
-                            (<Talk>
-                                <OtherBubble>
-                                    {message.text}
-                                </OtherBubble>
-                                <DT style ={{float:"left"}}>
-                                    <Date>20.11.09</Date>
-                                    <Time>11:56</Time>
-                                </DT>
-                            </Talk>)
-                        }
-                        </>)
-                        })
-                        }</>}
+                <Right>
+                <Scrollbars style={{ width: "100%", height: "80%"}}>
+                    <Talks>
+                    {room.readRoom !== undefined &&
+                            <>{room.readRoom.messages.map((message)=>{
+                                console.log(message);
+                            return( <>
+                            {message.from.email === userEmail ?
+                                (<Talk>
+                                    <MyBubble>
+                                        {message.text}
+                                    </MyBubble>
+                                    <DT style ={{float:"right"}}>
+                                        <Date>{message.createdAt.substring(5,10)}</Date>
+                                        <Time>{message.createdAt.substring(11,16)}</Time>
+                                    </DT>
+                                </Talk>)
+                                :
+                                (<Talk>
+                                    <OtherBubble>
+                                        {message.text}
+                                    </OtherBubble>
+                                    <DT style ={{float:"left"}}>
+                                        <Date>{message.createdAt.substring(5,10)}</Date>
+                                        <Time>{message.createdAt.substring(11,16)}</Time>
+                                    </DT>
+                                </Talk>)
+                            }
+                            </>)
+                            })
+                            }</>}
 
-                </Talks>
-                <Message onSubmit = {onSubmit}> 
-                    <MessageInput {...myText} type = "text" placeholder = "메시지를 입력해주세요." />
-                    <SendButton>전송</SendButton>
-                </Message>
-            </Right>
+                    </Talks>
+                    </Scrollbars>
+
+                    <Message onSubmit = {onSubmit}> 
+                        <MessageInput {...myText} type = "text" placeholder = "메시지를 입력해주세요." />
+                        <SendButton>전송</SendButton>
+                    </Message>
+                </Right>
             </>}
             
         </UContents>
