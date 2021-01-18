@@ -26,7 +26,6 @@ export const GET_QUESTIONS = gql `
 export const CREATE_QUESTION = gql `
     mutation createQuestion($index: Int!,$type: String!, $title:String!){
         createQuestion(index: $index,type: $type, title:$title){
-           id
            index
         }
     }

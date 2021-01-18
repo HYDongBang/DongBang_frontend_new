@@ -56,6 +56,9 @@ const X = styled.a`
   top: -8px;
   font-size:2.5em;
   color: #E5EAEE;
+  :hover{
+    color: #E5EAEE;
+  }
 `;
 
 

@@ -2,18 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import ProfileButton from "../../../Components/ProfileButton";
 import ClubLogo from "../../../Components/ClubLogo";
-import BoxInput from "../../../Components/BoxInput";
 import LineInput from "../../../Components/LineInput";
-// import Loading from "../../../Components/";
-
-import {READ_CLUB} from "./FormQueries"
-import { useQuery } from "react-apollo-hooks";
+import Loading from "../../../Components/Loading" ;
 
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {DropdownButton, Dropdown} from "react-bootstrap"
+import { Dropdown} from "react-bootstrap"
+
+import Popup from "reactjs-popup";
+import NewFormPresenter from "./NewFormPresenter";
+
 
 
 const Title = styled.div`
@@ -115,6 +114,7 @@ const Button = styled.div`
     border:none;
     background-color:transparent;
     text-align:end;
+    cursor:pointer;
 `;
 
 const Options = styled.div``;
@@ -147,23 +147,50 @@ const DropdownStyle ={
 
 }
 
+const X = styled.a`
+  cursor:pointer;
+  position:absolute;
+  right:-30px;
+  top: -8px;
+  font-size:2.5em;
+  color: #E5EAEE;
+  :hover{
+    color: #E5EAEE;
+  }
+`;
+
+
+const contentStyle ={
+    width:"35%",
+    height: "25%",
+    borderRadius: "15px",
+    padding: "25px",
+  };
+  
+
 export default ({
-    Loading,
+    data,
+    myloading,
     questions,
     setQuestions,
-    name,
-    description,
     onDeleteQuestion,
-    onDeleteChoice
+    onDeleteChoice,
+    myType,
+    myTitle,
+    onCreateQuestion
 }) => {
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
         const value = e.target.value;
         const index = questions.indexOf(questions.filter(element => element.id == key)[0]);
-        setQuestions(prev => {
-            prev[index].title = value;
-            return prev;
-        });
+        const newQuestions = questions;
+        newQuestions[index].title = value;
+        setQuestions(newQuestions);
+        // setQuestions(prev => {
+        //     prev[index].title = value;
+        //     console.log(prev);
+        //     return prev;
+        // });
         console.log(questions);
 
     };
@@ -171,8 +198,8 @@ export default ({
 
     return(
     <>
-        {!Loading && 
-        <>
+        {!myloading && data.readLoggedInUser!==undefined ? 
+        (<>
             <Title>
                 <Main>가입 신청 양식</Main>
                 <Sub>동아리 지원 양식을 편집할 수 있습니다.</Sub>
@@ -183,13 +210,12 @@ export default ({
                         <ClubLogo type = "culture"/>
                         <TBox>
                             <Text>동아리 이름</Text>
-
-                            <ClubText> {name.value} </ClubText>
+                            <ClubText> {data.readLoggedInUser.clubMaster.name} </ClubText>
                         </TBox>
                     </ClubInfo>
                     <CBox>
                         <Text>동아리 설명</Text>
-                        <ClubText> {description.value} </ClubText>
+                        <ClubText> {data.readLoggedInUser.clubMaster.description} </ClubText>
                     </CBox>
                 </Top>
             {questions.map((question, idx)=>{
@@ -201,7 +227,7 @@ export default ({
                                     <Wrapper>
                                         <Question value = {question.title}  style = {{width: "100%"}}onChange={handleInput} placeholder="질문" data-key={question.id}/>
                                         <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
-                                            <Dropdown.Toggle style ={DropdownStyle}>주관식</Dropdown.Toggle>
+                                            <Dropdown.Toggle style ={DropdownStyle}>{question.type === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>주관식</Dropdown.Item>
                                                 <Dropdown.Item>객관식</Dropdown.Item>
@@ -220,7 +246,7 @@ export default ({
                                     <Wrapper>
                                         <Question value = {question.title}  style = {{width: "100%"}} onChange={handleInput} placeholder="질문" data-key={question.id}/>
                                         <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
-                                            <Dropdown.Toggle style ={DropdownStyle}>객관식</Dropdown.Toggle>
+                                            <Dropdown.Toggle style ={DropdownStyle}>{question.type  === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>주관식</Dropdown.Item>
                                                 <Dropdown.Item>객관식</Dropdown.Item>
@@ -238,8 +264,8 @@ export default ({
                                         })}
                                 </Inner>
                                 {/* 함수 안되게 해놓기 위해.. */}
-                                {/* <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button> */}
-                                <Button > <FontAwesomeIcon  icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
+                                <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
+                                {/* <Button > <FontAwesomeIcon  icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button> */}
                                
                             </Box>
                         }
@@ -248,10 +274,27 @@ export default ({
             })}
             </Contents>
             <Submit>
-                <ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}></ProfileButton>
+            <Popup
+              trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
+              modal
+              contentStyle ={contentStyle} 
+            >
+              {close =>(
+                <>
+                <X onClick={close}>&times; </X>
+                <NewFormPresenter 
+                myType  ={myType}
+                myTitle ={myTitle}
+                onCreateQuestion={onCreateQuestion}
+                />
+                </>
+              )}
+            </Popup>
                 <ProfileButton content="저장" color="orange"></ProfileButton>
             </Submit>
-        </>
+        </>)
+        :
+        <Loading/>
         }
     </>
 );

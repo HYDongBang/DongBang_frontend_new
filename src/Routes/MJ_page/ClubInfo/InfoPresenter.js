@@ -170,7 +170,7 @@ return (
         <HeaderImg src = {data.readClub.clubImage}>
         </HeaderImg>
         <Club>
-            <ClubLogo  type = "sports"/>
+            <ClubLogo margin="auto" type = "sports"/>
             <Type>{data.readClub.type}</Type>
             <Name>{data.readClub.name}</Name>
         </Club>
