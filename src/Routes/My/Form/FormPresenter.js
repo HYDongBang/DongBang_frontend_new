@@ -125,7 +125,8 @@ const OptionPlus = styled.div`
     width: 80%;
     font-size: 0.8em;
     margin-top: 10px;
-    color: ${props => props.theme.darkGray};
+    color: ${props => props.theme.orange};
+    cursor:pointer;
     `;
 
 const Submit = styled.div`
@@ -177,20 +178,20 @@ export default ({
     onDeleteChoice,
     myType,
     myTitle,
-    onCreateQuestion
+    onCreateQuestion,
+    plusOption,
+    setPlusOption,
+    myChoice,
+    onCreateChoice
 }) => {
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
         const value = e.target.value;
         const index = questions.indexOf(questions.filter(element => element.id == key)[0]);
-        const newQuestions = questions;
-        newQuestions[index].title = value;
-        setQuestions(newQuestions);
-        // setQuestions(prev => {
-        //     prev[index].title = value;
-        //     console.log(prev);
-        //     return prev;
-        // });
+        setQuestions(prev => {
+            prev[index].title = value;
+            return prev;
+        });
         console.log(questions);
 
     };
@@ -225,7 +226,7 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question value = {question.title}  style = {{width: "100%"}}onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Question  style = {{width: "100%"}} onChange={handleInput}  placeholder= {question.title} data-key={question.id}/>
                                         <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
                                             <Dropdown.Toggle style ={DropdownStyle}>{question.type === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
@@ -244,7 +245,7 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question value = {question.title}  style = {{width: "100%"}} onChange={handleInput} placeholder="질문" data-key={question.id}/>
+                                        <Question style = {{width: "100%"}} onChange={handleInput} placeholder= {question.title} data-key={question.id}/>
                                         <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
                                             <Dropdown.Toggle style ={DropdownStyle}>{question.type  === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
@@ -253,19 +254,19 @@ export default ({
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Wrapper>
-
-                                    {question.choices.map((choice, idx)=>{
+                                    <Options>
+                                        {question.choices.map((choice, idx)=>{
                                             return (
-                                                <Options>
                                                     <LineInput value = {choice.subject} onClick={() => onDeleteChoice(choice.id)} icon ="delete" placeholder="옵션" width="80%"/>
-                                                    <OptionPlus>옵션추가</OptionPlus>
-                                                </Options>
                                             )
                                         })}
+                                        <OptionPlus onClick={() => setPlusOption(question.id)} >옵션추가</OptionPlus>
+                                        {plusOption === question.id ?
+                                            <LineInput {...myChoice} icon ="correct" placeholder="옵션" width="80%"  onClick={() => onCreateChoice(question.id)}  />
+                                            : <></> }   
+                                    </Options>
                                 </Inner>
-                                {/* 함수 안되게 해놓기 위해.. */}
                                 <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
-                                {/* <Button > <FontAwesomeIcon  icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button> */}
                                
                             </Box>
                         }

@@ -13,6 +13,7 @@ export const GET_QUESTIONS = gql `
                     title,
                     index,
                     choices{
+                        id
                         index,
                         subject
                     }

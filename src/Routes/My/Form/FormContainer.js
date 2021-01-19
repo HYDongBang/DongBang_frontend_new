@@ -1,14 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import useInput from "../../../Hooks/useInput";
 import FormPresenter from "./FormPresenter";
 
-import {GET_QUESTIONS, DELETE_QUESTION, DELETE_CHOICE, CREATE_QUESTION} from "./FormQueries"
+import {GET_QUESTIONS, DELETE_QUESTION, DELETE_CHOICE, CREATE_QUESTION, CREATE_CHOICE} from "./FormQueries"
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { useEffect } from "react";
 
 import { toast } from "react-toastify";
-import { checkDocument } from "apollo-utilities";
-
 
 export default () => {
     const [select, setSelect] = useState("");
@@ -16,12 +13,14 @@ export default () => {
 
     const [questions,setQuestions] = useState([]);
     const myType = useInput("short");
-    const myIndex = useInput("");
     const myTitle = useInput("");
+    const myChoice = useInput("");
+    const [plusOption,setPlusOption] = useState();
 
     const [deleteQuestionMutation] = useMutation(DELETE_QUESTION);
     const [deleteChoiceMutation] = useMutation(DELETE_CHOICE);
     const [createQuestionMutation] = useMutation(CREATE_QUESTION);
+    const [createChoiceMutation] = useMutation(CREATE_CHOICE);
 
 
     const onDeleteQuestion = async (e) => {
@@ -70,7 +69,6 @@ export default () => {
         e.preventDefault();
         const q = data.readLoggedInUser.clubMaster.questions;
         const lastIndex = q[q.length-1].index;
-        console.log("클릭됨");
         if(myTitle !==""){
             try {
                 const {
@@ -101,10 +99,39 @@ export default () => {
                 toast.error("가입신청 항목을 추가할 수 없습니다. 다시 시도해주세요.");
                 }
         }
-       
-        
       };
 
+      const onCreateChoice = async (e) => {
+        let myIndex;
+        const q = questions.filter(element => element.id === e)[0].choices;    
+        if(q.length ==0){
+            myIndex = 0;
+        }else{
+            myIndex = q[q.length-1].index
+        }
+        if(myChoice !==""){
+            try {
+                const {
+                    data: { createChoice: id },
+                } = await createChoiceMutation({
+                    variables: {
+                    index: myIndex,
+                    subject: myChoice.value,
+                    questionId: e,
+                    },
+                });
+                if (!id || id === "") {
+                    toast.error("전송 오류");
+                } else {
+                    toast("옵션이 추가되었습니다.");  
+                    myChoice.setValue("");
+                }
+                } catch (err) {
+                console.log(err.message);
+                toast.error("옵션을 추가할 수 없습니다. 다시 시도해주세요.");
+                }
+        }
+      };
 
     useEffect(()=>{
         if(!loading && data.readLoggedInUser!==undefined){
@@ -125,10 +152,11 @@ export default () => {
             myType={myType}
             myTitle={myTitle}
             onCreateQuestion={onCreateQuestion}
+            plusOption={plusOption}
+            setPlusOption={setPlusOption}
+            myChoice = {myChoice}
+            onCreateChoice={onCreateChoice}
             />
-
        );
-    
-
 };
 
