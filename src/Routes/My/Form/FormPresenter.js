@@ -95,21 +95,6 @@ const Question = styled.input`
     width:80%;
 `;
 
-const Selector = styled.div`
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-left: 10px;
-    width: 18%;
-    `;
-
-const Buttons = styled.div`
-    display:flex;
-    flex-direction: row-reverse;
-    border-top: 1px solid ${props => props.theme.lightGray};
-    margin-top: 15px;
-    padding-top: 15px;
-`;
-
 const Button = styled.div`
     border:none;
     background-color:transparent;
@@ -117,14 +102,16 @@ const Button = styled.div`
     cursor:pointer;
 `;
 
-const Options = styled.div``;
+const Option = styled.div`
+    display: flex;
+    width:80%;
+    justify-content: space-between;
+`;
 
 const OptionPlus = styled.div`
-    display: flex;
-    flex-direction: row-reverse;
-    width: 80%;
+    width: 55px;
     font-size: 0.8em;
-    margin-top: 10px;
+    margin-top: 15px;
     color: ${props => props.theme.orange};
     cursor:pointer;
     `;
@@ -182,7 +169,9 @@ export default ({
     plusOption,
     setPlusOption,
     myChoice,
-    onCreateChoice
+    onCreateChoice,
+    setCheck,
+    check
 }) => {
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
@@ -192,8 +181,18 @@ export default ({
             prev[index].title = value;
             return prev;
         });
+        setCheck(!check);
         console.log(questions);
+    };
 
+    const changeType = (e,i) => {
+        console.log(e);
+        const index = questions.indexOf(questions.filter(element => element.id == i)[0]);
+        setQuestions(prev => {
+            prev[index].type = e;
+            return prev;
+        });
+        setCheck(!check);
     };
 
 
@@ -226,12 +225,12 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question  style = {{width: "100%"}} onChange={handleInput}  placeholder= {question.title} data-key={question.id}/>
-                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
+                                        <Question  style = {{width: "100%"}}  value = {question.title} onChange={handleInput}  placeholder= {question.title} data-key={question.id}/>
+                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}} >
                                             <Dropdown.Toggle style ={DropdownStyle}>{question.type === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item>주관식</Dropdown.Item>
-                                                <Dropdown.Item>객관식</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => changeType("short", question.id)} >주관식</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => changeType("multiple", question.id)}>객관식</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Wrapper>
@@ -245,29 +244,33 @@ export default ({
                             <Box>
                                 <Inner>
                                     <Wrapper>
-                                        <Question style = {{width: "100%"}} onChange={handleInput} placeholder= {question.title} data-key={question.id}/>
+                                        <Question style = {{width: "100%"}} value = {question.title} onChange={handleInput} placeholder= {question.title} data-key={question.id}/>
                                         <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
                                             <Dropdown.Toggle style ={DropdownStyle}>{question.type  === "short"? "주관식": "객관식"}</Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item>주관식</Dropdown.Item>
-                                                <Dropdown.Item>객관식</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => changeType("short", question.id)} >주관식</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => changeType("multiple", question.id)}>객관식</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Wrapper>
-                                    <Options>
-                                        {question.choices.map((choice, idx)=>{
-                                            return (
-                                                    <LineInput value = {choice.subject} onClick={() => onDeleteChoice(choice.id)} icon ="delete" placeholder="옵션" width="80%"/>
-                                            )
-                                        })}
-                                        <OptionPlus onClick={() => setPlusOption(question.id)} >옵션추가</OptionPlus>
-                                        {plusOption === question.id ?
-                                            <LineInput {...myChoice} icon ="correct" placeholder="옵션" width="80%"  onClick={() => onCreateChoice(question.id)}  />
-                                            : <></> }   
-                                    </Options>
+                                    <>
+                                    {question.choices.map((choice, idx)=>{
+                                                return (
+                                                        <LineInput value = {choice.subject} marginB="10px" onClick={() => onDeleteChoice(choice.id, question.id)} icon ="delete" placeholder="옵션" width="80%"/>
+                                                )
+                                            })}
+                                    {plusOption === question.id ?
+                                        <Option>
+                                            <OptionPlus onClick={() => setPlusOption()} >옵션추가</OptionPlus>
+                                            <LineInput {...myChoice} icon ="correct" placeholder="추가할 옵션을 적어주세요" width="88%"  onClick={() => onCreateChoice(question.id)}  />
+                                        </Option>
+                                        : <>
+                                            <OptionPlus onClick={() => setPlusOption(question.id)} >옵션추가</OptionPlus>
+                                        </> 
+                                    }                                          
+                                    </>
                                 </Inner>
                                 <Button > <FontAwesomeIcon  onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /> </Button>
-                               
                             </Box>
                         }
                     </>

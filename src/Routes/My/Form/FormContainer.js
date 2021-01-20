@@ -16,6 +16,7 @@ export default () => {
     const myTitle = useInput("");
     const myChoice = useInput("");
     const [plusOption,setPlusOption] = useState();
+    const [check,setCheck] = useState(true);
 
     const [deleteQuestionMutation] = useMutation(DELETE_QUESTION);
     const [deleteChoiceMutation] = useMutation(DELETE_CHOICE);
@@ -45,7 +46,7 @@ export default () => {
         
       };
 
-      const onDeleteChoice = async (e) => {
+      const onDeleteChoice = async (e, i) => {
         try {
         const {
             data: { deleteChoice: index },
@@ -58,6 +59,9 @@ export default () => {
             toast.error("전송 오류");
         } else {
             toast("삭제 완료");
+            let q = questions.filter(element => element.id === i)[0].choices.filter(element => element.id !== e);   
+            questions.filter(element => element.id === i)[0].choices = q;
+            setCheck(!check);
         }
         } catch (err) {
         console.log(err.message);
@@ -107,7 +111,7 @@ export default () => {
         if(q.length ==0){
             myIndex = 0;
         }else{
-            myIndex = q[q.length-1].index
+            myIndex = q[q.length-1].index +1
         }
         if(myChoice !==""){
             try {
@@ -125,6 +129,14 @@ export default () => {
                 } else {
                     toast("옵션이 추가되었습니다.");  
                     myChoice.setValue("");
+                    questions.filter(element => element.id === e)[0].choices= questions.filter(element => element.id === e)[0].choices.concat({
+                        id: 1,
+                        index: myIndex,
+                        subject: myChoice.value,
+                        questionId: e,
+                    })
+                    setPlusOption();
+                   
                 }
                 } catch (err) {
                 console.log(err.message);
@@ -156,6 +168,8 @@ export default () => {
             setPlusOption={setPlusOption}
             myChoice = {myChoice}
             onCreateChoice={onCreateChoice}
+            setCheck = {setCheck}
+            check = {check}
             />
        );
 };
