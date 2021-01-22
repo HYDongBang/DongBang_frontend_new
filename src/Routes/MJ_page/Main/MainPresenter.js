@@ -22,6 +22,7 @@ import Loading from "../../../Components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import Popup from "reactjs-popup";
+import UTalksContainer from "../ClubTalk/User/UTalksContainer";
 
 
 
@@ -280,7 +281,7 @@ export default ({
               {close =>(
                 <>
                 <X onClick={close}>&times; </X>
-                <div>hi</div>
+                <UTalksContainer/>
                 </>
               )}
         </Popup>

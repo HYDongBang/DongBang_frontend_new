@@ -26,6 +26,7 @@ const Filter = styled.div`
 `;
 
 const Room = styled.div`
+    border-bottom: 2px solid ${props=>props.theme.lightGray};
     border-top: 2px solid ${props=>props.theme.lightGray};
     padding: 10px;
     display: flex;
@@ -115,7 +116,7 @@ const OtherBubble = styled.div`
   float:left;
   box-shadow: #efefef 4px 4px 3px;
   background-color:#F7F7F7;
-  border-radius: 0px 15px 15px 15px;
+  border-radius: 15px 15px 0px 15px;
   padding: 15px;
 `;
 
@@ -156,9 +157,7 @@ const SendButton = styled.button`
 
 
 
-export default ({club,
-     setAction,
-     action,
+export default ({
      rooms,
      room,
      roomsLoading,
@@ -182,9 +181,9 @@ export default ({club,
                                 return(<Room onClick={() => setRid(myroom.id)}>  
                                     <RoomTime>{myroom.updatedAt.substring(5,10)} | {myroom.updatedAt.substring(11,16)}</RoomTime>
                                     <RoomDesc>
-                                        <UserLogo name = {myroom.participants[1].name[0]}/> 
+                                        <UserLogo name = {myroom.participants[0].clubMaster.name[0]}/> 
                                         <Preview>
-                                            <Name>{myroom.participants[1].name}</Name>
+                                            <Name>{myroom.participants[0].clubMaster.name}</Name>
                                             <TalkPreview>{myroom.recentMessage.text}</TalkPreview>
                                         </Preview>
                                     </RoomDesc>
@@ -200,9 +199,8 @@ export default ({club,
                     <Talks>
                     {room.readRoom !== undefined &&
                             <>{room.readRoom.messages.map((message)=>{
-                                console.log(message);
                             return( <>
-                            {message.from.email === userEmail ?
+                            {message.from.clubMaster === null ?
                                 (<Talk>
                                     <MyBubble>
                                         {message.text}

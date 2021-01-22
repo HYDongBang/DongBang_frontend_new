@@ -49,3 +49,52 @@ export const CREATE_MESSAGE = gql `
           }
       }
     `
+
+
+export const READ_ROOM = gql `
+    query readRoom($id: Int!){
+        readRoom(id: $id){
+            id
+            messages{
+                to{
+                  clubMaster{
+                    name
+                  }
+                }
+                from{
+                  clubMaster{
+                    name
+                  }
+                }
+                text
+                createdAt
+              }
+        }
+    }
+`
+
+
+export const READ_ROOMS = gql `
+    query readRooms{
+      readRooms{
+        id
+        updatedAt
+        participants{
+          email
+          clubMaster{
+            name
+          }
+        }
+        recentMessage{
+          to{
+            email
+          }
+          from{
+            email
+          }
+          text
+          createdAt
+        }
+      }
+    }
+`
