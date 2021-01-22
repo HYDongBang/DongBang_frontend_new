@@ -8,8 +8,8 @@ import ClubsContainer from "../ClubInfo/ClubsContainer";
 
 
 const Club = styled.div`
-  height: 250px;
-  width: 250px;
+  height: 220px;
+  width: 220px;
   text-align: center;
   border-radius: 20px;
   cursor: pointer;
@@ -45,7 +45,7 @@ const ClubImg = styled.img`
 const Position = styled.div`
   position:absolute;
   margin-top:-45px;
-  margin-left: 80px;
+  margin-left: 65px;
 `;
 
 

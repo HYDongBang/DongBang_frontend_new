@@ -19,6 +19,12 @@ import { useQuery } from "react-apollo-hooks";
 import {READ_ALL_CLUBS} from "./MainQueries"
 import Loading from "../../../Components/Loading";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
+import Popup from "reactjs-popup";
+
+
+
 const Wrapper = styled.div`
     width:100%;
     height:100%;
@@ -32,7 +38,7 @@ const MainImg = styled.img`
 const MainContents = styled.div`
     width: 100%;
     height:100%;
-    padding: 0 15%;
+    padding: 0 20%;
 `;
 
 const Categories = styled.div`
@@ -46,8 +52,8 @@ const Categories = styled.div`
 `;
 
 const Category = styled.div`
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
 `;
 
 const Img = styled.img`
@@ -63,7 +69,7 @@ const Img = styled.img`
 const AllImg = styled.div`
     width: 100%;
     height: 100%;
-    font-size:2em;
+    font-size:1.7em;
     text-align:center;
     padding-top: 32%;
     border-radius:25%;
@@ -75,7 +81,8 @@ const AllImg = styled.div`
 const Text = styled.div`
     width: 110px;
     text-align:center;
-    margin-top:20px;
+    margin-top:15px;
+    margin-left:-10px;
     color: ${props => props.checked &&  "#FF7300" };
 `;
 
@@ -101,6 +108,40 @@ const SearchBar = styled.input`
     border-radius: 5px;
     box-shadow: #757575 1px 1px 6px 2px;
 `
+
+const TalkPlus = styled.div`
+    width: 65px;
+    height: 65px;
+    background-color: ${props => props.theme.orange};
+    position:fixed;
+    bottom: 30px;
+    right:30px;
+    border-radius:100%;
+    color:white;
+    text-align:center;
+
+`;
+
+const X = styled.a`
+  cursor:pointer;
+  position:absolute;
+  right:-30px;
+  top: -8px;
+  font-size:2.5em;
+  color: #E5EAEE;
+  :hover{
+    color: #E5EAEE;
+  }
+`;
+
+
+const contentStyle ={
+  width:"70%",
+  height: "80%",
+  borderRadius: "15px",
+  padding: "0px",
+};
+
 
 export default ({
     myType,
@@ -231,6 +272,18 @@ export default ({
                 }
             </ClubContainer>
         </MainContents>
+        <Popup
+              trigger={<TalkPlus><FontAwesomeIcon  style ={{fontSize:"2em", marginTop: "13px"}}icon={faComments}/></TalkPlus>}
+              modal
+              contentStyle ={contentStyle} 
+            >
+              {close =>(
+                <>
+                <X onClick={close}>&times; </X>
+                <div>hi</div>
+                </>
+              )}
+        </Popup>
     </Wrapper>
   );
 }
