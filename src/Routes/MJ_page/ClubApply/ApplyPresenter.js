@@ -5,8 +5,6 @@ import LineInput from "../../../Components/LineInput"
 import Textarea from "../../../Components/Textarea"
 import OrangeButton from "../../../Components/OrangeButton"
 
-import ScubaCrop from "../../../Styles/Images/Scuba_Crop.jpg"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
@@ -94,7 +92,8 @@ const Question = styled.div`
 
 
 const Desc = styled.div`
-
+    font-size: 0.8em;
+    color: ${props => props.theme.lightGray};
 `;
 
 const Tarea = styled.div`
@@ -118,7 +117,7 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
             {!loading && data.readClub &&(
                 <>
                 <Left>
-                <LeftImg src = {ScubaCrop}/>
+                <LeftImg src = {club.clubImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>

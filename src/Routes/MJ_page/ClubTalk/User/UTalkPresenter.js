@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-import ScubaCrop from "../../../../Styles/Images/Scuba_Crop.jpg"
 import ClubLogo from "../../../../Components/ClubLogo";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -161,7 +160,7 @@ export default ({club,
             {!loading &&
             <>
              <Left>
-                <LeftImg src = {club.logoImage}/>
+                <LeftImg src = {club.clubImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>
