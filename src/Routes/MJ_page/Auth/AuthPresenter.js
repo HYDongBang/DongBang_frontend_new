@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import LineInput from "../../../Components/LineInput";
@@ -41,6 +41,7 @@ const Content = styled.div`
 const FPassword = styled.div`
     color: ${props => props.theme.orange};
     margin-top:30px;
+    cursor:pointer;
 `;
 
 const Text = styled.div`
@@ -92,12 +93,20 @@ export default ({
     password, 
     onSubmit,
     pwClick,
-    setPwClick
+    setPwClick,
+    onSecret,
+    checkSecret,
+    secret,
+    isChecked,
+    auth,
+    password2,
+    onChangePassword
 })=>{
+    const [pw2Click, setPw2Click] = useState(false);
 
     return (
         <Scrollbars style={{ width: "100%", height: "100%"}}>
-            {status === "login" ? 
+            {status === "login" && 
                 <Container>
                     <Header>
                         <Title>Hello</Title>
@@ -114,7 +123,7 @@ export default ({
                                 <LineInput {...password}  onClick={() => setPwClick(!pwClick)}  icon="pw" type ={pwClick? "text": "password"} placeholder = "비밀번호 "/>
 
                             </Content>
-                            <FPassword>Forgot Password?</FPassword>
+                            <FPassword onClick={() => setStatus("FindPassword")}>Forgot Password?</FPassword>
                         </Contents>
                         <Bottom>
                             <LoginDesc>
@@ -129,9 +138,46 @@ export default ({
                         </Bottom>
                     </form>
                 </Container>
-
-                :
+            }
+            {(status === "signUp" || status === "signUp2") &&     
                 <SignInContainer status = {status} setStatus={setStatus}/>
+            }
+            {(status === "FindPassword") &&     
+                 <Container>
+                 <Header>
+                     <Title>Hello</Title>
+                     <Desc>비밀번호를 변경할 수 있습니다.</Desc>
+                 </Header>
+                 <form onSubmit={onChangePassword}>
+                    <Contents>
+                        <Content>
+                            <Text> Email Address</Text>   
+                            <LineInput {...email} icon="certification" type = "email" placeholder = "이메일을 작성해주세요." onClick ={onSecret}/>
+                        </Content>
+                        {secret !== "" &&
+                            <Content>
+                                <Text>Authentication Code</Text>   
+                                <LineInput {...auth}  icon="check" placeholder = "코드를 작성해주세요." onClick ={checkSecret}/>
+                            </Content>
+                        }
+                        {isChecked && 
+                        <>
+                            <Content>
+                                <Text>Password</Text>   
+                                <LineInput {...password} icon="pw" onClick={() => setPwClick(!pwClick)} type ={pwClick? "text": "password"} placeholder = "비밀번호 "/>
+                            </Content>
+                            <Content>
+                                <Text>Password</Text>   
+                                <LineInput {...password2} icon="pw"  onClick={() => setPw2Click(!pw2Click)} type ={pw2Click? "text": "password"} placeholder = "비밀번호를 다시 한번 입력해주세요"/>
+                            </Content>
+                        </>
+                        }
+                    </Contents>
+                    <div  style ={{textAlign:"center", position:"absolute", bottom:"-50px", width:"84%"}}>
+                        <Button>변경</Button>
+                    </div>
+                </form>
+             </Container>
             }
         </Scrollbars>
     )

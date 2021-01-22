@@ -11,3 +11,17 @@ export const LOCAL_LOG_IN = gql`
     logUserIn(token: $token) @client
   }
 `;
+
+export const EMAIL_AUTHENTICATE = gql`
+  mutation emailAuthenticateForPassword($email: String!) {
+    emailAuthenticateForPassword(email: $email)
+  }
+`;
+
+export const UPDATE_PASSWORD = gql`
+  mutation updateUserPassword($email: String!, $password: String!) {
+    updateUserPassword(email: $email, password: $password){
+      id
+    }
+  }
+`;
