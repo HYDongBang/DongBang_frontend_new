@@ -26,7 +26,6 @@ const Filter = styled.div`
 `;
 
 const Room = styled.div`
-    border-bottom: 2px solid ${props=>props.theme.lightGray};
     border-top: 2px solid ${props=>props.theme.lightGray};
     padding: 10px;
     display: flex;
