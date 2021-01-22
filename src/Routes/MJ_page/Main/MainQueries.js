@@ -15,4 +15,18 @@ export const READ_ALL_CLUBS = gql `
         }
     }
 `
+export const READ_LOGGED_IN_USER = gql `
+    query {
+        readLoggedInUser{
+            clubMaster{
+                id
+            }
+        }
+    }
+`
 
+export const LOG_IN = gql`
+    {
+        isLoggedIn @client
+    }
+`;

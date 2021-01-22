@@ -14,9 +14,6 @@ import basketball from "../../../Styles/Images/basketball.svg"
 import basketballOrange from "../../../Styles/Images/basketballOrange.svg"
 
 import Clubs from "./Clubs"
-
-import { useQuery } from "react-apollo-hooks";
-import {READ_ALL_CLUBS} from "./MainQueries"
 import Loading from "../../../Components/Loading";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -151,33 +148,18 @@ export default ({
     setWord,
     filterDisplay,
     setFilterDisplay,
+    loading,
+    data,
+    uLoading,
+    uData,
+    handleChange,
+    isLoggedIn,
+    check,
+    setCheck   
 }) => {
-
-  const { loading, data } = useQuery(READ_ALL_CLUBS);
-
-    const handleChange = (e) => {
-        setWord(e);
-    
-        let oldList = data.readAllClubs.map((club) => {
-          return {
-            id: club.id,
-            name: club.name,
-            type: club.type,
-            description: club.description,
-            logoImage: club.logoImage,
-            clubImage: club.clubImage,
-          };
-        });
-    
-        if (word !== "") {
-          let newList = [];
-          newList = oldList.filter((club) => club.name.includes(word));
-          setFilterDisplay(newList);
-        } else {
-          setFilterDisplay(data.readAllClubs);
-        }
-      };
- 
+    if(!uLoading && uData){
+        console.log(uData)
+    }
     return (
     <Wrapper> 
     <SearchBar
@@ -186,8 +168,6 @@ export default ({
           onChange={(e) => handleChange(e.target.value)}
         />
         <MainImg src={main}/>
-
-
         <MainContents>
             <Categories>
                 {myType === "" ? (
@@ -273,18 +253,20 @@ export default ({
                 }
             </ClubContainer>
         </MainContents>
-        <Popup
-              trigger={<TalkPlus><FontAwesomeIcon  style ={{fontSize:"2em", marginTop: "13px"}}icon={faComments}/></TalkPlus>}
-              modal
-              contentStyle ={contentStyle} 
-            >
-              {close =>(
-                <>
-                <X onClick={close}>&times; </X>
-                <UTalksContainer/>
-                </>
-              )}
-        </Popup>
+        {isLoggedIn && !uLoading && uData.readLoggedInUser && uData.readLoggedInUser.clubMaster ===null &&
+            (<Popup
+                trigger={<TalkPlus><FontAwesomeIcon  style ={{fontSize:"2em", marginTop: "13px"}}icon={faComments}/></TalkPlus>}
+                modal
+                contentStyle ={contentStyle} 
+                >
+                {close =>(
+                    <>
+                    <X onClick={close}>&times; </X>
+                    <UTalksContainer/>
+                    </>
+                )}
+            </Popup>)
+        }
     </Wrapper>
   );
 }
