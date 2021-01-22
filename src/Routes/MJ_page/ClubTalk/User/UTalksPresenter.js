@@ -116,7 +116,7 @@ const OtherBubble = styled.div`
   float:left;
   box-shadow: #efefef 4px 4px 3px;
   background-color:#F7F7F7;
-  border-radius: 15px 15px 0px 15px;
+  border-radius: 0px 15px 15px 15px;
   padding: 15px;
 `;
 
