@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Popup from "reactjs-popup";
 import ProfileButton from "../../../Components/ProfileButton";
 // import Loading from "../../../Components/";
 
@@ -79,28 +80,75 @@ const Down = styled.div`
 `;
 
 const Left = styled.div`
-
+    margin-top: -5px;
 `;
 
 const Time = styled.div`
     font-size: 0.85em;
-    padding: 10px 5px;
+    padding: 0px 15px 10px 0px;
 `;
 
 const Right = styled.div`
-    border: 2px solid ${props => props.theme.darkGray};
-    border-radius: 5px;
-    padding-right: 10px;
 `;
 
 const Line = styled.div`
-
+    display: flex;
 `;
 
 const Box = styled.div`
-    width: 40px;
-    height: 20px;
+    width: 53px;
+    height: 23.7px;
+    border: 1px solid ${props => props.theme.darkGray};
 `;
+
+const ColoredBox = styled.div`
+    width: 53px;
+    height: 23.7px;
+    background: ${props => props.theme.indigo};
+    color: ${props => props.theme.white};
+    text-align: center;
+    font-size: 0.85em;
+    line-height: 1.5;
+`;
+
+const Container = styled.div`
+`;
+
+const Head = styled.div`
+    display: flex;
+    padding: 5px 0px;
+`;
+
+const Text = styled.div`
+    font-size: 0.85em;
+    padding: 5px 10px;
+    text-align: center;
+`;
+
+const Body = styled.div`
+    padding: 15px 0px 15px 40px;
+    display: flex;
+`;
+
+const Tag = styled.div`
+`;
+
+const SelectTime = styled.select`
+    cursor: pointer;
+    margin: 0px 10px;
+    padding: 5px;
+`;
+
+const Option = styled.option`
+    padding: 5px;
+`;
+
+const Foot = styled.div`
+    text-align: right;
+    padding-right: 5px;
+    padding-top: 10px;
+`;
+
 
 const Submit = styled.div`
     padding-top: 80px;
@@ -110,45 +158,116 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
+const X = styled.div`
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    top: -8px;
+    font-size: 2.5em;
+    color: #e5eaee;
+`;
 
-export default ({ applicants, time }) => (
+export default ({ applicants, timeTable, day, time, onSubmit, onSelect, loading }) => {
+    
+return (
     <>
         <Title>
             <Main>면접 타임 테이블</Main>
             <Sub>면접 일정을 작성할 수 있습니다.</Sub>
         </Title>
+        {loading && <div>loading</div>}
+        {!loading && (
         <Contents>
             <Applicants>
-                <Menu>지원자</Menu>
-                {applicants.map(({ name, studentNumber }) => (
-                    <Applicant>
-                        <Name>{name}</Name>
-                        <Number>{studentNumber}</Number>
-                    </Applicant>
+                <Menu>지원자</Menu> 
+                {applicants.map(({id, startTime, endTime, interviewDay, user: {name, studentNumber} }) => (
+                    <Popup
+                        key={id}
+                        trigger={
+                            <Applicant key={id}>
+                                <Name>{name}</Name>
+                                <Number>{studentNumber}</Number>
+                            </Applicant>
+                        } modal
+                        contentStyle={{ width: "350px", height: "180px", border: "none", borderRadius: "10px"}}>
+                        {close => (
+                            <form id={id} onSubmit={onSubmit}>
+                            <X onClick={close}>&times;</X>
+                            <Container>
+                                <Head>
+                                    <Text>{name}</Text>
+                                    <Text>{studentNumber}</Text>
+                                </Head>
+                                <Body>
+                                    <Tag>
+                                        <Text>요일</Text>
+                                        <SelectTime id={id} name="day" onChange={onSelect}>
+                                            {day.map(element => {
+                                                if(interviewDay === element) return <Option value={element} selected>{element}</Option>
+                                                else return <Option value={element}>{element}</Option>
+                                            })}
+                                        </SelectTime>
+                                    </Tag>
+                                    <Tag>
+                                        <Text>시작 시간</Text>
+                                        <SelectTime id={id} name="startTime" onChange={onSelect}>
+                                            {time.map(element => {
+                                                if(startTime === element) return <Option value={element} selected>{element}</Option>
+                                                else return <Option value={element}>{element}</Option>
+                                            })}
+                                        </SelectTime>
+                                    </Tag>
+                                    <Tag>
+                                        <Text>종료 시간</Text>
+                                        <SelectTime id={id} name="endTime" onChange={onSelect}>
+                                            {time.map(element => {
+                                                if(time.indexOf(startTime) >= time.indexOf(element)) return;
+                                                if(endTime === element) return <Option value={element} selected>{element}</Option>
+                                                else return <Option value={element}>{element}</Option>
+                                            })}
+                                        </SelectTime>
+                                    </Tag>
+                                </Body>
+                                <Foot>
+                                <ProfileButton content="저장" color="orange"></ProfileButton>
+                                </Foot>
+                            </Container>
+                            </form>
+                        )}
+                    </Popup>
                 ))}
             </Applicants>
             <TimeTable>
                 <Up>
-                    <Day>월</Day><Day>화</Day><Day>수</Day><Day>목</Day><Day>금</Day><Day>토</Day><Day>일</Day>
+                    {day.map(element => (
+                        <Day key={element}>{element}</Day>
+                    ))}
                 </Up>
                 <Down>
                     <Left>
-                        {time.map(time => (<Time>{time}</Time>))}
+                        {time.map(time => <Time key={time}>{time}</Time>)}
                     </Left>
                     <Right>
-                        <Line>
-                            <Box></Box>
-                        </Line>
-                        <Line>
-                            <Box></Box>
-                        </Line>
+                        {time.map((horizontal, timeIdx) => 
+                            <Line key={timeIdx}>
+                                {day.map((vertical, dayIdx) => {
+                                    if (timeTable.length !== 0) {
+                                        if( timeTable[timeIdx][dayIdx] !== undefined && timeTable[timeIdx][dayIdx].name !== undefined) {
+                                            return <ColoredBox>{timeTable[timeIdx][dayIdx].name}</ColoredBox>
+                                        }
+                                    }
+                                    
+                                    return <Box key={vertical}></Box>
+                                })}
+                            </Line>
+                        )}
                     </Right>
                 </Down>
             </TimeTable>
         </Contents>
-        <Submit>
+        )}
+        {/*<Submit>
             <ProfileButton content="초기화" color="darkgray" style={{ marginRight: "15px" }}></ProfileButton>
-            <ProfileButton content="저장" color="orange"></ProfileButton>
-        </Submit>
+        </Submit>*/}
     </>
-);
+);}
