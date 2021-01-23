@@ -10,6 +10,8 @@ import {LOG_IN} from "./ClubsQuries"
 
 import { toast } from "react-toastify";
 
+import Loading from "../../../Components/Loading";
+
 const Wrapper = styled.div`
   background: white;
   height: 100%;
@@ -26,30 +28,37 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
     data: { isLoggedIn }
   } = useQuery(LOG_IN);
 
-  if ((action === "Apply" ||  action === "Talk") && !isLoggedIn){
-    toast("로그인이 필요합니다");
-    setAction("Info")
+  if(!loading && !cLoading && data){
+    if ((action === "Apply" ||  action === "Talk") && !isLoggedIn){
+      toast("로그인이 필요합니다");
+      setAction("Info")
+    }
+  
+    if (action === "Talk" && isLoggedIn && data.readLoggedInUser.clubMaster !== null &&data.readLoggedInUser.id !== club.master.id){
+      console.log(data.readLoggedInUser.id)
+      console.log(club.master.id);
+      toast("클럽장은 본인의 클럽 Talk에만 참여할 수 있습니다.");
+      setAction("Info")
+    }
   }
-
-  if (action === "Talk" && isLoggedIn && data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.clubMaster.id !== club.master.id){
-    toast("클럽장은 본인의 클럽 Talk에만 참여할 수 있습니다.");
-    setAction("Info")
-  }
+  
 
     return (
         <Wrapper>
-          {!loading && !cLoading && data &&
+          {!loading && !cLoading && data ?
           <>
             {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "Talk" && isLoggedIn &&
               <>
-                {data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.clubMaster.id === club.master.id && (<MTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email}/>)}
+                {data.readLoggedInUser.clubMaster !== null && data.readLoggedInUser.id === club.master.id && (<MTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email}/>)}
                 {data.readLoggedInUser.clubMaster === null && (<UTalkContainer club = {club} action={action} setAction ={setAction} userEmail = {data.readLoggedInUser.email} cData = {cData}/>)}
               </>
             }
             {action === "Apply" && isLoggedIn && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
           </>
+          :
+          <Loading marginT = "25%"/>
           }
         </Wrapper>
     )

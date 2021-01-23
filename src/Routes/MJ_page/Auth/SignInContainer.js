@@ -29,7 +29,9 @@ export default ({status, setStatus}) => {
           email: email.value
       }});
       console.log(emailAuthenticate);
-      if(emailAuthenticate){
+      if(emailAuthenticate==="overlap"){
+        toast("이미 존재하는 이메일입니다.")
+      }else if(emailAuthenticate){
         toast("코드를 보냈습니다")
         setSecret(emailAuthenticate);
       }
@@ -104,6 +106,8 @@ const checkSecret = async (e) => {
     majUniv={majUniv}
     onSecret={onSecret}
     checkSecret = {checkSecret}
+    isChecked={isChecked}
+    secret={secret}
     />
   );
 };

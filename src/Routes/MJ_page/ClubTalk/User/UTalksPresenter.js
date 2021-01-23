@@ -156,9 +156,7 @@ const SendButton = styled.button`
 
 
 
-export default ({club,
-     setAction,
-     action,
+export default ({
      rooms,
      room,
      roomsLoading,
@@ -182,9 +180,9 @@ export default ({club,
                                 return(<Room onClick={() => setRid(myroom.id)}>  
                                     <RoomTime>{myroom.updatedAt.substring(5,10)} | {myroom.updatedAt.substring(11,16)}</RoomTime>
                                     <RoomDesc>
-                                        <UserLogo name = {myroom.participants[1].name[0]}/> 
+                                        <UserLogo name = {myroom.participants[0].clubMaster.name[0]}/> 
                                         <Preview>
-                                            <Name>{myroom.participants[1].name}</Name>
+                                            <Name>{myroom.participants[0].clubMaster.name}</Name>
                                             <TalkPreview>{myroom.recentMessage.text}</TalkPreview>
                                         </Preview>
                                     </RoomDesc>
@@ -200,9 +198,8 @@ export default ({club,
                     <Talks>
                     {room.readRoom !== undefined &&
                             <>{room.readRoom.messages.map((message)=>{
-                                console.log(message);
                             return( <>
-                            {message.from.email === userEmail ?
+                            {message.from.clubMaster === null ?
                                 (<Talk>
                                     <MyBubble>
                                         {message.text}

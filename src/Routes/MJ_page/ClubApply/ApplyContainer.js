@@ -61,7 +61,11 @@ export default ({action, setAction, club }) => {
           }
         } catch (err) {
           console.log(err.message);
-          toast.error("신청서를 보낼 수 없습니다. 다시 시도해주세요.");
+          if(err.message === "GraphQL error:  지원서가 이미 존재합니다. "){
+            toast("신청서를 이미 보냈습니다.")
+          }else{
+            toast.error("신청서를 보낼 수 없습니다. 다시 시도해주세요.");
+          }
         }
       } else {
         console.log("모든 입력창을 채워주세요.");

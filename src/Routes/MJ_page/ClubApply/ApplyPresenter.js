@@ -5,8 +5,6 @@ import LineInput from "../../../Components/LineInput"
 import Textarea from "../../../Components/Textarea"
 import OrangeButton from "../../../Components/OrangeButton"
 
-import ScubaCrop from "../../../Styles/Images/Scuba_Crop.jpg"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
@@ -50,6 +48,10 @@ const LeftButtons = styled.div`
   display:flex;
   width: fit-content;
   margin:40px auto 0px;
+  position:absolute;
+  bottom: 50px;
+  width: 27%;
+  padding: 0px 2.3%;
 `;
 
 const LeftButton = styled.div`
@@ -89,12 +91,19 @@ const QA = styled.div`
 
 
 const Question = styled.div`
-    margin-bottom:10px;
+    margin-bottom:15px;
+    font-size: 1.1em;
+`;
+
+const Choices = styled.div`
+    width: 100%;
+    display: flex;
 `;
 
 
 const Desc = styled.div`
-
+    font-size: 0.8em;
+    color: ${props => props.theme.lightGray};
 `;
 
 const Tarea = styled.div`
@@ -118,7 +127,7 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
             {!loading && data.readClub &&(
                 <>
                 <Left>
-                <LeftImg src = {ScubaCrop}/>
+                <LeftImg src = {club.clubImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>
@@ -165,18 +174,20 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
                             {question.type ==="multiple" && 
                                 <QA>
                                 <Question>{question.title}</Question>
-                                    {question.choices.map((choice)=>(
-                                        <label style={{ marginBottom: "5px" }}>
-                                        <input
-                                        style={{ marginBottom: "5px" }}
-                                        type="radio"
-                                        name="options"
-                                        value={choice.subject}
-                                        onChange={(e) => handleInput(e.target.value, idx)}
-                                        ></input>
-                                        {choice.subject}
-                                    </label>
-                                    ))}
+                                    <Choices>
+                                        {question.choices.map((choice)=>(
+                                            <label style={{ marginBottom: "5px", marginRight:"10px" }}>
+                                                <input
+                                                style={{ marginBottom: "5px", marginRight:"10px" }}
+                                                type="radio"
+                                                value={choice.subject}
+                                                onChange={(e) => handleInput(e.target.value, idx)}
+                                                ></input>
+                                                {choice.subject}
+                                            </label>
+                                        ))}
+                                    </Choices>    
+
                                 </QA>
                             }
                             </>

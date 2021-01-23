@@ -8,16 +8,15 @@ import ClubsContainer from "../ClubInfo/ClubsContainer";
 
 
 const Club = styled.div`
-  height: 250px;
-  width: 250px;
+  height: 220px;
+  width: 220px;
   text-align: center;
   border-radius: 20px;
-  margin: 20px;
   cursor: pointer;
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  margin: 20px 5%;
+  margin: 20px;
 `;
 
 const Context = styled.div`
@@ -46,7 +45,7 @@ const ClubImg = styled.img`
 const Position = styled.div`
   position:absolute;
   margin-top:-45px;
-  margin-left: 80px;
+  margin-left: 65px;
 `;
 
 
@@ -57,6 +56,9 @@ const X = styled.a`
   top: -8px;
   font-size:2.5em;
   color: #E5EAEE;
+  :hover{
+    color: #E5EAEE;
+  }
 `;
 
 
@@ -73,9 +75,6 @@ export default  ({ clubs, myType }) => {
       clubs = [];
     }
     return clubs.map((club) => {
-
-      console.log(club.clubImage);
-
       return (
         <>
           {myType === "" && (

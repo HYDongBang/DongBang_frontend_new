@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 import main from "../../../Styles/Images/main.jpg"
 import writing from "../../../Styles/Images/writing.svg"
 import writingOrange from "../../../Styles/Images/writingOrange.svg"
@@ -15,9 +14,14 @@ import basketball from "../../../Styles/Images/basketball.svg"
 import basketballOrange from "../../../Styles/Images/basketballOrange.svg"
 
 import Clubs from "./Clubs"
+import Loading from "../../../Components/Loading";
 
-import { useQuery } from "react-apollo-hooks";
-import {READ_ALL_CLUBS} from "./MainQueries"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
+import Popup from "reactjs-popup";
+import UTalksContainer from "../ClubTalk/User/UTalksContainer";
+
+
 
 const Wrapper = styled.div`
     width:100%;
@@ -26,13 +30,13 @@ const Wrapper = styled.div`
 
 const MainImg = styled.img`
     width: 100%;
-    height: 600px;
+    height: 500px;
 `;
 
 const MainContents = styled.div`
     width: 100%;
     height:100%;
-    padding: 0 15%;
+    padding: 0 20%;
 `;
 
 const Categories = styled.div`
@@ -46,8 +50,8 @@ const Categories = styled.div`
 `;
 
 const Category = styled.div`
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
 `;
 
 const Img = styled.img`
@@ -63,7 +67,7 @@ const Img = styled.img`
 const AllImg = styled.div`
     width: 100%;
     height: 100%;
-    font-size:2em;
+    font-size:1.7em;
     text-align:center;
     padding-top: 32%;
     border-radius:25%;
@@ -75,7 +79,8 @@ const AllImg = styled.div`
 const Text = styled.div`
     width: 110px;
     text-align:center;
-    margin-top:20px;
+    margin-top:15px;
+    margin-left:-10px;
     color: ${props => props.checked &&  "#FF7300" };
 `;
 
@@ -85,13 +90,14 @@ const ClubContainer = styled.div`
     width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
+    justify-content:space-between;
 `;
 
 const SearchBar = styled.input`
     width: 40%;
     height: 50px;
     position:absolute;
-    margin-top: 15%;
+    margin-top: 150px;
     margin-left: 30%;
     color: ${props => props.checked};
     font-size: 1em;
@@ -101,6 +107,40 @@ const SearchBar = styled.input`
     box-shadow: #757575 1px 1px 6px 2px;
 `
 
+const TalkPlus = styled.div`
+    width: 65px;
+    height: 65px;
+    background-color: ${props => props.theme.orange};
+    position:fixed;
+    bottom: 30px;
+    right:30px;
+    border-radius:100%;
+    color:white;
+    text-align:center;
+
+`;
+
+const X = styled.a`
+  cursor:pointer;
+  position:absolute;
+  right:-30px;
+  top: -8px;
+  font-size:2.5em;
+  color: #E5EAEE;
+  :hover{
+    color: #E5EAEE;
+  }
+`;
+
+
+const contentStyle ={
+  width:"70%",
+  height: "80%",
+  borderRadius: "15px",
+  padding: "0px",
+};
+
+
 export default ({
     myType,
     setType,
@@ -108,33 +148,18 @@ export default ({
     setWord,
     filterDisplay,
     setFilterDisplay,
+    loading,
+    data,
+    uLoading,
+    uData,
+    handleChange,
+    isLoggedIn,
+    check,
+    setCheck   
 }) => {
-
-  const { loading, data } = useQuery(READ_ALL_CLUBS);
-
-    const handleChange = (e) => {
-        setWord(e);
-    
-        let oldList = data.readAllClubs.map((club) => {
-          return {
-            id: club.id,
-            name: club.name,
-            type: club.type,
-            description: club.description,
-            logoImage: club.logoImage,
-            clubImage: club.clubImage,
-          };
-        });
-    
-        if (word !== "") {
-          let newList = [];
-          newList = oldList.filter((club) => club.name.includes(word));
-          setFilterDisplay(newList);
-        } else {
-          setFilterDisplay(data.readAllClubs);
-        }
-      };
- 
+    if(!uLoading && uData){
+        console.log(uData)
+    }
     return (
     <Wrapper> 
     <SearchBar
@@ -143,8 +168,6 @@ export default ({
           onChange={(e) => handleChange(e.target.value)}
         />
         <MainImg src={main}/>
-
-
         <MainContents>
             <Categories>
                 {myType === "" ? (
@@ -220,14 +243,30 @@ export default ({
                 )}   
             </Categories>
             <ClubContainer>
-                {!loading && data && 
+                {!loading && data ? 
                     <Clubs
                     clubs={word.length < 1 ? data.readAllClubs : filterDisplay}
                     myType={myType}
                     />
+                    :
+                    <Loading marginT="10%"/>
                 }
             </ClubContainer>
         </MainContents>
+        {isLoggedIn && !uLoading && uData.readLoggedInUser && uData.readLoggedInUser.clubMaster ===null &&
+            (<Popup
+                trigger={<TalkPlus><FontAwesomeIcon  style ={{fontSize:"2em", marginTop: "13px"}}icon={faComments}/></TalkPlus>}
+                modal
+                contentStyle ={contentStyle} 
+                >
+                {close =>(
+                    <>
+                    <X onClick={close}>&times; </X>
+                    <UTalksContainer/>
+                    </>
+                )}
+            </Popup>)
+        }
     </Wrapper>
   );
 }

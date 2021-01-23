@@ -24,6 +24,7 @@ export const READ_ROOMS = gql `
         updatedAt
         participants{
           email
+          name
         }
         recentMessage{
           to{

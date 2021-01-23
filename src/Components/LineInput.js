@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { faEnvelope, faEyeSlash, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faEyeSlash, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Container = styled.div`
@@ -47,14 +47,15 @@ required: input 태그가 채워져야 하는지
 onClick: icon 클릭시
 icon: icon 종류(mail, pw, certification, delete), 필요없다면 null
 */
-const LineInput = ({ placeholder, required = true, value, onChange, onClick, icon = null, type = "text", width = "auto", disabled = false }) => (
-    <Container style={{ width: width }}>
+const LineInput = ({ placeholder, required = true, value, onChange, onClick, icon = null, type = "text", width = "auto", disabled = false, marginB }) => (
+    <Container style={{ width: width, marginBottom:marginB }}>
         <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} disabled={disabled} />
         {icon === "mail" && <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FF7300", fontSize: "1.1em", cursor: "pointer" }} />}
         {icon === "pw" && <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#FF7300", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
         {icon === "certification" && <Button onClick={onClick}>인증번호 받기</Button>}
         {icon === "check" && <Button onClick={onClick}>인증하기</Button>}
         {icon === "delete" && <FontAwesomeIcon icon={faTimes} style={{ color: "#D1D1D1", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
+        {icon === "correct" && <FontAwesomeIcon icon={faCheck} style={{ color: "#D1D1D1", fontSize: "1em", cursor: "pointer" }} onClick={onClick} />}
     </Container>
 );
 

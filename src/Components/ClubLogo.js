@@ -17,6 +17,7 @@ const CultureLogo = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
   text-align:center;
+  margin:${props => props.margin};
 `;
 
 const VolunteerLogo = styled.div`
@@ -25,6 +26,7 @@ const VolunteerLogo = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.indiePink};
   text-align:center;
+  margin:${props => props.margin};
 `;
 
 const AcademicLogo = styled.div`
@@ -33,6 +35,7 @@ const AcademicLogo = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.yellow};
   text-align:center;
+  margin:${props => props.margin};
 `;
 
 const LanguageLogo = styled.div`
@@ -41,6 +44,7 @@ const LanguageLogo = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
   text-align:center;
+  margin:${props => props.margin};
 `;
 
 const SportsLogo = styled.div`
@@ -49,15 +53,16 @@ const SportsLogo = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.indigo};
   text-align:center;
+  margin:${props => props.margin};
 `;
 
-const ClubLogo =({type}) =>(
+const ClubLogo =({type, margin}) =>(
   <>
-  {type === "culture"&& <CultureLogo><Img  src = {painting}/></CultureLogo>}
-  {type === "volunteer"&& <VolunteerLogo><Img  src = {team}/></VolunteerLogo>}
-  {type === "academic"&& <AcademicLogo> <Img src = {writing}/> </AcademicLogo>}
-  {type === "language"&& <LanguageLogo> <Img src = {speachBubbleLine}/> </LanguageLogo>}
-  {type === "sports"&& <SportsLogo> <Img src = {basketball}/> </SportsLogo>}
+  {type === "culture"&& <CultureLogo margin={margin}><Img  src = {painting}/></CultureLogo>}
+  {type === "volunteer"&& <VolunteerLogo margin={margin}><Img  src = {team}/></VolunteerLogo>}
+  {type === "academic"&& <AcademicLogo margin={margin}> <Img src = {writing}/> </AcademicLogo>}
+  {type === "language"&& <LanguageLogo margin={margin}> <Img src = {speachBubbleLine}/> </LanguageLogo>}
+  {type === "sports"&& <SportsLogo margin={margin}> <Img src = {basketball}/> </SportsLogo>}
   </>
 );
 
