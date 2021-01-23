@@ -130,12 +130,13 @@ export default () => {
                     toast("옵션이 추가되었습니다.");  
                     myChoice.setValue("");
                     questions.filter(element => element.id === e)[0].choices= questions.filter(element => element.id === e)[0].choices.concat({
-                        id: 1,
+                        id: id.id,
                         index: myIndex,
                         subject: myChoice.value,
                         questionId: e,
                     })
                     setPlusOption();
+                    console.log(questions);
                    
                 }
                 } catch (err) {
