@@ -93,12 +93,14 @@ const X = styled.div`
     color: #e5eaee;
 `;
 
-export default ({ master, administrator, member, onClickRadio, onClickLeave }) => (
+export default ({ master, administrator, member, onClickRadio, onClickLeave, loading }) => (
     <>
         <Title>
             <Main>멤버 관리</Main>
             <Sub>동아리 멤버를 관리할 수 있습니다.</Sub>
         </Title>
+        {loading && <div>loading</div>}
+        {!loading && (
         <Contents>
             <Members>
                 <Rank>회장</Rank>
@@ -126,26 +128,27 @@ export default ({ master, administrator, member, onClickRadio, onClickLeave }) =
             <Members>
                 <Rank>운영진</Rank>
                 <List>
-                    {administrator.map(list => (
-                        <Box key={list.id}>
-                            <Info>
-                                <Name>{list.name}</Name>
-                                <StudentNumber>{list.studentNumber}</StudentNumber>
-                            </Info>
-                            <Popup
-                                trigger={<Edit><FontAwesomeIcon icon={faPen} /></Edit>}
-                                modal
-                                contentStyle={{ width: "600px", height: "300px", border: "none", borderRadius: "10px"}}
-                            >
-                                {close => (
-                                    <>
-                                    <X onClick={close}>&times; </X>
-                                    <MemberBox type="administrator" list={list} onClickRadio={onClickRadio} onClickLeave={onClickLeave}></MemberBox>
-                                    </>
-                                )}
-                            </Popup>
-                        </Box>
-                    ))}
+                    {administrator.map(list => {
+                        return (
+                            <Box key={list.id}>
+                                <Info>
+                                    <Name>{list.name}</Name>
+                                    <StudentNumber>{list.studentNumber}</StudentNumber>
+                                </Info>
+                                <Popup
+                                    trigger={<Edit><FontAwesomeIcon icon={faPen} /></Edit>}
+                                    modal
+                                    contentStyle={{ width: "600px", height: "300px", border: "none", borderRadius: "10px"}}
+                                >
+                                    {close => (
+                                        <>
+                                        <X onClick={close}>&times; </X>
+                                        <MemberBox type="administrator" list={list} onClickRadio={onClickRadio} onClickLeave={onClickLeave}></MemberBox>
+                                        </>
+                                    )}
+                                </Popup>
+                            </Box>
+                    )})}
                 </List>
             </Members>
             <Members>
@@ -174,5 +177,6 @@ export default ({ master, administrator, member, onClickRadio, onClickLeave }) =
                 </List>
             </Members>
         </Contents>
+        )}
     </>
 );

@@ -92,6 +92,22 @@ const Label = styled.label`
     }
 `;
 
+const Plus = styled.div`
+    cursor: pointer;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border: 2px solid ${props => props.theme.lightGray};
+    border-radius: 5px;
+    font-size: 1.3em;
+    color: ${props => props.theme.lightGray};
+    &:hover {
+        border: 2px solid ${props => props.theme.orange};
+        color: ${props => props.theme.orange};
+        transition: 0.2s;
+    }
+`;
+
 const Addition = styled.div`
     padding-top: 60px;
 `;
@@ -179,6 +195,37 @@ const Text = styled.div`
     text-align: center;
 `;
 
+const X = styled.div`
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    top: -8px;
+    font-size: 2.5em;
+    color: #e5eaee;
+`;
+
+const Modal = styled.div`
+    padding: 10px;
+`;
+
+const Add = styled.div`
+    padding-left: 630px;
+`;
+
+const Button = styled.div`
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: ${props => props.theme.orange};
+    color: ${props => props.theme.white};
+    text-align: center;
+    line-height: 1.7;
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 5px 30px;
+    border: none;
+`;
+
 export default ({
     name,
     type,
@@ -194,10 +241,14 @@ export default ({
     phoneNumber,
     instagramUrl,
     facebookUrl,
+    title,
+    postContent,
+    postImage,
     onImgClick,
     onSubmit,
     onFileUpload,
     onClickRadio,
+    onClickPost,
     loading
 }) => (
     <>
@@ -295,6 +346,42 @@ export default ({
                             <Label htmlFor="clubImage">업로드</Label>
                             <input type="file" id="clubImage" style={{ display: "none" }} onChange={onFileUpload}></input>
                         </File>
+                    </Question>
+                    <Question>
+                        <About>동아리 활동 컨텐츠 추가</About>
+                        <Popup
+                            trigger={<Plus>+</Plus>}
+                            modal
+                            contentStyle={{ width: "800px", height: "450px", border: "none", padding: "10px 20px", borderRadius: "10px" }}
+                        >
+                            {close => (
+                                <>
+                                    <X onClick={close}>&times; </X>
+                                    <Modal>
+                                        <Question>
+                                            <About>제목</About>
+                                            <BoxInput placeholder="제목을 적어주세요." {...title} width="700px"></BoxInput>
+                                        </Question>
+                                        <Question>
+                                            <About>내용</About>
+                                            <Container style={{width: "700px"}}>
+                                                <Textarea placeholder="간단한 글을 작성해주세요." {...postContent} width="100%" height="150px"></Textarea>
+                                            </Container>
+                                        </Question>
+                                        <Question>
+                                            <File>
+                                                <BoxInput placeholder="컨텐츠 이미지" {...postImage} width="20%" disabled={true}></BoxInput>
+                                                <Label htmlFor="postImage">업로드</Label>
+                                                <input type="file" id="postImage" style={{ display: "none" }} onChange={onFileUpload}></input>
+                                            </File>
+                                        </Question>
+                                        <Add>
+                                            <Button id={"post"} onClick={onClickPost}>추가</Button>
+                                        </Add>
+                                    </Modal>
+                                </>
+                            )}
+                        </Popup>
                     </Question>
                 </Contents>
                 <Addition>

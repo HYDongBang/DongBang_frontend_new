@@ -18,7 +18,6 @@ const Header = styled.div`
 const Wrapper = styled.div`
     min-height: 1000px;
     width: 100%;
-    font-family: raleBold;
     display: flex;
 `;
 
@@ -27,6 +26,7 @@ const Menu = styled.div`
     min-height: 1000px;
     width: 30%;
     text-align: right;
+    font-family: 'NanumGothicR';
 `;
 
 const List = styled.div`
@@ -75,7 +75,6 @@ const Container = styled.div`
     width: 70%;
     padding-top: 100px;
     padding-left: 70px;
-    font-family: raleRegular;
 `;
 
 const toggle = {};

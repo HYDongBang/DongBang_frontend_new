@@ -26,25 +26,77 @@ export default () => {
 
     const onClickRadio = async e => {
         const currentType = e.target.name;
-        const targetType = e.target.id;
-        if(currentType === "master") {
-            if(targetType === "administrator") {
-
-            } else if(targetType === "member") {
-
-            }
-        } else if(currentType === "administrator") {
+        const targetType = e.target.value;
+        const id = e.target.id;
+        if(currentType === "administrator") {
             if(targetType === "master") {
-                
+                try {
+                    const { data } = await appointMasterMutation({
+                        variables: {
+                            userId: parseInt(id)
+                        }
+                    });
+                    setMaster(current => {
+                        return administrator.filter(element => element.id === id)[0];
+                    });
+                    setAdministrator(current => {
+                        const tmp = current;
+                        return tmp.filter(element => element.id !== id);
+                    });
+                    alert("변경되었습니다.");
+                } catch (e) {
+                    console.log(e.message);
+                    alert("다시 시도해 주세요.");
+                }
             } else if(targetType === "member") {
-
+                try {
+                    const { data } = await resignAdministratorMutation({
+                        variables: {
+                            userId: parseInt(id)
+                        }
+                    });
+                    setAdministrator(current => {
+                        const tmp = current;
+                        return tmp.filter(element => element.id !== id);
+                    });
+                } catch (e) {
+                    console.log(e.message);
+                    alert("다시 시도해 주세요.");
+                }
             }
         } else if(currentType === "member") {
             if(targetType === "administrator") {
-
+                try {
+                    const { data } = await becomeAdministratorMutation({
+                        variables: {
+                            userId: parseInt(id)
+                        }
+                    });
+                    setAdministrator(current => {
+                        const tmp = current;
+                        tmp.push(member.filter(element => element.id === id)[0]);
+                        return tmp;
+                    });
+                } catch (e) {
+                    console.log(e.message);
+                    alert("다시 시도해 주세요.");
+                }
             } else if(targetType === "master") {
-
+                try {
+                    const { data } = await appointMasterMutation({
+                        variables: {
+                            userId: parseInt(id)
+                        }
+                    });
+                    setMaster(current => {
+                        return administrator.filter(element => element.id === id)[0];
+                    });
+                } catch (e) {
+                    console.log(e.message);
+                    alert("다시 시도해 주세요.");
+                }
             }
+            window.location.reload();
         }
     };
 
@@ -63,5 +115,5 @@ export default () => {
         }
     };
 
-    return <MemberPresenter master={master} administrator={administrator} member={member} onClickRadio={onClickRadio} onClickLeave={onClickLeave} />;
+    return <MemberPresenter master={master} administrator={administrator} member={member} onClickRadio={onClickRadio} onClickLeave={onClickLeave} loading={getClubMembersQuery.loading} />;
 };

@@ -46,3 +46,11 @@ export const UPDATE_CLUB = gql`
         }
     }
 `;
+
+export const CREATE_POST = gql`
+    mutation createPost($title: String!, $content: String!, $fileUrl: String!) {
+        createPost(title: $title, content: $content, fileUrl: $fileUrl) {
+            id
+        }
+    }
+`;

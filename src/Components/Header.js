@@ -33,7 +33,7 @@ const Icon = styled.div`
     color: ${props => props.theme.white};
     font-weight: 600;
     font-size: 0.9em;
-    font-family: spoHanB;
+    font-family: 'Jua';
 `;
 
 const List = styled.div`
@@ -46,7 +46,7 @@ const Text = styled.div`
     padding-left: 10px;
     cursor: pointer;
     font-size: 0.5em;
-    font-family: spoHanB;
+    font-family: 'NanumGothicR';
 `;
 
 const contentStyle ={

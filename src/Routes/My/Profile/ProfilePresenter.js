@@ -7,11 +7,11 @@ import UserLogo from "../../../Components/UserLogo";
 
 const Title = styled.div`
     padding-bottom: 35px;
+    font-family: 'NanumGothicR';
 `;
 
 const Main = styled.div`
     font-size: 1.4em;
-    font-family: raleBold;
     padding-bottom: 10px;
 `;
 
@@ -33,7 +33,6 @@ const Question = styled.div`
 `;
 
 const About = styled.div`
-    font-family: spoHanB;
     font-size: 0.8em;
     padding-bottom: 10px;
 `;

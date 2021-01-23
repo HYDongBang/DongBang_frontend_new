@@ -57,14 +57,16 @@ export default({type, list, onClickRadio, onClickLeave}) => {
                         <Question>연락처</Question>
                         <LineInput placeholder="답변이 없습니다." disabled={true} width="200px" value={list.phoneNumber}></LineInput>
                     </Information>
-                    <Radio>
-                        <input type="radio" id="master" name={type} value="master" checked={type === "master"} onChange={onClickRadio}></input>
-                        <RadioLabel htmlFor="master">회장</RadioLabel>
-                        <input type="radio" id="administrator" name={type} value="administrator" checked={type === "administrator"} onChange={onClickRadio}></input>
-                        <RadioLabel htmlFor="administrator">운영진</RadioLabel>
-                        <input type="radio" id="member" name={type} value="member" checked={type === "member"} onChange={onClickRadio}></input>
-                        <RadioLabel htmlFor="member">멤버</RadioLabel>
-                    </Radio>
+                    {type !== "master" && (
+                        <Radio>
+                            <input type="radio" id={list.id} name={type} value="master" checked={type === "master"} onChange={onClickRadio}></input>
+                            <RadioLabel htmlFor="master">회장</RadioLabel>
+                            <input type="radio" id={list.id} name={type} value="administrator" checked={type === "administrator"} onChange={onClickRadio}></input>
+                            <RadioLabel htmlFor="administrator">운영진</RadioLabel>
+                            <input type="radio" id={list.id} name={type} value="member" checked={type === "member"} onChange={onClickRadio}></input>
+                            <RadioLabel htmlFor="member">멤버</RadioLabel>
+                        </Radio>
+                    )}
                     <ProfileButton content="탈퇴" color="gray" hover="orange" style={{marginTop: "20px", marginLeft: "100px"}} id={list.id} onClick={onClickLeave}></ProfileButton>
                 </Wrapper>
                 </>
