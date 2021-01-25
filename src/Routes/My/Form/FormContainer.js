@@ -17,6 +17,8 @@ export default () => {
     const myChoice = useInput("");
     const [plusOption,setPlusOption] = useState();
     const [check,setCheck] = useState(true);
+    const [load,setLoad] = useState(true);
+
 
     const [deleteQuestionMutation] = useMutation(DELETE_QUESTION);
     const [deleteChoiceMutation] = useMutation(DELETE_CHOICE);
@@ -72,7 +74,12 @@ export default () => {
       const onCreateQuestion = async (e) => {
         e.preventDefault();
         const q = data.readLoggedInUser.clubMaster.questions;
-        const lastIndex = q[q.length-1].index;
+        let lastIndex;
+        if(q.length===0){
+            lastIndex =0 ;
+        }else{
+            lastIndex = q[q.length-1].index;
+        }
         if(myTitle !==""){
             try {
                 const {
@@ -148,7 +155,11 @@ export default () => {
 
     useEffect(()=>{
         if(!loading && data.readLoggedInUser!==undefined){
-            setQuestions(data.readLoggedInUser.clubMaster.questions);     
+            setQuestions(data.readLoggedInUser.clubMaster.questions);  
+            if(!load){
+                window.location.reload();
+                setLoad(true);
+            }
         }
     }, [data]);
 
