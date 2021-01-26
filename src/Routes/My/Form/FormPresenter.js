@@ -170,7 +170,8 @@ export default ({
     myChoice,
     onCreateChoice,
     setCheck,
-    check
+    check,
+    onUpdateQuestions
 }) => {
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
@@ -270,23 +271,23 @@ export default ({
             })}
             </Contents>
             <Submit>
-            <Popup
-              trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
-              modal
-              contentStyle ={contentStyle} 
-            >
-              {close =>(
-                <>
-                <X onClick={close}>&times; </X>
-                <NewFormPresenter 
-                myType  ={myType}
-                myTitle ={myTitle}
-                onCreateQuestion={onCreateQuestion}
-                />
-                </>
-              )}
-            </Popup>
-                <ProfileButton content="저장" color="orange"></ProfileButton>
+                <Popup
+                trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
+                modal
+                contentStyle ={contentStyle} 
+                >
+                {close =>(
+                    <>
+                    <X onClick={close}>&times; </X>
+                    <NewFormPresenter 
+                    myType  ={myType}
+                    myTitle ={myTitle}
+                    onCreateQuestion={onCreateQuestion}
+                    />
+                    </>
+                )}
+                </Popup>
+                <ProfileButton onClick={() => onUpdateQuestions()} content="저장" color="orange"></ProfileButton>
             </Submit>
         </>)
         :

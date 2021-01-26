@@ -2,10 +2,11 @@ import React, {useState, useEffect} from "react";
 import useInput from "../../../Hooks/useInput";
 import FormPresenter from "./FormPresenter";
 
-import {GET_QUESTIONS, DELETE_QUESTION, DELETE_CHOICE, CREATE_QUESTION, CREATE_CHOICE} from "./FormQueries"
+import {GET_QUESTIONS, DELETE_QUESTION, DELETE_CHOICE, CREATE_QUESTION, CREATE_CHOICE, UPDATE_QUESTIONS} from "./FormQueries"
 import { useMutation, useQuery } from "react-apollo-hooks";
 
 import { toast } from "react-toastify";
+import NewFormPresenter from "./NewFormPresenter";
 
 export default () => {
     const [select, setSelect] = useState("");
@@ -17,13 +18,13 @@ export default () => {
     const myChoice = useInput("");
     const [plusOption,setPlusOption] = useState();
     const [check,setCheck] = useState(true);
-    const [load,setLoad] = useState(true);
-
+    const [newQ,setNewQ] = useState([]);
 
     const [deleteQuestionMutation] = useMutation(DELETE_QUESTION);
     const [deleteChoiceMutation] = useMutation(DELETE_CHOICE);
     const [createQuestionMutation] = useMutation(CREATE_QUESTION);
     const [createChoiceMutation] = useMutation(CREATE_CHOICE);
+    const [updateQuestionsMutation] = useMutation(UPDATE_QUESTIONS);
 
 
     const onDeleteQuestion = async (e) => {
@@ -113,8 +114,9 @@ export default () => {
       };
 
       const onCreateChoice = async (e) => {
+        e.preventDefault();
         let myIndex;
-        const q = questions.filter(element => element.id === e)[0].choices;    
+        const q = questions.filter(element => element.title !== e)[0].choices;    
         if(q.length ==0){
             myIndex = 0;
         }else{
@@ -153,13 +155,40 @@ export default () => {
         }
       };
 
+      const onUpdateQuestions = async (e) => {
+        questions.forEach(question => {
+            setNewQ(prev =>
+                prev.concat({
+                    id: question.id,
+                    title: question.title,
+                })
+            );
+        });
+        console.log(newQ)
+        if(newQ.length !==0){
+            try {
+                const {
+                    data: { updateQuestions: id },
+                } = await updateQuestionsMutation({
+                    variables: {
+                    Questions: newQ,
+                    },
+                });
+                if (!id || id === "") {
+                    toast.error("전송 오류");
+                } else {
+                    toast("수정값이 저장되었습니다.");  
+                }
+                } catch (err) {
+                console.log(err.message);
+                toast.error("옵션을 추가할 수 없습니다. 다시 시도해주세요.");
+                }
+        }
+      };
+    
     useEffect(()=>{
         if(!loading && data.readLoggedInUser!==undefined){
-            setQuestions(data.readLoggedInUser.clubMaster.questions);  
-            if(!load){
-                window.location.reload();
-                setLoad(true);
-            }
+            setQuestions(data.readLoggedInUser.clubMaster.questions); 
         }
     }, [data]);
 
@@ -182,6 +211,7 @@ export default () => {
             onCreateChoice={onCreateChoice}
             setCheck = {setCheck}
             check = {check}
+            onUpdateQuestions={onUpdateQuestions}
             />
        );
 };
