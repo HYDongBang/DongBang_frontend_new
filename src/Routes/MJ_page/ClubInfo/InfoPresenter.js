@@ -113,12 +113,13 @@ const Activities = styled.div`
 
 const Activity = styled.div`
     width:50%;
-    padding:1%;
+    height: 30%;
+    padding:2%;
 `;
 
 
-const ActImg = styled.div`
-
+const ActImg = styled.img`
+    width: 100%;
 `;
 
 const ActTitle = styled.div`
@@ -220,9 +221,10 @@ return (
                 <MLine/>
                 <Activities >
                     {data.readClub.posts.map((post)=>{
+                        console.log(post.fileUrl);
                         return(
                         <Activity>
-                            <ActImg></ActImg>
+                            <ActImg src = {post.fileUrl}/>
                             <ActTitle key>
                                 {post.title}
                             </ActTitle>
