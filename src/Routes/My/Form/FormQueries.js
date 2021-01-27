@@ -54,3 +54,11 @@ export const DELETE_CHOICE = gql `
         }
     }
 `
+
+export const UPDATE_QUESTIONS = gql `
+    mutation updateQuestions($Questions: [QuestionInput]){
+        updateQuestions(Questions: $Questions){
+           id
+        }
+    }
+`

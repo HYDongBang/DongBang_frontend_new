@@ -173,7 +173,7 @@ export default ({
                         </>
                         }
                     </Contents>
-                    <div  style ={{textAlign:"center", position:"absolute", bottom:"-50px", width:"84%"}}>
+                    <div  style ={{textAlign:"center"}}>
                         <Button>변경</Button>
                     </div>
                 </form>

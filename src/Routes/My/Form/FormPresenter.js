@@ -8,8 +8,6 @@ import Loading from "../../../Components/Loading" ;
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Dropdown} from "react-bootstrap"
-
 import Popup from "reactjs-popup";
 import NewFormPresenter from "./NewFormPresenter";
 
@@ -124,16 +122,17 @@ const Submit = styled.div`
     padding-bottom: 50px;
 `;
 
-const DropdownStyle ={
-    width: "100%",
-    backgroundColor: "transparent",
-    color: "black",
-    border: "1px solid black",
-    "&:focus":{
-        boxShadow: "0 0 0 0.2rem rgb(255 200 162)"
-    },
+const DropdownStyle  = styled.div`
+    margin-left: 1%;
+    width: 19%;
+    color: black;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 1.6em;
+    border-radius: 5px;
+    
+`
 
-}
 
 const X = styled.a`
   cursor:pointer;
@@ -171,7 +170,8 @@ export default ({
     myChoice,
     onCreateChoice,
     setCheck,
-    check
+    check,
+    onUpdateQuestions
 }) => {
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
@@ -182,7 +182,6 @@ export default ({
             return prev;
         });
         setCheck(!check);
-        console.log(questions);
     };
 
     const changeType = (e,i) => {
@@ -226,13 +225,9 @@ export default ({
                                 <Inner>
                                     <Wrapper>
                                         <Question  style = {{width: "100%"}}  value = {question.title} onChange={handleInput}  placeholder= {question.title} data-key={question.id}/>
-                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}} >
-                                            <Dropdown.Toggle style ={DropdownStyle}>{question.type === "short"? "주관식": "객관식"}</Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={() => changeType("short", question.id)} >주관식</Dropdown.Item>
-                                                <Dropdown.Item onClick={() => changeType("multiple", question.id)}>객관식</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                        <DropdownStyle >
+                                            주관식
+                                        </DropdownStyle>
                                     </Wrapper>
                                 </Inner>
                                 <Button> <FontAwesomeIcon onClick={() => onDeleteQuestion(question.id)} icon={faTrashAlt} style={{ fontSize: "1.1em", marginRight: "5px"}} /></Button>
@@ -245,13 +240,10 @@ export default ({
                                 <Inner>
                                     <Wrapper>
                                         <Question style = {{width: "100%"}} value = {question.title} onChange={handleInput} placeholder= {question.title} data-key={question.id}/>
-                                        <Dropdown style ={{width:"19%",paddingLeft:"1%"}}>
-                                            <Dropdown.Toggle style ={DropdownStyle}>{question.type  === "short"? "주관식": "객관식"}</Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={() => changeType("short", question.id)} >주관식</Dropdown.Item>
-                                                <Dropdown.Item onClick={() => changeType("multiple", question.id)}>객관식</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                        <DropdownStyle >
+                                           객관식
+                                        </DropdownStyle>
+
                                     </Wrapper>
                                     <>
                                     {question.choices.map((choice, idx)=>{
@@ -278,23 +270,23 @@ export default ({
             })}
             </Contents>
             <Submit>
-            <Popup
-              trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
-              modal
-              contentStyle ={contentStyle} 
-            >
-              {close =>(
-                <>
-                <X onClick={close}>&times; </X>
-                <NewFormPresenter 
-                myType  ={myType}
-                myTitle ={myTitle}
-                onCreateQuestion={onCreateQuestion}
-                />
-                </>
-              )}
-            </Popup>
-                <ProfileButton content="저장" color="orange"></ProfileButton>
+                <Popup
+                trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
+                modal
+                contentStyle ={contentStyle} 
+                >
+                {close =>(
+                    <>
+                    <X onClick={close}>&times; </X>
+                    <NewFormPresenter 
+                    myType  ={myType}
+                    myTitle ={myTitle}
+                    onCreateQuestion={onCreateQuestion}
+                    />
+                    </>
+                )}
+                </Popup>
+                <ProfileButton onClick={() => onUpdateQuestions()} content="저장" color="orange"></ProfileButton>
             </Submit>
         </>)
         :
