@@ -182,7 +182,6 @@ export default ({
             return prev;
         });
         setCheck(!check);
-        console.log(questions);
     };
 
     const changeType = (e,i) => {

@@ -114,7 +114,6 @@ export default () => {
       };
 
       const onCreateChoice = async (e) => {
-        e.preventDefault();
         let myIndex;
         const q = questions.filter(element => element.title !== e)[0].choices;    
         if(q.length ==0){
@@ -156,15 +155,12 @@ export default () => {
       };
 
       const onUpdateQuestions = async (e) => {
-        questions.forEach(question => {
-            setNewQ(prev =>
-                prev.concat({
-                    id: question.id,
-                    title: question.title,
-                })
-            );
-        });
-        console.log(newQ)
+        questions.map((question, idx) => {
+            newQ[idx] = {
+                id: question.id,
+                title: question.title
+            }
+        })
         if(newQ.length !==0){
             try {
                 const {
