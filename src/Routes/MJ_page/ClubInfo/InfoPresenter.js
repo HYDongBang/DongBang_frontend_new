@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
-import headerMovie from "../../../Styles/Images/header_movie.jpg"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
@@ -177,12 +176,12 @@ return (
         </Club>
         <Buttons>
             <ButtonContainer onClick={() => setAction("Talk")} >
-                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x" icon={faComments} />   
+                <FontAwesomeIcon  style ={{marginRight:"2%",fontSize:"1.2em"}} icon={faComments} />   
                 실시간 톡
             </ButtonContainer>
 
             <ButtonContainer onClick={() => setAction("Apply")} >
-                <FontAwesomeIcon  style ={{marginRight:"2%"}} size="1.5x"  icon={faPaperPlane}  />   
+                <FontAwesomeIcon  style ={{marginRight:"2%",fontSize:"1.2em"}}   icon={faPaperPlane}  />   
                 지원하기
             </ButtonContainer>
         </Buttons>
@@ -204,10 +203,10 @@ return (
                 <Tag>메일</Tag> <Info>{data.readClub.email}</Info>
                 <Tag>연락처</Tag> <Info>{data.readClub.phoneNumber}</Info>
                 <Icon href = {data.readClub.facebookUrl} target="_blank" title="페이스북">
-                    <FontAwesomeIcon size="2x" icon={faFacebookSquare}/>
+                    <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faFacebookSquare}/>
                 </Icon> 
                 <Icon href = {data.readClub.instagramUrl} target="_blank" title="인스타그램">
-                    <FontAwesomeIcon size="2x" icon={faInstagramSquare}/>
+                    <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faInstagramSquare}/>
                 </Icon> 
             </RightInfo>
         </ClubInfo>
@@ -221,11 +220,10 @@ return (
                 <MLine/>
                 <Activities >
                     {data.readClub.posts.map((post)=>{
-                        console.log(post.fileUrl);
                         return(
                         <Activity>
                             <ActImg src = {post.fileUrl}/>
-                            <ActTitle key>
+                            <ActTitle>
                                 {post.title}
                             </ActTitle>
                             <ActDes>
