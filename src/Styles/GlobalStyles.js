@@ -21,7 +21,7 @@ export default createGlobalStyle`
     src: url(${require("./Font/Raleway/Raleway-Bold.ttf")});
   } 
   @font-face {
-    font-family:NanumGothicR;
+    font-family:'NanumGothicR';
     src: url(${require("./Font/Nanum_Gothic/NanumGothic-Regular.ttf")});
   } 
   @font-face {
@@ -40,7 +40,7 @@ export default createGlobalStyle`
   body {
     background-color:${props => props.theme.white};
     color:${props => props.theme.black};
-    font-family: NanumGothicR;
+    font-family: 'NanumGothicR';
     }
   a {
     text-decoration:none;
