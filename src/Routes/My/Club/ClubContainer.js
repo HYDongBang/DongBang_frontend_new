@@ -36,7 +36,7 @@ export default () => {
             name.setValue(info.name);
             type.setValue(info.type);
             description.setValue(info.description);
-            content.setValue(info.content);
+            content.setValue(info.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n'));
             clubImage.setValue(info.clubImage);
             logoImage.setValue(info.logoImage);
             partyDay.setValue(info.partyDay);
@@ -86,13 +86,13 @@ export default () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            let logoLocation = "";
-            let clubLocation = "";
+            let logoLocation = logoImage.value;
+            let clubLocation = clubImage.value;
             const lFile = new FormData();
             const cFile = new FormData();
             lFile.append("file", logoFile.value);
             cFile.append("file", clubFile.value);
-            {
+            if (logoFile.value !== null){
                 const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", lFile, {
                     headers: {
                         "content-type": "multipart/form-data"
@@ -100,7 +100,7 @@ export default () => {
                 });
                 logoLocation = data.location;
             }
-            {
+            if (clubFile.value !== null){
                 const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", cFile, {
                     headers: {
                         "content-type": "multipart/form-data"
@@ -108,12 +108,13 @@ export default () => {
                 });
                 clubLocation = data.location;
             }
+            
             const { data } = await updateClubMutation({
                 variables: {
                     name: name.value,
                     type: type.value,
                     description: description.value,
-                    content: content.value,
+                    content: content.value.replace(/(?:\r\n|\r|\n)/g, '<br />'),
                     clubImage: logoLocation,
                     logoImage: clubLocation,
                     partyDay: partyDay.value,

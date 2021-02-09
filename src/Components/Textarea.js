@@ -15,7 +15,7 @@ const Input = styled.textarea`
 `;
 
 const Textarea = ({ placeholder, required = true, value, onChange, type = "text", width = "auto", height = "auto", disabled = false }) => (
-    <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} disabled={disabled} style={{ width: width, height: height }}></Input>
+    <Input placeholder={placeholder} required={required} value={value} onChange={onChange} type={type} disabled={disabled} style={{ width: width, height: height }} ></Input>
 );
 
 Textarea.propTypes = {

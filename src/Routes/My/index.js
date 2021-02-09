@@ -7,7 +7,6 @@ import Member from "./Member";
 import Applicant from "./Applicant";
 import Interview from "./Interview";
 import Form from "./Form";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = styled.div`
     background: ${props => props.theme.orange};
