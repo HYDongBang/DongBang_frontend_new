@@ -35,6 +35,7 @@ const Question = styled.div`
 const About = styled.div`
     font-size: 0.8em;
     padding-bottom: 10px;
+    font-family: 'spoHanB';
 `;
 
 const Submit = styled.div`
