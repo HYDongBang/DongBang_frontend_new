@@ -271,10 +271,10 @@ export default ({
                                             선택
                                         </div>
                                     )}
-                                    {type.value === "문화예술공연" && <SelectedImg src={painting}></SelectedImg>}
-                                    {type.value === "봉사사회활동" && <SelectedImg src={team}></SelectedImg>}
-                                    {type.value === "학술교양종교" && <SelectedImg src={writing}></SelectedImg>}
-                                    {type.value === "어학친목" && <SelectedImg src={speachBubbleLine}></SelectedImg>}
+                                    {type.value === "공연/예술" && <SelectedImg src={painting}></SelectedImg>}
+                                    {type.value === "전시창작" && <SelectedImg src={team}></SelectedImg>}
+                                    {type.value === "교양/종교" && <SelectedImg src={writing}></SelectedImg>}
+                                    {type.value === "학술" && <SelectedImg src={speachBubbleLine}></SelectedImg>}
                                     {type.value === "체육" && <SelectedImg src={basketball}></SelectedImg>}
                                 </SelectImg>
                             }
@@ -284,28 +284,28 @@ export default ({
                             {close => (
                                 <Wrapper>
                                     <Tag>
-                                        <ImgContainer id="문화예술공연" onClick={e => onImgClick(close, e.target.id)}>
-                                            <Img id="문화예술공연" src={painting}></Img>
+                                        <ImgContainer id="공연/예술" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="공연/예술" src={painting}></Img>
                                         </ImgContainer>
                                         <Text>문화/예술/공연</Text>
                                     </Tag>
                                     <Tag>
-                                        <ImgContainer id="봉사사회활동" onClick={e => onImgClick(close, e.target.id)}>
-                                            <Img id="봉사사회활동" src={team}></Img>
+                                        <ImgContainer id="전시창작" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="전시창작" src={team}></Img>
                                         </ImgContainer>
-                                        <Text>봉사/사회활동</Text>
+                                        <Text>전시창작</Text>
                                     </Tag>
                                     <Tag>
-                                        <ImgContainer id="학술교양종교" onClick={e => onImgClick(close, e.target.id)}>
-                                            <Img id="학술교양종교" src={writing}></Img>
+                                        <ImgContainer id="교양/종교" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="교양/종교" src={writing}></Img>
                                         </ImgContainer>
-                                        <Text>학술/교양/종교</Text>
+                                        <Text>교양/종교</Text>
                                     </Tag>
                                     <Tag>
-                                        <ImgContainer id="어학친목" onClick={e => onImgClick(close, e.target.id)}>
-                                            <Img id="어학친목" src={speachBubbleLine}></Img>
+                                        <ImgContainer id="학술" onClick={e => onImgClick(close, e.target.id)}>
+                                            <Img id="학술" src={speachBubbleLine}></Img>
                                         </ImgContainer>
-                                        <Text>어학/친목</Text>
+                                        <Text>학술</Text>
                                     </Tag>
                                     <Tag>
                                         <ImgContainer id="체육" onClick={e => onImgClick(close, e.target.id)}>

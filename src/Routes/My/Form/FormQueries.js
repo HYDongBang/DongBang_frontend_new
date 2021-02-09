@@ -7,6 +7,7 @@ export const GET_QUESTIONS = gql `
                 id
                 name
                 description
+                type
                 questions{
                     id,
                     type,

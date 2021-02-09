@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import Profile from "./Profile";
@@ -7,6 +7,9 @@ import Member from "./Member";
 import Applicant from "./Applicant";
 import Interview from "./Interview";
 import Form from "./Form";
+import { gql } from "apollo-boost";
+import { useQuery } from "react-apollo-hooks";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = styled.div`
     background: ${props => props.theme.orange};
@@ -80,49 +83,76 @@ const Container = styled.div`
 const toggle = {};
 
 export default ({ match }) => {
+    const GET_CLUB = gql`
+        query readLoggedInUser {
+            readLoggedInUser {
+                id
+                clubMaster {
+                    id
+                }
+            }
+        }
+    `;
     const href = match.path;
     const [menu, setMenu] = useState(href);
+    const getClubQuery = useQuery(GET_CLUB);
+    const [isMaster, setIsMaster] = useState();
+
+    useEffect(() => {
+        if (getClubQuery.data) {
+            setIsMaster(getClubQuery.data.readLoggedInUser.clubMaster);
+        }
+    }, [getClubQuery.data]);
+
     return (
         <>
             <Header></Header>
-            <Wrapper>
-                <Menu>
-                    <List>
-                        <Link onClick={() => setMenu("/profile")} to="/profile">
-                            {/* TODO: 해당 페이지에 있으면 즉 state가 해당 페이지를 가리키면 style적용*/}
-                            <Element>프로필 관리</Element>
-                        </Link>
-                        <Link onClick={() => setMenu("/club")} to="/club">
-                            <Element>동아리 정보 관리</Element>
-                        </Link>
-                        {/* TODO: 세번째 메뉴에 hover시 toggle 메뉴 나오게 이벤트 추가*/}
-                        <Element>멤버 / 지원자 관리</Element>
-                        <Toggle>
-                            <Link onClick={() => setMenu("/member")} to="/member">
-                                <Sub>멤버 관리</Sub>
+            {!getClubQuery.loading && (
+                <Wrapper>
+                    <Menu>
+                        <List>
+                            <Link onClick={() => setMenu("/profile")} to="/profile">
+                                <Element>프로필 관리</Element>
                             </Link>
-                            <Link onClick={() => setMenu("/applicant")} to="/applicant">
-                                <Sub>지원자 관리</Sub>
-                            </Link>
-                            <Link onClick={() => setMenu("/interview")} to="/interview">
-                                <Sub>면접 타임 테이블</Sub>
-                            </Link>
-                            <Link onClick={() => setMenu("/form")} to="/form">
-                                <Sub>가입신청 양식</Sub>
-                            </Link>
-                        </Toggle>
-                        <Element>회원 탈퇴</Element>
-                    </List>
-                </Menu>
-                <Container>
-                    <Route exact path={"/profile"} component={Profile} />
-                    <Route path={"/club"} component={Club} />
-                    <Route path={"/member"} component={Member} />
-                    <Route path={"/applicant"} component={Applicant} />
-                    <Route path={"/interview"} component={Interview} />
-                    <Route path={"/form"} component={Form} />
-                </Container>
-            </Wrapper>
+                            { isMaster !== null && (
+                                <>
+                                    <Link onClick={() => setMenu("/club")} to="/club">
+                                        <Element>동아리 정보 관리</Element>
+                                    </Link>
+                                    <Element>멤버 / 지원자 관리</Element>
+                                    <Toggle>
+                                        <Link onClick={() => setMenu("/member")} to="/member">
+                                            <Sub>멤버 관리</Sub>
+                                        </Link>
+                                        <Link onClick={() => setMenu("/applicant")} to="/applicant">
+                                            <Sub>지원자 관리</Sub>
+                                        </Link>
+                                        <Link onClick={() => setMenu("/interview")} to="/interview">
+                                            <Sub>면접 타임 테이블</Sub>
+                                        </Link>
+                                        <Link onClick={() => setMenu("/form")} to="/form">
+                                            <Sub>가입신청 양식</Sub>
+                                        </Link>
+                                    </Toggle>
+                                </>
+                            )}
+                            <Element>회원 탈퇴</Element>
+                        </List>
+                    </Menu>
+                    <Container>
+                        <Route exact path={"/profile"} component={Profile} />
+                        { isMaster !== null && (
+                            <>
+                                <Route path={"/club"} component={Club} />
+                                <Route path={"/member"} component={Member} />
+                                <Route path={"/applicant"} component={Applicant} />
+                                <Route path={"/interview"} component={Interview} />
+                                <Route path={"/form"} component={Form} />
+                            </>
+                        )}
+                    </Container>
+                </Wrapper>
+            )}
         </>
     );
 };
