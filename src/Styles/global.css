@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "spoHanR";
+    src: url("./Font/Spoqa/Spoqa-Han-Sans-Regular.ttf");
+}
+@font-face {
+    font-family: "spoHanB";
+    src: url("./Font/Spoqa/Spoqa-Han-Sans-Bold.ttf");
+}
+@font-face {
+    font-family: "raleRegular";
+    src: url("./Font/Raleway/Raleway-Regular.ttf");
+}
+@font-face {
+    font-family: "raleBold";
+    src: url("./Font/Raleway/Raleway-Bold.ttf");
+}
+@font-face {
+    font-family: "NanumGothicR";
+    src: url("./Font/Nanum_Gothic/NanumGothic-Regular.ttf");
+}
+@font-face {
+    font-family: "Jua";
+    src: url("./Font/Jua/Jua-Regular.ttf");
+}
+@font-face {
+    font-family: "NanumMyeonjo";
+    src: url("./Font/Nanum_Myeongjo/NanumMyeongjo-Regular.ttf");
+}
+
+* {
+    font-family: "spoHanR";
+}
