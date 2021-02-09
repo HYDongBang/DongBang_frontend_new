@@ -5,6 +5,12 @@ import Popup from "reactjs-popup";
 import movieCrop from "../../../Styles/Images/movieCrop.png"
 import ClubLogo from "../../../Components/ClubLogo"
 import ClubsContainer from "../ClubInfo/ClubsContainer";
+import headerMovie from "../../../Styles/Images/header_movie.jpg"
+import headerLibrary from "../../../Styles/Images/Library_header.jpg"
+import headerMuseum from "../../../Styles/Images/header_museum.jpg"
+import headerBeach from "../../../Styles/Images/header_beach.jpg"
+import headerSports from "../../../Styles/Images/header_sports.jpg"
+
 
 
 const Club = styled.div`
@@ -25,11 +31,16 @@ const Context = styled.div`
 `;
 
 const ClubType = styled.div`
-  margin: 10px auto 15px;
+  margin: 7px auto 10px;
+  font-family:"spoHanB";
+  font-size:0.85em;
+  color:${props=>props.theme.orange};
 `;
 
 const ClubName = styled.div`
   padding-bottom: 5px;
+  font-family:"spoHanB";
+  font-size:0.9em;
 `;
 
 const ClubText = styled.div`
@@ -90,7 +101,11 @@ export default  ({ clubs, myType }) => {
               key={club.id}
               trigger={
                 <Club>
-                  <ClubImg src = {club.logoImage}/>
+                  {club.type === "학술" && <ClubImg src = {headerLibrary}/>}
+                  {club.type === "교양종교" && <ClubImg src = {headerBeach}/>}
+                  {club.type === "전시창작" && <ClubImg src = {headerMuseum}/>}
+                  {club.type === "체육" && <ClubImg src = {headerSports}/>}
+                  {club.type === "공연예술" && <ClubImg src = {headerMovie}/>}
                   <Position>
                      <Logo src = {club.logoImage}/>
                   </Position>
@@ -119,7 +134,11 @@ export default  ({ clubs, myType }) => {
               key={club.id}
               trigger={
                 <Club >
-                  <ClubImg src = {club.logoImage}/>
+                  {club.type === "학술" && <ClubImg src = {headerLibrary}/>}
+                  {club.type === "교양종교" && <ClubImg src = {headerBeach}/>}
+                  {club.type === "전시창작" && <ClubImg src = {headerMuseum}/>}
+                  {club.type === "체육" && <ClubImg src = {headerSports}/>}
+                  {club.type === "공연예술" && <ClubImg src = {headerMovie}/>}
                   <Position>
                      <Logo src = {club.logoImage}/>
                   </Position>

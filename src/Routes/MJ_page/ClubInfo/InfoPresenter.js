@@ -3,6 +3,10 @@ import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
 
 import headerMovie from "../../../Styles/Images/header_movie.jpg"
+import headerLibrary from "../../../Styles/Images/Library_header.jpg"
+import headerMuseum from "../../../Styles/Images/header_museum.jpg"
+import headerBeach from "../../../Styles/Images/header_beach.jpg"
+import headerSports from "../../../Styles/Images/header_sports.jpg"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
@@ -169,7 +173,7 @@ let clubContent;
 if (!loading && data.readClub) {
     const content = data.readClub.content;
     console.log(content);
-    clubContent = content.split("<br>").map(function (item, idx) {
+    clubContent = content.split("<").map(function (item, idx) {
       return (
         <span key={idx}>
           {item}
@@ -184,8 +188,12 @@ return (
     {!loading && data.readClub &&
     (
         <>
-        <HeaderImg src = {headerMovie}>
-        </HeaderImg>
+        {club.type === "학술" && <HeaderImg src = {headerLibrary}/>}
+        {club.type === "교양종교" && <HeaderImg src = {headerBeach}/>}
+        {club.type === "전시창작" && <HeaderImg src = {headerMuseum}/>}
+        {club.type === "체육" && <HeaderImg src = {headerSports}/>}
+        {club.type === "공연예술" && <HeaderImg src = {headerMovie}/>}
+        
         <Club>
             <ClubLogo margin="auto" type = {data.readClub.type}/>
             <Type>{data.readClub.type}</Type>
