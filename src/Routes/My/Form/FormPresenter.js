@@ -206,7 +206,7 @@ export default ({
             <Contents>
                 <Top>
                     <ClubInfo>
-                        <ClubLogo type = "culture"/>
+                        <ClubLogo type = {data.readLoggedInUser.clubMaster.type}/>
                         <TBox>
                             <Text>동아리 이름</Text>
                             <ClubText> {data.readLoggedInUser.clubMaster.name} </ClubText>
