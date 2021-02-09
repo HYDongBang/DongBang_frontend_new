@@ -42,6 +42,14 @@ const ClubImg = styled.img`
   width: 100%;
 `;
 
+const Logo = styled.img`
+  height: 86px;
+  width: 86px;
+  border-radius: 38px;
+  box-shadow: 1px 1px 4px 0px grey;
+  overflow: hidden;
+`;
+
 const Position = styled.div`
   position:absolute;
   margin-top:-45px;
@@ -84,7 +92,7 @@ export default  ({ clubs, myType }) => {
                 <Club>
                   <ClubImg src = {club.logoImage}/>
                   <Position>
-                     <ClubLogo type = "culture"/>
+                     <Logo src = {club.logoImage}/>
                   </Position>
 
                   <Context>
@@ -111,9 +119,9 @@ export default  ({ clubs, myType }) => {
               key={club.id}
               trigger={
                 <Club >
-                  <ClubImg src = {club.clubImage}/>
-                  <Position >
-                     <ClubLogo type = "culture"/>
+                  <ClubImg src = {club.logoImage}/>
+                  <Position>
+                     <Logo src = {club.logoImage}/>
                   </Position>
                   <Context>
                     <ClubType> {club.type}</ClubType>

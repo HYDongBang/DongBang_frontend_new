@@ -5,10 +5,12 @@ import MTalkContainer from "../ClubTalk/Master/MTalkContainer";
 import UTalkContainer from "../ClubTalk/User/UTalkContainer";
 import ApplyContainer from "../ClubApply/ApplyContainer";
 
+
 import { useQuery } from "react-apollo-hooks";
 import {LOG_IN} from "./ClubsQuries"
 
 import { toast } from "react-toastify";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import Loading from "../../../Components/Loading";
 
@@ -46,7 +48,7 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
     return (
         <Wrapper>
           {!loading && !cLoading && data ?
-          <>
+            <Scrollbars style ={{height:"100%"}}>
             {action === "Info" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "MoreInfo" && (<InfoContainer club = {club} action={action} setAction ={setAction}/>)}
             {action === "Talk" && isLoggedIn &&
@@ -56,7 +58,7 @@ export default ({ action, setAction, club, loading, data, cLoading, cData }) => 
               </>
             }
             {action === "Apply" && isLoggedIn && (<ApplyContainer club = {club} action={action} setAction ={setAction}/>)}
-          </>
+            </Scrollbars>
           :
           <Loading marginT = "25%"/>
           }

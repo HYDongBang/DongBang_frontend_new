@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
 
+import headerMovie from "../../../Styles/Images/header_movie.jpg"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
@@ -28,6 +30,13 @@ const HeaderImg = styled.img`
     width:100%;
     height:45%;
     overflow:hidden;
+    position:relative;
+`;
+
+const ClubImage = styled.img`
+    width:100%;
+    height:100%;
+    padding:0 15%;
 `;
 
 const Buttons = styled.div`
@@ -35,17 +44,20 @@ const Buttons = styled.div`
   top:15px;
   display:flex;
   right:30px;
+  z-index:10;
 `;
 
 const Club = styled.div`
     text-align:center;
     width:fit-content;
-    margin: 5px auto 0px;
+    margin: -50px auto 0px;
+    position:relative;
+    z-index: 5;
 `;
 
 const Type = styled.div`
- margin:8px;
- color: ${props=>props.theme.indigo};
+    margin:8px;
+    color: ${props=>props.theme.indigo};
 `;
 
 const Name = styled.div`
@@ -54,7 +66,7 @@ const Name = styled.div`
 `;
 
 const Desc = styled.div`
- padding: 25px 7% 0px 7%;
+ padding: 30px 10%;
  line-height: 1.5em;
  font-size:0.9em;
 `;
@@ -84,6 +96,10 @@ margin-right:5px;
 const Icon = styled.a`
     margin-left:10px;
     color:  ${props=>props.theme.black};
+    &:hover{
+        color: ${props=>props.theme.orange};    
+        transition-duration: 0.3s;
+    }
 `;
 
 
@@ -152,7 +168,8 @@ let clubContent;
 
 if (!loading && data.readClub) {
     const content = data.readClub.content;
-    clubContent = content.split("\n").map(function (item, idx) {
+    console.log(content);
+    clubContent = content.split("<br>").map(function (item, idx) {
       return (
         <span key={idx}>
           {item}
@@ -167,10 +184,10 @@ return (
     {!loading && data.readClub &&
     (
         <>
-        <HeaderImg src = {data.readClub.clubImage}>
+        <HeaderImg src = {headerMovie}>
         </HeaderImg>
         <Club>
-            <ClubLogo margin="auto" type = "sports"/>
+            <ClubLogo margin="auto" type = {data.readClub.type}/>
             <Type>{data.readClub.type}</Type>
             <Name>{data.readClub.name}</Name>
         </Club>
@@ -185,10 +202,10 @@ return (
                 지원하기
             </ButtonContainer>
         </Buttons>
-
         <Desc> 
           {clubContent}
         </Desc>
+        <ClubImage src ={data.readClub.clubImage}/>
 
         <Line/>
 

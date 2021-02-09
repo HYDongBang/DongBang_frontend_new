@@ -182,51 +182,51 @@ export default ({
                     </Category>
                 )}
 
-                {myType === "문화예술공연" ? (
+                {myType === "전시창작" ? (
                     <Category onClick={() => setType("")}>
                         <Img checked="true" src = {paintingOrange} />
-                        <Text checked="true">문화/예술/공연</Text>
+                        <Text checked="true">전시창작</Text>
                     </Category>
                 ) : (
-                    <Category onClick={() => setType("문화예술공연")}>
+                    <Category onClick={() => setType("전시창작")}>
                         <Img src = {painting}/>
-                        <Text>문화/예술/공연</Text>
+                        <Text>전시창작</Text>
                     </Category>
                 )}
 
-                {myType === "봉사사회활동" ? (
+                {myType === "교양종교" ? (
                     <Category onClick={() => setType("")} >
                         <Img checked="true" src = {teamOrange} />
-                        <Text checked="true">봉사/사회활동</Text>
+                        <Text checked="true">교양/종교</Text>
                     </Category>
                 ) : (
-                    <Category onClick={() => setType("봉사사회활동")}>
+                    <Category onClick={() => setType("교양종교")}>
                         <Img src = {team} />
-                        <Text >봉사/사회활동</Text>
+                        <Text >교양/종교</Text>
                     </Category>
                 )}
 
-                {myType === "학술교양종교" ? (
+                {myType === "학술" ? (
                     <Category onClick={() => setType("")}>
                         <Img  checked="true" src = {writingOrange} />
-                        <Text checked="true">학술/교양/종교</Text>
+                        <Text checked="true">학술</Text>
                     </Category>
                 ) : (
-                    <Category onClick={() => setType("학술교양종교")}>
+                    <Category onClick={() => setType("학술")}>
                         <Img  src = {writing} />
-                        <Text>학술/교양/종교</Text>
+                        <Text>학술</Text>
                     </Category>
                 )}   
 
-                {myType === "어학친목" ? (
+                {myType === "공연예술" ? (
                     <Category onClick={() => setType("")}>
                         <Img checked="true" src = {speachBubbleLineOrange} />
-                        <Text checked="true">어학/친목</Text>
+                        <Text checked="true">공연예술</Text>
                     </Category>
                 ) : (
-                    <Category onClick={() => setType("어학친목")}>
+                    <Category onClick={() => setType("공연예술")}>
                         <Img src = {speachBubbleLine} />
-                        <Text>어학/친목</Text>
+                        <Text>공연예술</Text>
                     </Category>
                 )}
                 

@@ -127,7 +127,7 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
             {!loading && data.readClub &&(
                 <>
                 <Left>
-                <LeftImg src = {club.clubImage}/>
+                <LeftImg src = {club.logoImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
                     <ClubLogo type = "sports"/>
