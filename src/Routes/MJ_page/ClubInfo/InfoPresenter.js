@@ -173,7 +173,7 @@ let clubContent;
 if (!loading && data.readClub) {
     const content = data.readClub.content;
     console.log(content);
-    clubContent = content.split("<").map(function (item, idx) {
+    clubContent = content.split("<br />").map(function (item, idx) {
       return (
         <span key={idx}>
           {item}

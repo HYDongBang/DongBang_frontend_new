@@ -115,8 +115,8 @@ export default () => {
                     type: type.value,
                     description: description.value,
                     content: content.value.replace(/(?:\r\n|\r|\n)/g, '<br />'),
-                    clubImage: logoLocation,
-                    logoImage: clubLocation,
+                    clubImage: clubLocation,
+                    logoImage: logoLocation,
                     partyDay: partyDay.value,
                     party: party.value,
                     numberOfMembers: numberOfMembers.value,
@@ -150,7 +150,7 @@ export default () => {
             const { data } = await createPostMutation({
                 variables: {
                     title: title.value,
-                    content: postContent.value,
+                    content: postContent.value.replace(/(?:\r\n|\r|\n)/g, '<br />'),
                     fileUrl: postLocation
                 }
             });
