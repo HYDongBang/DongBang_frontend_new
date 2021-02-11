@@ -71,7 +71,7 @@ const Position = styled.div`
 const X = styled.a`
   cursor:pointer;
   position:absolute;
-  right:-30px;
+  right:-43px;
   top: -8px;
   font-size:2.5em;
   color: #E5EAEE;

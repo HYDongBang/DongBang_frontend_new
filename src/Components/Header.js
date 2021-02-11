@@ -57,15 +57,14 @@ const contentStyle ={
   };
 
 
-  const X = styled.a`
-  cursor:pointer;
-  position:absolute;
-  right:-30px;
-  top: -8px;
-  font-size:2.5em;
-  color: #E5EAEE;
+  const X = styled.div`
+  cursor: pointer;
+  position: absolute;
+  right: -37px;
+  top: -5px;
+  font-size: 2.3em;
+  color: #e5eaee;
 `;
-
 
 export default () => {
     const {

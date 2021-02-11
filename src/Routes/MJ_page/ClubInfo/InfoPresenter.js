@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ClubLogo from "../../../Components/ClubLogo";
 
 import headerMovie from "../../../Styles/Images/header_movie.jpg"
 import headerLibrary from "../../../Styles/Images/Library_header.jpg"
@@ -37,6 +36,15 @@ const HeaderImg = styled.img`
     position:relative;
 `;
 
+
+const Logo = styled.img`
+  height: 86px;
+  width: 86px;
+  border-radius: 38px;
+  box-shadow: 1px 1px 4px 0px grey;
+  overflow: hidden;
+`;
+
 const ClubImage = styled.img`
     width:100%;
     height:100%;
@@ -61,12 +69,14 @@ const Club = styled.div`
 
 const Type = styled.div`
     margin:8px;
-    color: ${props=>props.theme.indigo};
+    color: ${props=>props.theme.orange};
+    font-family:'spoHanB';
 `;
 
 const Name = styled.div`
- margin:5px;
- font-size:1.2em;
+    margin:5px;
+    font-size:1.2em;
+    font-family:'spoHanB';
 `;
 
 const Desc = styled.div`
@@ -195,7 +205,7 @@ return (
         {club.type === "공연예술" && <HeaderImg src = {headerMovie}/>}
         
         <Club>
-            <ClubLogo margin="auto" type = {data.readClub.type}/>
+            <Logo src = {data.readClub.logoImage}/>
             <Type>{data.readClub.type}</Type>
             <Name>{data.readClub.name}</Name>
         </Club>
