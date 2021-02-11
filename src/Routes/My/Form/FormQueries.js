@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const GET_QUESTIONS = gql `
-    query {
+    query readLoggedInUser{
         readLoggedInUser{
             clubMaster{
                 id

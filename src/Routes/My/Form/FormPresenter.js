@@ -133,17 +133,13 @@ const DropdownStyle  = styled.div`
     
 `
 
-
-const X = styled.a`
-  cursor:pointer;
-  position:absolute;
-  right:-30px;
-  top: -8px;
-  font-size:2.5em;
-  color: #E5EAEE;
-  :hover{
-    color: #E5EAEE;
-  }
+const X = styled.div`
+cursor: pointer;
+position: absolute;
+right: -37px;
+top: -5px;
+font-size: 2.3em;
+color: #e5eaee;
 `;
 
 
@@ -184,6 +180,7 @@ export default ({
         setCheck(!check);
     };
 
+
     const changeType = (e,i) => {
         console.log(e);
         const index = questions.indexOf(questions.filter(element => element.id == i)[0]);
@@ -194,10 +191,9 @@ export default ({
         setCheck(!check);
     };
 
-
     return(
     <>
-        {!myloading && data.readLoggedInUser!==undefined ? 
+        {!myloading && data.readLoggedInUser.clubMaster!==undefined ? 
         (<>
             <Title>
                 <Main>가입 신청 양식</Main>

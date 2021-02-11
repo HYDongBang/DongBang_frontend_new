@@ -160,10 +160,10 @@ export default ({club,
             {!loading &&
             <>
              <Left>
-                <LeftImg src = {club.clubImage}/>
+                <LeftImg src = {club.logoImage}/>
                 <LeftInfo>
                     <div style ={{margin:"auto", width:"fit-content", marginBottom:"13px"}}>
-                    <ClubLogo type = "sports"/>
+                    <ClubLogo type = {club.type}/>
                     </div>
                     <ClubType>{club.type}</ClubType>
                     <ClubName>{club.name}</ClubName>
