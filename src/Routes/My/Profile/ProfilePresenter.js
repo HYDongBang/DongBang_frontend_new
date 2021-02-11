@@ -3,7 +3,7 @@ import styled from "styled-components";
 import BoxInput from "../../../Components/BoxInput";
 import ProfileButton from "../../../Components/ProfileButton";
 import UserLogo from "../../../Components/UserLogo";
-// import Loading from "../../../Components/"
+import Loading from "../../../Components/Loading"
 
 const Title = styled.div`
     padding-bottom: 35px;
@@ -51,7 +51,7 @@ export default ({ name, uni, major, studentNumber, phone, email, onSubmit, loadi
             <Main>프로필 관리</Main>
             <Sub>내 정보 및 프로필을 편집할 수 있습니다.</Sub>
         </Title>
-        { loading && <div>loading</div> }
+        { loading && <Loading></Loading> }
         { !loading && (
         <form onSubmit={onSubmit}>
             <Contents>

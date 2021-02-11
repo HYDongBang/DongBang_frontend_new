@@ -61,7 +61,7 @@ const LineInput = ({ placeholder, required = true, value, onChange, onClick, ico
 
 LineInput.propTypes = {
     placeholder: PropTypes.string.isRequired,
-    required: PropTypes.bool.isRequired,
+    required: PropTypes.bool,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     onClick: PropTypes.func,

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
 import ProfileButton from "../../../Components/ProfileButton";
-// import Loading from "../../../Components/";
+import Loading from "../../../Components/Loading";
 
 const Title = styled.div`
     padding-bottom: 35px;
@@ -175,7 +175,7 @@ return (
             <Main>면접 타임 테이블</Main>
             <Sub>면접 일정을 작성할 수 있습니다.</Sub>
         </Title>
-        {loading && <div>loading</div>}
+        {loading && <Loading></Loading>}
         {!loading && (
         <Contents>
             <Applicants>
@@ -189,7 +189,8 @@ return (
                                 <Number>{studentNumber}</Number>
                             </Applicant>
                         } modal
-                        contentStyle={{ width: "350px", height: "180px", border: "none", borderRadius: "10px"}}>
+                        contentStyle={{ width: "350px", height: "180px", border: "none", borderRadius: "10px"}}
+                        lockScroll={true}>
                         {close => (
                             <form id={id} onSubmit={onSubmit}>
                             <X onClick={close}>&times;</X>

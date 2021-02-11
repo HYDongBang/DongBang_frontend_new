@@ -5,7 +5,7 @@ import ProfileButton from "../../../Components/ProfileButton";
 import LineInput from "../../../Components/LineInput";
 import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import Loading from "../../../Components/";
+import Loading from "../../../Components/Loading";
 
 const Title = styled.div`
     padding-bottom: 35px;
@@ -78,9 +78,9 @@ const Submit = styled.div`
 const X = styled.div`
     cursor: pointer;
     position: absolute;
-    right: -30px;
-    top: -8px;
-    font-size: 2.5em;
+    right: -37px;
+    top: -5px;
+    font-size: 2.3em;
     color: #e5eaee;
 `;
 
@@ -104,12 +104,12 @@ export default ({ applicants, selected, questions, onClickAll, onClickSelect, on
             <Main>지원자 관리</Main>
             <Sub>지원자를 관리할 수 있습니다.</Sub>
         </Title>
-        {loading && <div>loading</div>}
+        {loading && <Loading></Loading>}
         {!loading && (
             <form onClick={onSubmit}>
                 <Contents>
                     <Num>
-                        전체 지원자 <span style={{ color: "#FF7300" }}>{applicants.length}</span> 명
+                        전체 지원자 <span style={{ color: "#FF7300" }}>{applicants.length}</span> 명 <span style={{ paddingLeft: "5px", fontSize: "0.8em", color: "lightGray", fontFamily: "spoHanR"}}>지원자 이름을 누르면 지원서를 볼 수 있습니다.</span>
                     </Num>
                     <Table>
                         <Attributes>
@@ -148,6 +148,7 @@ export default ({ applicants, selected, questions, onClickAll, onClickSelect, on
                                         trigger={<Info style={{ width: "80px", cursor: "pointer" }}>{name}</Info>}
                                         modal
                                         contentStyle={{ width: "800px", height: "450px", border: "none", borderRadius: "10px" }}
+                                        lockScroll={true}
                                     >
                                         {close => (
                                             <>
