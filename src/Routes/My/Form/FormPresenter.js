@@ -274,6 +274,7 @@ export default ({
                 trigger={<ProfileButton content="추가 " color="darkgray" style={{ marginRight: "15px" }}/>}
                 modal
                 contentStyle ={contentStyle} 
+                lockScroll={true}
                 >
                 {close =>(
                     <>

@@ -13,7 +13,7 @@ import team from "../../../Styles/Images/team.svg";
 import speachBubbleLine from "../../../Styles/Images/speachBubbleLine.svg";
 import basketball from "../../../Styles/Images/basketball.svg";
 
-// import Loading from "../../../Components/";
+import Loading from "../../../Components/Loading";
 
 const Title = styled.div`
     padding-bottom: 35px;
@@ -256,7 +256,7 @@ export default ({
             <Main>동아리 정보 관리</Main>
             <Sub>동아리 정보를 편집할 수 있습니다.</Sub>
         </Title>
-        {loading && <div>loading</div>}
+        {loading && <Loading></Loading>}
         {!loading && (
             <form onSubmit={onSubmit} encType="multipart/form-data">
                 <Contents>
@@ -280,6 +280,7 @@ export default ({
                             }
                             modal
                             contentStyle={{ background: "none", border: "none" }}
+                            lockScroll={true}
                         >
                             {close => (
                                 <Wrapper>
@@ -353,6 +354,7 @@ export default ({
                             trigger={<Plus>+</Plus>}
                             modal
                             contentStyle={{ width: "800px", height: "450px", border: "none", padding: "10px 20px", borderRadius: "10px" }}
+                            lockScroll={true}
                         >
                             {close => (
                                 <>

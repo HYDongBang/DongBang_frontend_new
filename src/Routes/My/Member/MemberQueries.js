@@ -49,8 +49,8 @@ export const JOIN_CLUB = gql`
 
 // 동아리 탈퇴 시키기
 export const LEAVE_CLUB = gql`
-    mutation deleteUser($id: Int!) {
-        deleteUser(id: $id) {
+    mutation leaveClub($userId: Int!) {
+        leaveClub(userId: $userId) {
             id
         }
     }

@@ -119,6 +119,7 @@ export default  ({ clubs, myType }) => {
               }
               modal
               contentStyle ={contentStyle} 
+              lockScroll={true}
             >
               {close =>(
                 <>
@@ -151,6 +152,7 @@ export default  ({ clubs, myType }) => {
               }
               modal
               contentStyle ={contentStyle}
+              lockScroll={true}
             >
               {close =>(
                 <>

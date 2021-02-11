@@ -119,7 +119,7 @@ export default ({ match }) => {
                                     <Link onClick={() => setMenu("/club")} to="/club">
                                         <Element>동아리 정보 관리</Element>
                                     </Link>
-                                    <Element>멤버 / 지원자 관리</Element>
+                                    <Element style={{ cursor: "default" }}>멤버 / 지원자 관리</Element>
                                     <Toggle>
                                         <Link onClick={() => setMenu("/member")} to="/member">
                                             <Sub>멤버 관리</Sub>
@@ -136,7 +136,7 @@ export default ({ match }) => {
                                     </Toggle>
                                 </>
                             )}
-                            <Element>회원 탈퇴</Element>
+                            <Element onClick={() => {alert("아직 지원되지 않는 기능입니다.")}}>회원 탈퇴</Element>
                         </List>
                     </Menu>
                     <Container>

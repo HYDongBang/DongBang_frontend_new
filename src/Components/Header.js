@@ -92,7 +92,8 @@ export default () => {
                         <Text>로그인/회원가입</Text>
                     }
                     modal
-                    contentStyle = {contentStyle}>
+                    contentStyle = {contentStyle}
+                    lockScroll={true}>
                         {close =>(
                             <>
                             <X onClick={close}>&times; </X>
