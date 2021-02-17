@@ -83,6 +83,7 @@ const Desc = styled.div`
  padding: 30px 10%;
  line-height: 1.5em;
  font-size:0.9em;
+ font-family:'NanumGothicR';
 `;
 
 const ClubInfo = styled.div`
@@ -182,7 +183,6 @@ let clubContent;
 
 if (!loading && data.readClub) {
     const content = data.readClub.content;
-    console.log(content);
     clubContent = content.split("<br />").map(function (item, idx) {
       return (
         <span key={idx}>
