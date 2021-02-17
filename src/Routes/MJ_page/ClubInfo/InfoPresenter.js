@@ -190,7 +190,7 @@ if (!loading && data.readClub) {
           <br />
         </span>
       );
-    });
+    })
 }
 
 return (
@@ -255,6 +255,14 @@ return (
                 <MLine/>
                 <Activities >
                     {data.readClub.posts.map((post)=>{
+                        const pContent = post.content.split("<br />").map(function (item, idx) {
+                            return (
+                              <span key={idx}>
+                                {item}
+                                <br />
+                              </span>
+                            );
+                          });
                         return(
                         <Activity>
                             <ActImg src = {post.fileUrl}/>
@@ -262,7 +270,7 @@ return (
                                 {post.title}
                             </ActTitle>
                             <ActDes>
-                                {post.content}
+                                {pContent}
                             </ActDes>
                         </Activity>
                         )
