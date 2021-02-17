@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ClubLogo from "../../../Components/ClubLogo";
-import LineInput from "../../../Components/LineInput"
-import Textarea from "../../../Components/Textarea"
+import BoxInput from "../../../Components/BoxInput"
 import OrangeButton from "../../../Components/OrangeButton"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -114,6 +113,23 @@ const Tarea = styled.div`
     border: 1px solid ${props=>props.theme.lightGray};
 `;
 
+const Textarea = styled.textarea`
+    width: 100%;
+    height:100px;
+    border: solid 1px gray;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    font-size: 0.85em;
+    line-height: 1.3em;
+    margin-top:5px;
+    padding: 10px;
+    font-family: raleR;
+    resize: none;
+    border-radius: 10px;
+`;
+
 
 export default ({club, setAction, action, loading, data, onSubmit, myanswers, setMyAnswers, myApplication})=>{
     const handleInput = (e, idx) => {
@@ -161,7 +177,7 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
                             {question.type ==="short" && 
                                 <QA>
                                     <Question>{question.title}</Question>
-                                    <LineInput onChange={(e) => handleInput(e.target.value, idx)}/>
+                                        <Textarea width = "100%" height="100%" onChange={(e) => handleInput(e.target.value, idx)}/>
                                 </QA>
                             }
                             {question.type ==="long" && 
@@ -181,6 +197,7 @@ export default ({club, setAction, action, loading, data, onSubmit, myanswers, se
                                                 <input
                                                 style={{ marginBottom: "5px", marginRight:"10px" }}
                                                 type="radio"
+                                                name = "options"
                                                 value={choice.subject}
                                                 onChange={(e) => handleInput(e.target.value, idx)}
                                                 ></input>
