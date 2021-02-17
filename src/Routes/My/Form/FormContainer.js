@@ -19,6 +19,9 @@ export default () => {
     const [plusOption,setPlusOption] = useState();
     const [check,setCheck] = useState(true);
     const [newQ,setNewQ] = useState([]);
+    const [name,setName] = useState([]);
+    const [type,setType] = useState([]);
+    const [des,setDes] = useState([]);
 
     const [deleteQuestionMutation] = useMutation(DELETE_QUESTION);
     const [deleteChoiceMutation] = useMutation(DELETE_CHOICE);
@@ -185,6 +188,9 @@ export default () => {
     useEffect(()=>{
         if(!loading && data.readLoggedInUser!==undefined){
             setQuestions(data.readLoggedInUser.clubMaster.questions); 
+            setType(data.readLoggedInUser.clubMaster.type); 
+            setName(data.readLoggedInUser.clubMaster.name); 
+            setDes(data.readLoggedInUser.clubMaster.description); 
         }
     }, [data]);
 
@@ -208,6 +214,9 @@ export default () => {
             setCheck = {setCheck}
             check = {check}
             onUpdateQuestions={onUpdateQuestions}
+            name = {name}
+            des = {des}
+            type = {type}
             />
        );
 };
