@@ -91,8 +91,9 @@ const QA = styled.div`
 
 
 const Question = styled.div`
-    margin-bottom:15px;
-    font-size: 1.1em;
+    margin-bottom:15pxs;
+    font-size: 0.9em;
+    line-height:1.4em;
 `;
 
 const Choices = styled.div`
