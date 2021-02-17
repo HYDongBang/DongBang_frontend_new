@@ -20,7 +20,7 @@ export default () => {
                 tmpTimeTable[i] = [Array(7).map(element => {})];
             }
             info.forEach(applicant => {
-                if(applicant.startTime !== undefined && applicant.endTime !== undefined) {
+                if(applicant.startTime !== null && applicant.endTime !== null) {
                     for(let i=time.indexOf(applicant.startTime); i<time.indexOf(applicant.endTime);i++) {
                         tmpTimeTable[i][day.indexOf(applicant.interviewDay)] = {id: applicant.id, name: applicant.user.name};
                     }
@@ -58,7 +58,7 @@ export default () => {
                 return current.map(applicant => {
                     if (applicant.id === parseInt(id)) {
                         return { ...applicant, interviewDay: value};
-                    }
+                    } else return applicant;
                 });
             });
         } else if(name === "startTime") {
@@ -66,16 +66,15 @@ export default () => {
                 return current.map(applicant => {
                     if (applicant.id === parseInt(id)) {
                         return { ...applicant, startTime: value};
-                    }
+                    } else return applicant;
                 });
             });
         } else if(name === "endTime") {
             setApplicants(current => {
-                console.log("current", current)
                 return current.map(applicant => {
                     if (applicant.id === parseInt(id)) {
                         return { ...applicant, endTime: value};
-                    }
+                    } else return applicant;
                 });
             });
         }
