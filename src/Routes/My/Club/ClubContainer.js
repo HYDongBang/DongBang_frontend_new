@@ -93,7 +93,7 @@ export default () => {
             lFile.append("file", logoFile.value);
             cFile.append("file", clubFile.value);
             if (logoFile.value !== null){
-                const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", lFile, {
+                const { data } = await axios.post("http://ec2-13-124-175-177.ap-northeast-2.compute.amazonaws.com:4000/api/upload", lFile, {
                     headers: {
                         "content-type": "multipart/form-data"
                     }
@@ -101,7 +101,7 @@ export default () => {
                 logoLocation = data.location;
             }
             if (clubFile.value !== null){
-                const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", cFile, {
+                const { data } = await axios.post("http://ec2-13-124-175-177.ap-northeast-2.compute.amazonaws.com:4000/api/upload", cFile, {
                     headers: {
                         "content-type": "multipart/form-data"
                     }
@@ -140,7 +140,7 @@ export default () => {
             const file = new FormData();
             file.append("file", postFile.value);
             {
-                const { data } = await axios.post("http://ec2-52-79-235-57.ap-northeast-2.compute.amazonaws.com:4000/api/upload", file, {
+                const { data } = await axios.post("http://ec2-13-124-175-177.ap-northeast-2.compute.amazonaws.com:4000/api/upload", file, {
                     headers: {
                     "content-type": "multipart/form-data"
                     }
