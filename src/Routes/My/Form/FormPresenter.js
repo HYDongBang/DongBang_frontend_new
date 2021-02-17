@@ -167,8 +167,12 @@ export default ({
     onCreateChoice,
     setCheck,
     check,
-    onUpdateQuestions
+    onUpdateQuestions,
+    type, 
+    name,
+    des
 }) => {
+    console.log(data);
     const handleInput = e => {
         const key = e.target.getAttribute("data-key");
         const value = e.target.value;
@@ -193,7 +197,7 @@ export default ({
 
     return(
     <>
-        {!myloading && data.readLoggedInUser.clubMaster!==undefined ? 
+        {!myloading && data.readLoggedInUser!==undefined? 
         (<>
             <Title>
                 <Main>가입 신청 양식</Main>
@@ -202,15 +206,15 @@ export default ({
             <Contents>
                 <Top>
                     <ClubInfo>
-                        <ClubLogo type = {data.readLoggedInUser.clubMaster.type}/>
+                        <ClubLogo type = {type}/>
                         <TBox>
                             <Text>동아리 이름</Text>
-                            <ClubText> {data.readLoggedInUser.clubMaster.name} </ClubText>
+                            <ClubText> {name} </ClubText>
                         </TBox>
                     </ClubInfo>
                     <CBox>
                         <Text>동아리 설명</Text>
-                        <ClubText> {data.readLoggedInUser.clubMaster.description} </ClubText>
+                        <ClubText> {des} </ClubText>
                     </CBox>
                 </Top>
             {questions.map((question, idx)=>{
