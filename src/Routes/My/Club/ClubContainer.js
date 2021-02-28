@@ -19,7 +19,7 @@ export default () => {
     const logoFile = useInput(null);
     const partyDay = useInput("");
     const party = useInput("");
-    const numberOfMembers = useInput("");
+    const numberOfMembers = useInput(0);
     const isUnion = useInput("");
     const email = useInput("");
     const phoneNumber = useInput("");
@@ -119,7 +119,7 @@ export default () => {
                     logoImage: logoLocation,
                     partyDay: partyDay.value,
                     party: party.value,
-                    numberOfMembers: numberOfMembers.value,
+                    numberOfMembers: parseInt(numberOfMembers.value),
                     isUnion: isUnion.value,
                     email: email.value,
                     phoneNumber: phoneNumber.value,
