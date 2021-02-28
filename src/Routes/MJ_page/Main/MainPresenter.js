@@ -169,8 +169,8 @@ export default ({
             <Categories>
                 {myType === "" ? (
                     <Category onClick={() => setType("")}>
-                        <AllImg checked="true"> ALL </AllImg>
-                        <Text checked="true">모두보기</Text>
+                        <AllImg checked={true}> ALL </AllImg>
+                        <Text checked={true}>모두보기</Text>
                     </Category>
                 ):(
                     <Category onClick={() => setType("")}>
@@ -181,8 +181,8 @@ export default ({
 
                 {myType === "전시창작" ? (
                     <Category onClick={() => setType("")}>
-                        <Img checked="true" src = {paintingOrange} />
-                        <Text checked="true">전시창작</Text>
+                        <Img checked={true} src = {paintingOrange} />
+                        <Text checked={true}>전시창작</Text>
                     </Category>
                 ) : (
                     <Category onClick={() => setType("전시창작")}>
@@ -205,8 +205,8 @@ export default ({
 
                 {myType === "학술" ? (
                     <Category onClick={() => setType("")}>
-                        <Img  checked="true" src = {writingOrange} />
-                        <Text checked="true">학술</Text>
+                        <Img  checked={true} src = {writingOrange} />
+                        <Text checked={true}>학술</Text>
                     </Category>
                 ) : (
                     <Category onClick={() => setType("학술")}>
@@ -217,8 +217,8 @@ export default ({
 
                 {myType === "공연예술" ? (
                     <Category onClick={() => setType("")}>
-                        <Img checked="true" src = {speachBubbleLineOrange} />
-                        <Text checked="true">공연예술</Text>
+                        <Img checked={true} src = {speachBubbleLineOrange} />
+                        <Text checked={true}>공연예술</Text>
                     </Category>
                 ) : (
                     <Category onClick={() => setType("공연예술")}>
@@ -229,8 +229,8 @@ export default ({
                 
                 {myType === "체육" ? (
                     <Category onClick={() => setType("")} >
-                        <Img checked="true" src = {basketballOrange}/>
-                        <Text checked="true">체육</Text>
+                        <Img checked={true} src = {basketballOrange}/>
+                        <Text checked={true}>체육</Text>
                     </Category>
                 ) : (
                     <Category onClick={() => setType("체육")}>
