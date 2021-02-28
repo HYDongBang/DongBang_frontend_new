@@ -428,7 +428,7 @@ export default ({
                             <Question>
                                 <SnsLogo>
                                     <FontAwesomeIcon icon={faInstagramSquare} style={{ height: "34px", width: "34px", zIndex: "50" }} />
-                                    <BoxInput placeholder="인스타그램 주소를 넣어주세요." {...instagramUrl} width="77%" type="url"></BoxInput>
+                                    <BoxInput placeholder="인스타그램 주소를 넣어주세요." {...instagramUrl} width="77%" type="url" required={false}></BoxInput>
                                 </SnsLogo>
                             </Question>
                         </Left>
@@ -471,7 +471,7 @@ export default ({
                             <Question>
                                 <SnsLogo>
                                     <FontAwesomeIcon icon={faFacebookSquare} style={{ height: "34px", width: "34px", zIndex: "50" }} />
-                                    <BoxInput placeholder="페이스북 주소를 넣어주세요." {...facebookUrl} width="78%" type="url"></BoxInput>
+                                    <BoxInput placeholder="페이스북 주소를 넣어주세요." {...facebookUrl} width="78%" type="url" required={false}></BoxInput>
                                 </SnsLogo>
                             </Question>
                         </Right>

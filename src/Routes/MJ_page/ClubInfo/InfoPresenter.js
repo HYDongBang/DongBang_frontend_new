@@ -47,7 +47,6 @@ const Logo = styled.img`
 
 const ClubImage = styled.img`
     width:100%;
-    height:100%;
     padding:0 15%;
 `;
 
@@ -106,6 +105,7 @@ const RightInfo = styled.div`
 const Tag = styled.div`
 color: ${props=>props.theme.orange};
 margin-right:5px;
+font-size: 0.8em;
 `;
 
 const Icon = styled.a`
@@ -120,6 +120,7 @@ const Icon = styled.a`
 
 const Info = styled.div`
 margin-right:15px;
+font-size: 0.8em;
 `;
 
 const Line = styled.div`
@@ -223,7 +224,9 @@ return (
         <Desc> 
           {clubContent}
         </Desc>
-        <ClubImage src ={data.readClub.clubImage}/>
+        {data.readClub.clubImage !== null && (
+            <ClubImage src ={data.readClub.clubImage}/>
+        )}
 
         <Line/>
 
@@ -237,12 +240,16 @@ return (
             <RightInfo>
                 <Tag>메일</Tag> <Info>{data.readClub.email}</Info>
                 <Tag>연락처</Tag> <Info>{data.readClub.phoneNumber}</Info>
-                <Icon href = {data.readClub.facebookUrl} target="_blank" title="페이스북">
-                    <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faFacebookSquare}/>
-                </Icon> 
-                <Icon href = {data.readClub.instagramUrl} target="_blank" title="인스타그램">
-                    <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faInstagramSquare}/>
-                </Icon> 
+                {data.readClub.facebookUrl !== null && (
+                    <Icon href = {data.readClub.facebookUrl} target="_blank" title="페이스북">
+                        <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faFacebookSquare}/>
+                    </Icon> 
+                )}
+                {data.readClub.instagramUrl !== null && (
+                    <Icon href = {data.readClub.instagramUrl} target="_blank" title="인스타그램">
+                        <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faInstagramSquare}/>
+                    </Icon> 
+                )}
             </RightInfo>
         </ClubInfo>
 
