@@ -408,6 +408,14 @@ export default ({
                                         <RadioLabel htmlFor="noParty">없음</RadioLabel>
                                     </Radio>
                                 )}
+                                {party.value === null && (
+                                    <Radio>
+                                        <input type="radio" id="yesParty" name="party" value="yesParty" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesParty">있음</RadioLabel>
+                                        <input type="radio" id="noParty" name="party" value="noParty" onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noParty">없음</RadioLabel>
+                                    </Radio>
+                                )}
                             </Question>
                             <Question>
                                 <About>동아리 회합일정</About>
@@ -440,6 +448,14 @@ export default ({
                                         <input type="radio" id="yesUnion" name="union" value="yesUnion" onChange={onClickRadio}></input>
                                         <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
                                         <input type="radio" id="noUnion" name="union" value="noUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="noUnion">없음</RadioLabel>
+                                    </Radio>
+                                )}
+                                {isUnion.value === null && (
+                                    <Radio>
+                                        <input type="radio" id="yesUnion" name="union" value="yesUnion" checked onChange={onClickRadio}></input>
+                                        <RadioLabel htmlFor="yesUnion">있음</RadioLabel>
+                                        <input type="radio" id="noUnion" name="union" value="noUnion" onChange={onClickRadio}></input>
                                         <RadioLabel htmlFor="noUnion">없음</RadioLabel>
                                     </Radio>
                                 )}
