@@ -32,8 +32,13 @@ const Container = styled.div`
 const Icon = styled.div`
     color: ${props => props.theme.white};
     font-weight: 600;
-    font-size: 0.9em;
+    @media ( min-width: 768px ) {
+        font-size: 0.9em;
+    }
     font-family: 'Jua';
+    @media ( max-width: 768px ) {
+        font-size: 0.5em;
+    }
 `;
 
 const List = styled.div`
@@ -45,8 +50,13 @@ const Text = styled.div`
     color: ${props => props.theme.white};
     padding-left: 10px;
     cursor: pointer;
-    font-size: 0.5em;
     font-family: 'NanumGothicR';
+    @media ( min-width: 768px ) {
+        font-size: 0.5em;
+    }
+    @media ( max-width: 768px ) {
+        font-size: 0.3em;
+    }
 `;
 
 const contentStyle ={

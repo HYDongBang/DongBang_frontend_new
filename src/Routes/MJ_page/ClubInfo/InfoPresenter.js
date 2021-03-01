@@ -22,16 +22,21 @@ const OrangeButton = styled.div`
   border-radius: 38px;
   background-color:${props=>props.theme.orange};
   text-align:center;
-  line-height:2.6;
+  line-height:2.7;
   font-size:1.1em;
   font-family:raleBold;
   color:${props=>props.theme.white};
   cursor:pointer;
+  @media ( max-width: 768px ) {
+    width: 100px;
+    height: 30px;
+    font-size: 0.7em;
+    margin: 0 auto;
+  }
 `;
 
 const HeaderImg = styled.img`
     width:100%;
-    height:45%;
     overflow:hidden;
     position:relative;
 `;
@@ -40,7 +45,11 @@ const HeaderImg = styled.img`
 const Logo = styled.img`
   height: 86px;
   width: 86px;
-  border-radius: 38px;
+  @media ( max-width: 768px ) {
+    height: 50px;
+    width: 50px;
+  }
+  border-radius: 100%;
   box-shadow: 1px 1px 4px 0px grey;
   overflow: hidden;
 `;
@@ -56,12 +65,17 @@ const Buttons = styled.div`
   display:flex;
   right:30px;
   z-index:10;
+  @media ( max-width: 768px ) {
+    display: none;
+  }
 `;
 
 const Club = styled.div`
     text-align:center;
-    width:fit-content;
     margin: -50px auto 0px;
+    @media ( max-width: 768px ) {
+        margin: -20px auto 0px;
+      }
     position:relative;
     z-index: 5;
 `;
@@ -70,12 +84,18 @@ const Type = styled.div`
     margin:8px;
     color: ${props=>props.theme.orange};
     font-family:'spoHanB';
+    @media ( max-width: 768px ) {
+        font-size: 0.85em;
+    }
 `;
 
 const Name = styled.div`
     margin:5px;
     font-size:1.2em;
     font-family:'spoHanB';
+    @media ( max-width: 768px ) {
+        font-size: 1.1em;
+    }
 `;
 
 const Desc = styled.div`
@@ -83,6 +103,10 @@ const Desc = styled.div`
  line-height: 1.5em;
  font-size:0.9em;
  font-family:'NanumGothicR';
+ @media ( max-width: 768px ) {
+    font-size: 0.75em;
+ }
+ overflow-x: hidden;
 `;
 
 const ClubInfo = styled.div`
@@ -90,22 +114,34 @@ const ClubInfo = styled.div`
     display:flex;
     padding: 0px 7%;
     line-height:2em;
+    width: 100%;
+    overflow: hidden;
 `;
 
 const LeftInfo = styled.div`
     float:left;
     display:flex;
+    @media ( max-width: 768px ) {
+        display: block;
+    }
 `;
 
 const RightInfo = styled.div`
     float:right;
     display:flex;
+    @media ( max-width: 768px ) {
+        display: block;
+    }
 `;
 
 const Tag = styled.div`
 color: ${props=>props.theme.orange};
 margin-right:5px;
 font-size: 0.8em;
+@media ( max-width: 768px ) {
+    font-size: 0.7em;
+    line-height: 1;
+}
 `;
 
 const Icon = styled.a`
@@ -115,12 +151,20 @@ const Icon = styled.a`
         color: ${props=>props.theme.orange};    
         transition-duration: 0.3s;
     }
+    @media ( max-width: 768px ) {
+        margin-left: 0;
+        margin-right: 10px;
+    }
 `;
 
 
 const Info = styled.div`
 margin-right:15px;
 font-size: 0.8em;
+overflow-x: hidden;
+@media ( max-width: 768px ) {
+    font-size: 0.7em;
+}
 `;
 
 const Line = styled.div`
@@ -140,6 +184,7 @@ const Activities = styled.div`
     width:86%;
     margin:auto;
     display:flex;
+    flex-wrap: wrap;
 `;
 
 const Activity = styled.div`
@@ -156,11 +201,21 @@ const ActImg = styled.img`
 const ActTitle = styled.div`
     margin:15px 0;
     font-size: 1.2em;
+    @media ( max-width: 768px ) {
+        font-size: 0.8em;
+        font-weight: 600;
+        line-height: 1.2;
+    }
 `;
 
 const ActDes = styled.div`
     line-height:1.3em;
     font-size:0.8em;
+    @media ( max-width: 768px ) {
+        font-size: 0.6em;
+        padding: 1px 0px;
+    }
+    overflow-x: auto;
 `;
 
 const ButtonContainer = styled.div`
