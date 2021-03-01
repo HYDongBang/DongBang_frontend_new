@@ -16,22 +16,29 @@ import headerSports from "../../../Styles/Images/header_sports.jpg"
 const Club = styled.div`
   height: 220px;
   width: 220px;
+  @media ( max-width: 768px ) {
+    height: 120px;
+    max-width: 45%;
+  }
   text-align: center;
   border-radius: 20px;
   cursor: pointer;
   border: 1px solid #E5EAEE;
   box-shadow: #E5EAEE 0px 3px 3px ;
   overflow:hidden;
-  margin: 20px;
+  margin-bottom: 5%;
 `;
 
 const Context = styled.div`
-  padding: 50px 10px 10px 10px;
   height:70%;
 `;
 
 const ClubType = styled.div`
-  margin: 7px auto 10px;
+  margin: 9px auto 10px;
+  @media ( max-width: 768px ) {
+    margin: 5px auto 5px;
+    font-size: 0.3em;
+  }
   font-family:"spoHanB";
   font-size:0.85em;
   color:${props=>props.theme.orange};
@@ -41,30 +48,44 @@ const ClubName = styled.div`
   padding-bottom: 5px;
   font-family:"spoHanB";
   font-size:0.9em;
+  @media ( max-width: 768px ) {
+    font-size: 0.6em;
+  }
 `;
 
 const ClubText = styled.div`
   font-size: 0.8em;
+  @media ( max-width: 768px ) {
+    font-size: 0.3em;
+  }
   line-height: 1.2em;
 `;
 
 const ClubImg = styled.img`
   height: 35%;
+  @media ( max-width: 768px ) {
+    height: 40px;
+  }
   width: 100%;
 `;
 
 const Logo = styled.img`
-  height: 86px;
-  width: 86px;
-  border-radius: 38px;
+  @media ( min-width: 768px ) {
+    height: 86px;
+    width: 86px;
+  }
+  @media ( max-width: 768px ) {
+    max-height: 40px;
+    max-width: 40px;
+  }
+  border-radius: 100%;
   box-shadow: 1px 1px 4px 0px grey;
   overflow: hidden;
+  max-width: initial;
 `;
 
 const Position = styled.div`
-  position:absolute;
-  margin-top:-45px;
-  margin-left: 65px;
+  margin-top: -20%;
 `;
 
 
@@ -78,14 +99,20 @@ const X = styled.a`
   :hover{
     color: #E5EAEE;
   }
+  @media ( max-width: 768px ) {
+    font-size: 1.2em;
+    right:-23px;
+    top: 1px;
+  }
 `;
 
 
 const contentStyle ={
-  width:"70%",
-  height: "80%",
+  width:"80%",
+  height: "85%",
   borderRadius: "15px",
   padding: "0px",
+  overflow: "hidden"
 };
 
 export default  ({ clubs, myType }) => {
@@ -112,7 +139,6 @@ export default  ({ clubs, myType }) => {
                   <Position>
                      <Logo src = {club.logoImage}/>
                   </Position>
-
                   <Context>
                     <ClubType> {club.type}</ClubType>
                     <ClubName>{club.name}</ClubName>

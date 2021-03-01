@@ -15,11 +15,18 @@ const Title = styled.div`
     padding: 20px;
     font-size: 1.6em;
     font-family: 'raleRegular';
+    @media ( max-width: 768px ) {
+        font-size: 1em;
+        font-weight: 600;
+    }
 `;
 
 const Copy = styled.div`
     padding-bottom: 20px;
     font-size: 0.7em;
+    @media ( max-width: 768px ) {
+        font-size: 0.5em;
+    }
 `;
 
 const Git = styled.a`

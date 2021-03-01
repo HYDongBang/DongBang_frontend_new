@@ -29,8 +29,8 @@ const Wrapper = styled.div`
 `;
 
 const MainImg = styled.img`
-    width: 100%;
-    height: 500px;
+    max-width: 100%;
+    max-height: 100%;
 `;
 
 const MainContents = styled.div`
@@ -40,9 +40,8 @@ const MainContents = styled.div`
 `;
 
 const Categories = styled.div`
-    height: 200px;
     width: 100%;
-    padding: 30px;
+    padding: 10% 0;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -50,8 +49,9 @@ const Categories = styled.div`
 `;
 
 const Category = styled.div`
-    width: 90px;
-    height: 90px;
+    width: 15%;
+    height: 15%;
+    cursor: pointer;
 `;
 
 const Img = styled.img`
@@ -61,47 +61,54 @@ const Img = styled.img`
     background-color:${props => props.checked ? "#FFFFFF" : "#F7F8F9" };
     border-radius:25%;
     cursor:pointer;
-    border: ${props => props.checked &&  "2px solid #FF7300" };
+    border: ${props => props.checked &&  "1.5px solid #FF7300" };
 `;
 
 const AllImg = styled.div`
     width: 100%;
     height: 100%;
-    font-size:1.7em;
-    text-align:center;
-    padding-top: 32%;
-    border-radius:25%;
+    padding: 33%;
+    font-size:3vw;
+    border-radius:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     background-color:${props => props.checked ? "#FFFFFF" : "#F7F8F9" };
-    border: ${props => props.checked &&  "2px solid #FF7300" };
+    border: ${props => props.checked &&  "1.5px solid #FF7300" };
     color: ${props => props.checked &&  "#FF7300" };
 `;
 
 const Text = styled.div`
-    width: 110px;
+    font-size: 1.5vw;
     text-align:center;
-    margin-top:15px;
-    margin-left:-10px;
+    @media ( max-width: 768px ) {
+        padding: 15% 16%;
+    }
+    padding: 15% 0;
     color: ${props => props.checked &&  "#FF7300" };
 `;
 
-
 const ClubContainer = styled.div`
-    min-height:600px;
     width: 100%;
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
-    justify-content:space-between;
+    justify-content: space-between;
 `;
 
 const SearchBar = styled.input`
-    width: 40%;
-    height: 50px;
+    width: 50%;
     position:absolute;
-    margin-top: 150px;
-    margin-left: 30%;
+    margin-top: 13%;
+    margin-left: 25%;
     color: ${props => props.checked};
-    font-size: 1em;
-    padding: 10px;
+    @media ( max-width: 768px ) {
+        padding: 1.3% 1.5%;
+        font-size: 1.8vw;
+    }
+    @media ( min-width: 768px ) {
+        padding: 0.5% 1.5%;
+        font-size: 1.5vw;
+    }
     border:none;
     border-radius: 5px;
     box-shadow: #757575 1px 1px 6px 2px;
@@ -126,6 +133,9 @@ const X = styled.div`
     right: -37px;
     top: -5px;
     font-size: 2.3em;
+    @media ( max-width: 768px ) {
+        font-size: 1.5em;
+    }
     color: #e5eaee;
 `;
 
@@ -163,18 +173,18 @@ export default ({
           value={word}
           placeholder="찾으려는 동아리 명을 입력해주세요."
           onChange={(e) => handleChange(e.target.value)}
-        />
+    />
         <MainImg src={main}/>
         <MainContents>
             <Categories>
                 {myType === "" ? (
                     <Category onClick={() => setType("")}>
-                        <AllImg checked={true}> ALL </AllImg>
-                        <Text checked={true}>모두보기</Text>
+                        <AllImg checked={true}>ALL</AllImg>
+                        <Text>모두보기</Text>
                     </Category>
                 ):(
                     <Category onClick={() => setType("")}>
-                        <AllImg> ALL </AllImg>
+                        <AllImg>ALL</AllImg>
                         <Text>모두보기</Text>
                     </Category>
                 )}
