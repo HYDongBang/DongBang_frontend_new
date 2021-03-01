@@ -238,7 +238,7 @@ return (
                 <Tag>연합여부</Tag> <Info>{data.readClub.isUnion?"연합":"비연합"}</Info>
             </LeftInfo>
             <RightInfo>
-                {data.readClub.email !== "null" && (
+                {(data.readClub.email !== "null" && data.readClub.email !== null) && (
                     <><Tag>메일</Tag> <Info>{data.readClub.email}</Info></>
                 )}
                 <Tag>연락처</Tag> 
