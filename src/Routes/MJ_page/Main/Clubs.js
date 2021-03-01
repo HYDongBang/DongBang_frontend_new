@@ -94,6 +94,9 @@ export default  ({ clubs, myType }) => {
       clubs = [];
     }
     return clubs.map((club) => {
+      if (club.content === "1" || club.description === "1") {
+        return;
+      }
       return (
         <>
           {myType === "" && (

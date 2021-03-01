@@ -234,12 +234,26 @@ return (
             <LeftInfo>
                 <Tag>회합일정</Tag> <Info>{data.readClub.partyDay}</Info>
                 <Tag>뒷풀이</Tag> <Info>{data.readClub.party?"있음":"없음"}</Info>
-                <Tag>인원수</Tag> <Info>{data.readClub.numberOfMembers}명</Info>
+                {data.readClub.numberOfMembers !== null && (<><Tag>인원수</Tag> <Info>{data.readClub.numberOfMembers}명</Info></>)}
                 <Tag>연합여부</Tag> <Info>{data.readClub.isUnion?"연합":"비연합"}</Info>
             </LeftInfo>
             <RightInfo>
-                <Tag>메일</Tag> <Info>{data.readClub.email}</Info>
-                <Tag>연락처</Tag> <Info>{data.readClub.phoneNumber}</Info>
+                {data.readClub.email !== "null" && (
+                    <><Tag>메일</Tag> <Info>{data.readClub.email}</Info></>
+                )}
+                <Tag>연락처</Tag> 
+                <Info>
+                    {data.readClub.phoneNumber.split(" ").length > 1 && (
+                        <>
+                            {data.readClub.phoneNumber.split(" ").map(element => (
+                                <div style={{lineHeight: "1.5"}}>{element}</div>
+                            ))}
+                        </>
+                    )}
+                    {data.readClub.phoneNumber.split(" ").length <= 1 && (
+                        <span>{data.readClub.phoneNumber}</span>
+                    )}
+                </Info>
                 {data.readClub.facebookUrl !== null && (
                     <Icon href = {data.readClub.facebookUrl} target="_blank" title="페이스북">
                         <FontAwesomeIcon style={{fontSize:"1.8em"}} icon={faFacebookSquare}/>

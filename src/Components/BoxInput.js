@@ -16,7 +16,7 @@ const Input = styled.input`
 /* 
 required: input 태그가 채워져야 하는지
 */
-const BoxInput = ({ placeholder, required = true, value, onChange, type = "text", width = "auto", disabled = false }) => (
+const BoxInput = ({ placeholder, required = false, value, onChange, type = "text", width = "auto", disabled = false }) => (
     <Input placeholder={placeholder} required={required} value={value} onChange={onChange} style={{ width: width }} type={type} disabled={disabled} />
 );
 

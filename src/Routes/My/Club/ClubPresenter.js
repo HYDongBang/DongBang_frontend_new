@@ -466,7 +466,7 @@ export default ({
                             </Question>
                             <Question>
                                 <About>동아리 메일 주소</About>
-                                <BoxInput placeholder="메일 주소를 입력해주세요." {...email} width="90%" type="email"></BoxInput>
+                                <BoxInput placeholder="메일 주소를 입력해주세요." {...email} width="90%" type="email" required={false}></BoxInput>
                             </Question>
                             <Question>
                                 <SnsLogo>
