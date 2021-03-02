@@ -104,7 +104,7 @@ const Desc = styled.div`
  font-size:0.9em;
  font-family:'NanumGothicR';
  @media ( max-width: 768px ) {
-    font-size: 0.75em;
+    font-size: 0.8em;
  }
  overflow-x: hidden;
 `;
@@ -265,6 +265,7 @@ return (
             <Type>{data.readClub.type}</Type>
             <Name>{data.readClub.name}</Name>
         </Club>
+        {/* 
         <Buttons>
             <ButtonContainer onClick={() => setAction("Talk")} >
                 <FontAwesomeIcon  style ={{marginRight:"2%",fontSize:"1.2em"}} icon={faComments} />   
@@ -276,6 +277,7 @@ return (
                 지원하기
             </ButtonContainer>
         </Buttons>
+        */}
         <Desc> 
           {clubContent}
         </Desc>

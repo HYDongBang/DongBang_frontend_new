@@ -49,8 +49,8 @@ const Categories = styled.div`
 `;
 
 const Category = styled.div`
-    width: 15%;
-    height: 15%;
+    width: 12%;
+    height: 12%;
     cursor: pointer;
 `;
 
@@ -67,7 +67,7 @@ const Img = styled.img`
 const AllImg = styled.div`
     width: 100%;
     height: 100%;
-    padding: 33%;
+    padding: 29%;
     font-size:3vw;
     border-radius:100%;
     justify-content: center;
@@ -79,7 +79,7 @@ const AllImg = styled.div`
 `;
 
 const Text = styled.div`
-    font-size: 1.5vw;
+    font-size: 1.2vw;
     text-align:center;
     @media ( max-width: 768px ) {
         padding: 15% 16%;
@@ -106,8 +106,8 @@ const SearchBar = styled.input`
         font-size: 1.8vw;
     }
     @media ( min-width: 768px ) {
-        padding: 0.5% 1.5%;
-        font-size: 1.5vw;
+        padding: 0.6% 1.5%;
+        font-size: 1.3vw;
     }
     border:none;
     border-radius: 5px;

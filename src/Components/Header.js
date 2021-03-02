@@ -87,7 +87,7 @@ export default () => {
             <Link to="/">
                 <Icon>DongBang 동방</Icon>
             </Link>
-            {isLoggedIn ? (
+            {/*isLoggedIn ? (
                 <List>
                     <Link to="/profile">
                         <Text>마이페이지</Text>
@@ -111,7 +111,7 @@ export default () => {
                         )}
                     </Popup>
                 </List>
-            )}
+                        )*/}
         </Container>
     );
 }
